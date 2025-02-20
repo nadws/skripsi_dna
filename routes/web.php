@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DepartemenCOntroller;
 use App\Http\Controllers\CabangController;
+use App\Http\Controllers\KaryawanController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +34,15 @@ Route::middleware('auth')->group(function () {
         ->name('departemen.')
         ->group(function () {
             Route::get('/', 'index')->name('index');
+            Route::post('/store', 'store')->name('store');
+        });
+
+        Route::controller(KaryawanController::class)
+        ->prefix('karyawan')
+        ->name('karyawan.')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            
         });
 });
 

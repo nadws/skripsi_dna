@@ -18,10 +18,10 @@
                                 <a href="{{ route('cabang.index') }}" class='submenu-link'>Data Cabang</a>
                             </li>
                             <li class="submenu-item  ">
-                                <a href="{{ route('cabang.index') }}" class='submenu-link'>Data Departemen</a>
+                                <a href="{{ route('departemen.index') }}" class='submenu-link'>Data Departemen</a>
                             </li>
                             <li class="submenu-item  ">
-                                <a href="{{ route('cabang.index') }}" class='submenu-link'>Data Karyawan</a>
+                                <a href="{{ route('karyawan.index') }}" class='submenu-link'>Data Karyawan</a>
                             </li>
                             <li class="submenu-item  ">
                                 <a href="{{ route('cabang.index') }}" class='submenu-link'>Data Barang</a>
