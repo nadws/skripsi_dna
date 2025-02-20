@@ -15,6 +15,7 @@ class CabangController extends Controller
         ];
 
         return view('cabang.index',$data);
-        
     }
+
+
 }

@@ -1,3 +1,3 @@
 <x-app-layout title="Dashboard">
-    <p>ini dashboard</h1>
+    <p>ini dashboard update</h1>
 </x-app-layout>
