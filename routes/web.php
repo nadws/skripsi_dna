@@ -24,6 +24,8 @@ Route::middleware('auth')->group(function () {
         ->name('cabang.')
         ->group(function () {
             Route::get('/', 'index')->name('index');
+            Route::post('/store', 'store')->name('store');
+            Route::get('/delete/{id}', 'delete')->name('delete');
         });
 
     Route::controller(DepartemenCOntroller::class)

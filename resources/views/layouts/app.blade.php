@@ -115,6 +115,7 @@
                 </div>
                 <div class="page-content">
                     <section class="row">
+                        <x-alert />
                         {{ $slot }}
                     </section>
                 </div>

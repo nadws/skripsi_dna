@@ -12,7 +12,7 @@
                         <th>Nama Cabang</th>
                         <th>Alamat</th>
                         <th>Keterangan</th>
-                        <th>Aksi</th>
+                        <th class="text-center">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -22,9 +22,11 @@
                             <td>{{ $c->nama }}</td>
                             <td>{{ $c->alamat }}</td>
                             <td>{{ $c->ket }}</td>
-                            <td>
-                                <a href="#" class="btn btn-warning btn-sm">Edit</a>
-                                <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                            <td class="text-center">
+                                <a href="#" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
+                                <a href="{{ route('cabang.delete', $c->id) }}"
+                                    onclick="return confirm('Apakah anda yakin?')" class="btn btn-danger btn-sm"><i
+                                        class="bi bi-trash"></i></a>
                             </td>
                         </tr>
                     @endforeach
@@ -34,22 +36,25 @@
         </div>
     </div>
 
-    <x-modal size="modal-lg" id="tambah">
-        <div class="row">
-            <div class="col-lg-6">
-                <label for="">Nama Cabang</label>
-                <input type="text" class="form-control" name="nama">
+    <form action="{{ route('cabang.store') }}" method="post">
+        @csrf
+        <x-modal size="modal-lg" id="tambah">
+            <div class="row">
+                <div class="col-lg-6">
+                    <label for="">Nama Cabang</label>
+                    <input type="text" class="form-control" name="nama">
+                </div>
+                <div class="col-lg-6">
+                    <label for="">Alamat</label>
+                    <input type="text" class="form-control" name="alamat">
+                </div>
+                <div class="col-lg-12">
+                    <label for="">Keterangan</label>
+                    <textarea name="ket" class="form-control" id="" cols="10" rows="4"></textarea>
+                </div>
             </div>
-            <div class="col-lg-6">
-                <label for="">Alamat</label>
-                <input type="text" class="form-control" name="alamat">
-            </div>
-            <div class="col-lg-12">
-                <label for="">Keterangan</label>
-                <textarea name="ket" class="form-control" id="" cols="10" rows="4"></textarea>
-            </div>
-        </div>
 
-    </x-modal>
+        </x-modal>
+    </form>
 
 </x-app-layout>
