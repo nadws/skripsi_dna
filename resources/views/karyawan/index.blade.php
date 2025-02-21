@@ -44,7 +44,7 @@
         </div>
     </div>
 
-    <form action="{{ route('departemen.store') }}" method="post">
+    <form action="{{ route('karyawan.store') }}" method="post">
         @csrf
         <x-modal size="modal-lg" id="tambah">
             <div class="row">
@@ -80,10 +80,10 @@
                 </div>
                 <div class="col-lg-6 mt-2">
                     <label for="">Jenis Kelamin</label>
-                    <select name="" id="" class="form-control">
+                    <select name="jenis_kelamin" id="" class="form-control">
                         <option value="">Pilih Jenis Kelamin</option>
                         <option value="Laki-laki">Laki-laki</option>
-                        <option value="Perempuan">Perempuan"></option>
+                        <option value="Perempuan">Perempuan</option>
                     </select>
                 </div>
                 <div class="col-lg-6 mt-2">

@@ -23,8 +23,32 @@
                             <li class="submenu-item  ">
                                 <a href="{{ route('karyawan.index') }}" class='submenu-link'>Data Karyawan</a>
                             </li>
-                            <li class="submenu-item  ">
-                                <a href="{{ route('cabang.index') }}" class='submenu-link'>Data Barang</a>
+                            <li class="submenu-item  has-sub">
+                                <a href="#" class='submenu-link'>Barang & Stock</a>
+                                <!-- 3 Level Submenu -->
+                                <ul class="subsubmenu">
+
+                                    <li class="subsubmenu-item ">
+                                        <a href="{{ route('barang.index') }}" class="subsubmenu-link">Data Barang</a>
+                                    </li>
+                                    <li class="subsubmenu-item ">
+                                        <a href="#" class="subsubmenu-link">Stok Masuk</a>
+                                    </li>
+                                    <li class="subsubmenu-item ">
+                                        <a href="#" class="subsubmenu-link">Stok Opname</a>
+                                    </li>
+                                    <li class="subsubmenu-item ">
+                                        <a href="#" class="subsubmenu-link">Over Stock</a>
+                                    </li>
+                                    <li class="subsubmenu-item ">
+                                        <a href="#" class="subsubmenu-link">Peminjaman Barang</a>
+                                    </li>
+                                    <li class="subsubmenu-item ">
+                                        <a href="#" class="subsubmenu-link">Disposal Barang</a>
+                                    </li>
+
+                                </ul>
+
                             </li>
                         </ul>
                     </div>

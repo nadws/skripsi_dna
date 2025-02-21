@@ -147,6 +147,22 @@
     <script src="assets/static/js/pages/dashboard.js"></script>
     <script src="assets/extensions/simple-datatables/umd/simple-datatables.js"></script>
     <script src="assets/static/js/pages/simple-datatables.js"></script>
+    <script>
+        document.getElementById('imageInput').addEventListener('change', function(event) {
+            let image = event.target.files[0];
+
+            if (image) {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    let preview = document.getElementById('imagePreview');
+                    preview.src = e.target.result;
+                    preview.style.display = "block"; // Tampilkan gambar
+                }
+                reader.readAsDataURL(image);
+            }
+        });
+    </script>
+
 
 </body>
 

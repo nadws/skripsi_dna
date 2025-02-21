@@ -17,12 +17,13 @@ class Karyawan extends Model
         'alamat',
         'jenis_kelamin'
     ];
-    public function cabang() {
-        return $this->belongsTo(Cabang::class,'cabang_id');
+    public function cabang()
+    {
+        return $this->belongsTo(Cabang::class, 'cabang_id');
     }
 
-    public function Departemen() {
-        return $this->belongsTo(Departemen::class,'departemen_id');
-        
+    public function Departemen()
+    {
+        return $this->belongsTo(Departemen::class, 'departemen_id');
     }
 }

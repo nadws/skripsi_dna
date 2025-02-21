@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BarangController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DepartemenCOntroller;
 use App\Http\Controllers\CabangController;
@@ -37,15 +38,22 @@ Route::middleware('auth')->group(function () {
             Route::post('/store', 'store')->name('store');
         });
 
-        Route::controller(KaryawanController::class)
+    Route::controller(KaryawanController::class)
         ->prefix('karyawan')
         ->name('karyawan.')
         ->group(function () {
             Route::get('/', 'index')->name('index');
-            
+            Route::post('/store', 'store')->name('store');
+        });
+    Route::controller(BarangController::class)
+        ->prefix('barang')
+        ->name('barang.')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::post('/store', 'store')->name('store');
         });
 });
 
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
