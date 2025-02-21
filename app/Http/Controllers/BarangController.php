@@ -12,20 +12,22 @@ class BarangController extends Controller
 {
     public function index()
     {
-        if (Auth::user()->role == 'presiden') {
+        if (Auth::user()->role == 'presiden' || Auth::user()->role == 'superadmin') {
             $cabang_id = 0;
         } else {
             $cabang_id = Auth::user()->cabang_id;
         }
         $kode_barang = Barang::latest('kode')->first();
-        $kode_barang = empty($kode_barang->kode) ? 'BRG0001' : substr($kode_barang->kode, 3) + 1;
+        $kode_barang = empty($kode_barang) ? 1001 : $kode_barang->kode  + 1;
+
         $data = [
             'title' => 'Daftar Barang',
             'barang' =>  Barang::getBarang($cabang_id),
             'role' => Auth::user()->role,
             'kode_barang' => $kode_barang,
             'cabang_id' => $cabang_id,
-            'nama_cabang' => Cabang::find($cabang_id)->nama
+            'nama_cabang' => Auth::user()->role == 'admin' ? Cabang::find($cabang_id)->nama  : 'Semua Cabang',
+            'cabang' => Cabang::all()
 
         ];
         return view('barang.index', $data);
@@ -36,7 +38,7 @@ class BarangController extends Controller
         try {
 
             $kode_barang = Barang::latest('kode')->first();
-            $kode_barang = empty($kode_barang->kode) ? 'BRG0001' : 'BRG' . str_pad(substr($kode_barang->kode, 3) + 1, 4, '0', STR_PAD_LEFT);
+            $kode_barang = empty($kode_barang) ? 1001 : $kode_barang->kode + 1;
 
             $imageName = null;
             if ($r->hasFile('image')) {

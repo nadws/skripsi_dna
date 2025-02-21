@@ -17,7 +17,7 @@
                             <li class="submenu-item  ">
                                 <a href="{{ route('cabang.index') }}" class='submenu-link'>Data Cabang</a>
                             </li>
-                            <li class="submenu-item  ">
+                            <li class="submenu-item">
                                 <a href="{{ route('departemen.index') }}" class='submenu-link'>Data Departemen</a>
                             </li>
                             <li class="submenu-item  ">
@@ -41,7 +41,8 @@
                                         <a href="#" class="subsubmenu-link">Over Stock</a>
                                     </li>
                                     <li class="subsubmenu-item ">
-                                        <a href="#" class="subsubmenu-link">Peminjaman Barang</a>
+                                        <a href="{{ route('peminjaman.index') }}" class="subsubmenu-link">Peminjaman
+                                            Barang</a>
                                     </li>
                                     <li class="subsubmenu-item ">
                                         <a href="#" class="subsubmenu-link">Disposal Barang</a>

@@ -1,7 +1,7 @@
 <x-app-layout title="{{ $title }}">
     <div class="card">
         <div class="card-header">
-            @if ($role == 'admin')
+            @if ($role == 'admin' || $role == 'superadmin')
                 <h5 class="float-start">Stok Barang Cabang : {{ $nama_cabang }}</h5>
                 <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#tambah">Tambah
                     Data</button>
@@ -72,12 +72,26 @@
                         <div class="col-lg-6">
                             <label for="">Nama Barang</label>
                             <input type="text" class="form-control" name="nama_barang">
-                            <input type="hidden" class="form-control" name="cabang_id" value="{{ $cabang_id }}">
+
                         </div>
                         <div class="col-lg-6">
                             <label for="">Merek</label>
                             <input type="text" class="form-control" name="merek">
                         </div>
+                        @if ($role == 'admin')
+                            <input type="hidden" class="form-control" name="cabang_id" value="{{ $cabang_id }}">
+                        @elseif ($role == 'superadmin')
+                            <div class="col-lg-6">
+                                <label for="">Cabang</label>
+                                <select name="cabang_id" id="" class="form-control">
+                                    <option value="">Pilih Cabang</option>
+                                    @foreach ($cabang as $c)
+                                        <option value="{{ $c->id }}">{{ $c->nama }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        @endif
+
                         <div class="col-lg-6">
                             <label for="">Stok Awal</label>
                             <input type="text" class="form-control" name="stok_awal">
