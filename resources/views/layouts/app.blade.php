@@ -29,6 +29,14 @@
     .layout-horizontal .header-top .logo img {
         height: 50px;
     }
+
+    .menu-item.active .menu-link {
+        color: #0056b3;
+        /* Warna teks aktif */
+        font-weight: bold;
+        border-bottom: 3px solid white;
+        /* Underline untuk menu aktif */
+    }
 </style>
 
 <body>
@@ -51,7 +59,7 @@
                                     </div>
                                     <div class="text">
                                         <h6 class="user-dropdown-name">{{ Auth::user()->name }}</h6>
-                                        <p class="user-dropdown-status text-sm text-muted">Admin</p>
+                                        <p class="user-dropdown-status text-sm text-muted">{{ Auth::user()->role }}</p>
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end shadow-lg"
@@ -136,6 +144,20 @@
             </footer>
         </div>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(document).on('click', '.submit', function(e) {
+                $(this).attr("hidden", true); // Sembunyikan tombol submit
+                $(".submit_proses").removeAttr("hidden"); // Tampilkan tombol submit_proses
+
+            });
+        });
+    </script>
+    @yield('scripts')
+
+
+
     <script src="assets/static/js/components/dark.js"></script>
     <script src="assets/static/js/pages/horizontal-layout.js"></script>
     <script src="assets/extensions/perfect-scrollbar/perfect-scrollbar.min.js"></script>
@@ -147,6 +169,8 @@
     <script src="assets/static/js/pages/dashboard.js"></script>
     <script src="assets/extensions/simple-datatables/umd/simple-datatables.js"></script>
     <script src="assets/static/js/pages/simple-datatables.js"></script>
+
+
     <script>
         document.getElementById('imageInput').addEventListener('change', function(event) {
             let image = event.target.files[0];

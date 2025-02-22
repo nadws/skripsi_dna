@@ -8,30 +8,30 @@ use App\Models\Cabang;
 
 class CabangController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $data = [
             'title' => 'Data Cabang',
-            'cabang' => Cabang::orderBY('id','desc')->get()
+            'cabang' => Cabang::orderBY('id', 'desc')->get()
         ];
 
-        return view('cabang.index',$data);
+        return view('superadmin.cabang.index', $data);
     }
 
-    public function store(Request $r) {
-        $data =[
+    public function store(Request $r)
+    {
+        $data = [
             'nama' => $r->nama,
             'alamat' => $r->alamat,
-            'ket'=> $r->ket
+            'ket' => $r->ket
         ];
         Cabang::create($data);
-        return redirect()->route('cabang.index')->with('success','Data Berhasil Disimpan');
-        
+        return redirect()->route('cabang.index')->with('success', 'Data Berhasil Disimpan');
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         Cabang::find($id)->delete();
-        return redirect()->route('cabang.index')->with('success','Data Berhasil Dihapus');
+        return redirect()->route('cabang.index')->with('success', 'Data Berhasil Dihapus');
     }
-
-
 }
