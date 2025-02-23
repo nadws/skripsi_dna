@@ -14,9 +14,9 @@ class KaryawanController extends Controller
     {
         $data = [
             'title' => 'Data Karyawan',
-            'karyawan' => Karyawan::orderBy('id', 'desc')->get(),
+            'karyawan' => Karyawan::where('cabang_id', Auth::user()->cabang_id)->orderBy('id', 'desc')->get(),
             'cabang' => Cabang::all(),
-            'departemen' => Departemen::all(),
+            'departemen' => Departemen::where('cabang_id', Auth::user()->cabang_id)->get(),
             'cabang_id' => Auth::user()->cabang_id,
         ];
         return view('karyawan.index', $data);

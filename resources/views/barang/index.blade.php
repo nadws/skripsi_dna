@@ -1,12 +1,8 @@
 <x-app-layout title="{{ $title }}">
     <div class="card">
         <div class="card-header">
-            @if ($role == 'admin' || $role == 'superadmin')
-                <h5 class="float-start">Stok Barang Cabang : {{ $nama_cabang }}</h5>
-                <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#tambah">Tambah
-                    Data</button>
-            @else
-            @endif
+            <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#tambah">Tambah
+                Data</button>
         </div>
         <div class="card-body">
             <table class="table table-bordered" id="table1">

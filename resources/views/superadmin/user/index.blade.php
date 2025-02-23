@@ -25,9 +25,11 @@
                             <td>{{ $u->role }}</td>
                             <td>{{ $u->cabang->nama ?? '-' }}</td>
                             <td>
-                                <a href="#" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
-                                <a href="#" onclick="return confirm('Apakah anda yakin?')"
-                                    class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
+                                <button data-bs-toggle="modal" data-bs-target="#edit"
+                                    class="btn btn-warning btn-sm getData" data-id="{{ $u->id }}"><i
+                                        class="bi bi-pencil-square"></i></a>
+                                    {{-- <a href="#" onclick="return confirm('Apakah anda yakin?')"
+                                    class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a> --}}
                             </td>
                         </tr>
                     @endforeach
@@ -73,5 +75,10 @@
                 </div>
             </div>
         </x-modal>
+    </form>
+
+    <form action="{{ route('user.update') }}" method="post">
+        @csrf
+        <x-modal-edit id="edit" size="modal-lg" url="user.getEdit"></x-modal-edit>
     </form>
 </x-app-layout>

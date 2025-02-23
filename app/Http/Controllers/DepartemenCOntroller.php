@@ -13,7 +13,7 @@ class DepartemenCOntroller extends Controller
     {
         $data = [
             'title' => 'Data Departemen',
-            'departemen' => Departemen::orderBY('id', 'desc')->get(),
+            'departemen' => Departemen::where('cabang_id', Auth::user()->cabang_id)->orderBY('id', 'desc')->get(),
             'cabang' => Cabang::all(),
             'cabang_id' => Auth::user()->cabang_id,
         ];

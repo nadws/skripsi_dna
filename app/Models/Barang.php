@@ -34,8 +34,10 @@ class Barang extends Model
                 ) as b on a.id = b.barang_id
 
                 left join kategori_assets as c on c.id = a.kategori_id
+                where (Coalesce(b.debit, 0) - Coalesce(b.kredit, 0)) != 0
 
                 order by a.id DESC
+               
             
         ");
     }
@@ -44,7 +46,7 @@ class Barang extends Model
         if ($cabang_id == 0) {
             $where = "";
         } else {
-            $where = "AND b.cabang_id = $cabang_id";
+            $where = "WHERE b.cabang_id = $cabang_id";
         }
         return DB::select("SELECT a.*, (Coalesce(b.debit, 0) - Coalesce(b.kredit, 0)) as stok,
         (SELECT harga FROM stoks WHERE barang_id = a.id and kredit = 0 ORDER BY created_at DESC LIMIT 1) AS harga_terbaru
@@ -52,9 +54,10 @@ class Barang extends Model
                 left join (
                     SELECT barang_id, sum(debit) as debit, sum(kredit) as kredit
                     FROM stoks as b
-                    Where (Coalesce(b.debit, 0) - Coalesce(b.kredit, 0)) != 0 $where
+                     $where
                     group by b.barang_id
                 ) as b on a.id = b.barang_id
+                 where (Coalesce(b.debit, 0) - Coalesce(b.kredit, 0)) != 0
             
         ");
     }

@@ -30,6 +30,8 @@ Route::middleware('auth')->group(function () {
         ->group(function () {
             Route::get('/', 'index')->name('index');
             Route::post('/store', 'store')->name('store');
+            Route::get('/getEdit', 'getEdit')->name('getEdit');
+            Route::post('/update', 'update')->name('update');
         });
 
     Route::controller(CabangController::class)
