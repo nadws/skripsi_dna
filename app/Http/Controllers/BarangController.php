@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Barang;
 use App\Models\Cabang;
 use App\Models\Stok;
+use App\Models\KategoriAsset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,7 +28,8 @@ class BarangController extends Controller
             'kode_barang' => $kode_barang,
             'cabang_id' => $cabang_id,
             'nama_cabang' => Auth::user()->role == 'admin' ? Cabang::find($cabang_id)->nama  : 'Semua Cabang',
-            'cabang' => Cabang::all()
+            'cabang' => Cabang::all(),
+            'kategori' => KategoriAsset::all()
 
         ];
         return view('barang.index', $data);
@@ -50,7 +52,8 @@ class BarangController extends Controller
                 'kode' => $kode_barang,
                 'nama_barang' => $r->nama_barang,
                 'merek' => $r->merek,
-                'image' => $imageName
+                'image' => $imageName,
+                'kategori_id' => $r->kategori_id
             ]);
 
             $data2 = [

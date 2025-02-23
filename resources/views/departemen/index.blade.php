@@ -36,13 +36,14 @@
 
     <form action="{{ route('departemen.store') }}" method="post">
         @csrf
-        <x-modal size="modal-lg" id="tambah">
+        <x-modal id="tambah">
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-12">
                     <label for="">Nama Departemen</label>
                     <input type="text" class="form-control" name="nama">
+                    <input type="hidden" name="cabang_id" value="{{ $cabang_id }}">
                 </div>
-                <div class="col-lg-6">
+                {{-- <div class="col-lg-6">
                     <label for="">Cabang</label>
                     <select name="cabang_id" id="" class="form-control">
                         <option value="">Pilih Cabang</option>
@@ -50,7 +51,7 @@
                             <option value="{{ $c->id }}">{{ $c->nama }}</option>
                         @endforeach
                     </select>
-                </div>
+                </div> --}}
 
             </div>
 

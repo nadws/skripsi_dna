@@ -26,9 +26,9 @@
                             <td>{{ $c->nama }}</td>
                             <td>{{ $c->cabang->nama }}</td>
                             <td>{{ $c->departemen->nama }}</td>
-                            <td>{{ $c->tempat_lahir }}, {{ date('d-m-Y', strtotime($c->tanggal_lahir)) }}</td>
+                            <td>{{ $c->tempat_lahir }}, {{ date('d-m-Y', strtotime($c->tgl_lahir)) }}</td>
                             <td>{{ $c->jenis_kelamin }}</td>
-                            <td>{{ date('d-m-Y', strtotime($c->tanggal_bergabung)) }}</td>
+                            <td>{{ date('d-m-Y', strtotime($c->tgl_gabung)) }}</td>
                             <td>{{ $c->alamat }}</td>
                             <td class="text-center">
                                 <a href="#" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
@@ -51,8 +51,9 @@
                 <div class="col-lg-6">
                     <label for="">Nama Karyawan</label>
                     <input type="text" class="form-control" name="nama">
+                    <input type="hidden" name="cabang_id" value="{{ $cabang_id }}">
                 </div>
-                <div class="col-lg-6">
+                {{-- <div class="col-lg-6">
                     <label for="">Cabang</label>
                     <select name="cabang_id" id="" class="form-control">
                         <option value="">Pilih Cabang</option>
@@ -60,7 +61,7 @@
                             <option value="{{ $c->id }}">{{ $c->nama }}</option>
                         @endforeach
                     </select>
-                </div>
+                </div> --}}
                 <div class="col-lg-6 mt-2">
                     <label for="">Departemen</label>
                     <select name="departemen_id" id="" class="form-control">

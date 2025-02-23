@@ -29,6 +29,7 @@
         </div>
     </div>
     <form action="{{ route('kategori.store') }}" method="post">
+        @csrf
         <x-modal id="tambah">
             <div class="row">
                 <div class="col-lg-12">

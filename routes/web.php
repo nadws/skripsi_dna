@@ -46,7 +46,7 @@ Route::middleware('auth')->group(function () {
         ->name('kategori.')
         ->group(function () {
             Route::get('/', 'index')->name('index');
-            Route::get('/store', 'store')->name('store');
+            Route::post('/store', 'store')->name('store');
         });
 
     Route::controller(DepartemenCOntroller::class)

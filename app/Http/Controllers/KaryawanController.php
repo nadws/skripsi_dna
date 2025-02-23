@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Karyawan;
 use App\Models\Cabang;
 use App\Models\Departemen;
+use Illuminate\Support\Facades\Auth;
 
 class KaryawanController extends Controller
 {
@@ -15,7 +16,8 @@ class KaryawanController extends Controller
             'title' => 'Data Karyawan',
             'karyawan' => Karyawan::orderBy('id', 'desc')->get(),
             'cabang' => Cabang::all(),
-            'departemen' => Departemen::all()
+            'departemen' => Departemen::all(),
+            'cabang_id' => Auth::user()->cabang_id,
         ];
         return view('karyawan.index', $data);
     }

@@ -15,7 +15,7 @@ class UserController extends Controller
             'user' => User::all(),
             'cabang' => Cabang::all()
         ];
-        return view('user.index', $data);
+        return view('superadmin.user.index', $data);
     }
 
     public function store(Request $r)

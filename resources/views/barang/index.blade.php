@@ -15,6 +15,7 @@
                         <th class="text-center">No</th>
                         <th class="text-center">Kode Barang</th>
                         <th class="text-center">Nama Barang</th>
+                        <th class="text-center">Kategori</th>
                         <th class="text-center">Merek</th>
                         <th class="text-center">Stok</th>
                         <th class="text-center">Harga Satuan</th>
@@ -28,6 +29,7 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $c->kode }}</td>
                             <td>{{ $c->nama_barang }}</td>
+                            <td>{{ $c->kategori }}</td>
                             <td>{{ $c->merek }}</td>
                             <td class="text-end">{{ $c->stok }}</td>
                             <td class="text-end">{{ number_format($c->harga_terbaru, 0) }}</td>
@@ -72,6 +74,16 @@
                         <div class="col-lg-6">
                             <label for="">Nama Barang</label>
                             <input type="text" class="form-control" name="nama_barang">
+
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="">Kategori</label>
+                            <select name="kategori_id" id="" class="form-control">
+                                <option value="">Pilih Kategori</option>
+                                @foreach ($kategori as $c)
+                                    <option value="{{ $c->id }}">{{ $c->kategori }}</option>
+                                @endforeach
+                            </select>
 
                         </div>
                         <div class="col-lg-6">
