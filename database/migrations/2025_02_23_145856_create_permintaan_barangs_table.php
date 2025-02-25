@@ -19,6 +19,7 @@ return new class extends Migration
             $table->double('jumlah');
             $table->enum('kategori', ['pembelian', 'overstock']);
             $table->string('keterangan');
+            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->timestamps();
         });
         Schema::create('pembelian_barangs', function (Blueprint $table) {
@@ -28,6 +29,7 @@ return new class extends Migration
             $table->integer('suplier_id');
             $table->double('jumlah');
             $table->double('harga_satuan');
+            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->timestamps();
         });
         Schema::create('over_barangs', function (Blueprint $table) {
@@ -37,6 +39,7 @@ return new class extends Migration
             $table->integer('dari_cabang_id');
             $table->double('jumlah');
             $table->double('harga_satuan');
+            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->timestamps();
         });
     }

@@ -14,3 +14,8 @@
         <span><i class="bi bi-card-checklist"></i> Data Kategori Asset</span>
     </a>
 </li>
+<li class="menu-item {{ request()->routeIs('suplier.index') ? 'active' : '' }}">
+    <a href="{{ route('suplier.index') }}" class="menu-link">
+        <span><i class="bi bi-card-checklist"></i> Data Suplier</span>
+    </a>
+</li>

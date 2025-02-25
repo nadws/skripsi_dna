@@ -18,8 +18,8 @@
         <span><i class="bi bi-journal-bookmark"></i></i>Peminjaman Asset</span>
     </a>
 </li>
-<li class="menu-item ">
-    <a href="" class="menu-link">
+<li class="menu-item {{ request()->routeIs('permintaan.index') ? 'active' : '' }}">
+    <a href="{{ route('permintaan.index') }}" class="menu-link">
         <span><i class="bi bi-journal-bookmark"></i></i>Permintaan Asset</span>
     </a>
 </li>
