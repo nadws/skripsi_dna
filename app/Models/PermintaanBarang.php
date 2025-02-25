@@ -13,4 +13,18 @@ class PermintaanBarang extends Model
     {
         return $this->belongsTo(Barang::class, 'barang_id');
     }
+
+    public function cabang()
+    {
+        return $this->belongsTo(Cabang::class, 'cabang_id');
+    }
+
+    public function pembelian()
+    {
+        return $this->belongsTo(PembelianBarang::class, 'invoice', 'invoice');
+    }
+    public function overstock()
+    {
+        return $this->belongsTo(OverBarang::class, 'invoice', 'invoice');
+    }
 }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use App\Models\Cabang;
+use App\Models\OverBarang;
+use App\Models\PembelianBarang;
 use App\Models\PermintaanBarang;
 use App\Models\Suplier;
 use Illuminate\Http\Request;
@@ -73,7 +75,7 @@ class PermintaanBarangController extends Controller
                     'jumlah' => $r->jumlah_pembelian,
                     'harga_satuan' => $r->harga_satuan_pembelian
                 ];
-                DB::table('pembelian_barangs')->insert($data2);
+                PembelianBarang::create($data2);
             } else {
                 $data = [
                     'invoice' => $invoice,
@@ -93,7 +95,7 @@ class PermintaanBarangController extends Controller
                     'jumlah' => $r->jumlah_overstock,
                     'harga_satuan' => $r->harga_satuan_overstock
                 ];
-                DB::table('over_barangs')->insert($data2);
+                OverBarang::create($data2);
             }
 
             DB::commit(); // Simpan semua perubahan jika berhasil

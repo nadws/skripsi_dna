@@ -10,6 +10,7 @@
                         <th>No</th>
                         <th>Invoice</th>
                         <th>Asset</th>
+                        <th>Suplier / Cabang</th>
                         <th>Jumlah</th>
                         <th>Kategori</th>
                         <th>Keterangan</th>
@@ -22,6 +23,9 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>PER-{{ $p->invoice }}</td>
                             <td>{{ $p->barang->nama_barang }} ({{ $p->barang->merek }})</td>
+                            <td>{{ empty($p->pembelian->suplier->nama) ? '' : 'Suplier ' . $p->pembelian->suplier->nama }}
+                                {{ empty($p->overstock->cabang->nama) ? '' : 'Cabang ' . $p->overstock->cabang->nama }}
+                            </td>
                             <td>{{ $p->jumlah }}</td>
                             <td>{{ $p->kategori }}</td>
                             <td>{{ $p->keterangan }}</td>
