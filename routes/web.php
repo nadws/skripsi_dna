@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccPengajuanPermintaanassetController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DepartemenCOntroller;
@@ -98,6 +99,14 @@ Route::middleware('auth')->group(function () {
             Route::get('/get_asset', 'get_asset')->name('get_asset');
             Route::get('/get_stock', 'get_stock')->name('get_stock');
             Route::post('/store', 'store')->name('store');
+        });
+        Route::controller(AccPengajuanPermintaanassetController::class)
+        ->prefix('accpermintaan')
+        ->name('accpermintaan.')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/getEdit', 'getEdit')->name('getEdit');
+            Route::post('/edit', 'edit')->name('edit');
         });
 });
 

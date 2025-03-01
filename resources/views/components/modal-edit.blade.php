@@ -1,9 +1,9 @@
-@props(['size' => '', 'id' => 'edit', 'url' => ''])
+@props(['size' => '', 'id' => 'edit', 'url' => '' , 'tipe' => 'edit', 'judul' => ''])
 <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
     <div class="modal-dialog {{ $size }}">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="tambahModalLabel">Edit Data</h5>
+                <h5 class="modal-title" id="tambahModalLabel">{{$judul}}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
@@ -11,9 +11,17 @@
                 <div id="load-data"></div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary submit">Simpan</button>
-                <button type="button" disabled class="btn btn-primary submit_proses" hidden>Proses ..</button>
+                @if ($tipe == 'edit')
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary submit">Simpan</button>
+                    <button type="button" disabled class="btn btn-primary submit_proses" hidden>Proses ..</button>
+                @elseif($tipe == 'view')
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                @else 
+                <button type="submit" class="btn btn-danger submit" name="tombol" value="tolak">Tolak</button>
+                    <button type="submit" class="btn btn-primary submit" name="tombol" value="setuju">Setujui</button>
+                @endif
+                
             </div>
         </div>
     </div>
