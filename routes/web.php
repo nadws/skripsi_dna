@@ -8,9 +8,11 @@ use App\Http\Controllers\CabangController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\KategoriAssetController;
+use App\Http\Controllers\PerbaikanAssetController;
 use App\Http\Controllers\PermintaanBarangController;
 use App\Http\Controllers\SuplierController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VendorController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -100,11 +102,32 @@ Route::middleware('auth')->group(function () {
             Route::get('/get_stock', 'get_stock')->name('get_stock');
             Route::post('/store', 'store')->name('store');
         });
-        Route::controller(AccPengajuanPermintaanassetController::class)
+    Route::controller(AccPengajuanPermintaanassetController::class)
         ->prefix('accpermintaan')
         ->name('accpermintaan.')
         ->group(function () {
             Route::get('/', 'index')->name('index');
+            Route::get('/getEdit', 'getEdit')->name('getEdit');
+            Route::post('/edit', 'edit')->name('edit');
+        });
+    Route::controller(VendorController::class)
+        ->prefix('vendor')
+        ->name('vendor.')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::post('/store', 'store')->name('store');
+            Route::get('/getEdit', 'getEdit')->name('getEdit');
+            Route::post('/edit', 'edit')->name('edit');
+        });
+    Route::controller(PerbaikanAssetController::class)
+        ->prefix('perbaikan')
+        ->name('perbaikan.')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/getAssetKaryawan', 'getAssetKaryawan')->name('getAssetKaryawan');
+            Route::get('/getQtyAssetKaryawan', 'getQtyAssetKaryawan')->name('getQtyAssetKaryawan');
+            Route::get('/getStockCabang', 'getStockCabang')->name('getStockCabang');
+            Route::post('/store', 'store')->name('store');
             Route::get('/getEdit', 'getEdit')->name('getEdit');
             Route::post('/edit', 'edit')->name('edit');
         });

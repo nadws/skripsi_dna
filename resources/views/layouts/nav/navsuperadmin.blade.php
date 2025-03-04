@@ -19,3 +19,8 @@
         <span><i class="bi bi-card-checklist"></i> Data Suplier</span>
     </a>
 </li>
+<li class="menu-item {{ request()->routeIs('vendor.index') ? 'active' : '' }}">
+    <a href="{{ route('vendor.index') }}" class="menu-link">
+        <span><i class="bi bi-gear"></i> Data Vendor</span>
+    </a>
+</li>
