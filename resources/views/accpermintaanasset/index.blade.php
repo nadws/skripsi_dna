@@ -1,4 +1,4 @@
-<x-app-layout title="{{$title}}">
+<x-app-layout title="{{ $title }}">
     <div class="card">
         <div class="card-heade">
 
@@ -36,8 +36,9 @@
                                     class="badge {{ $p->status == 'pending' ? 'bg-warning' : ($p->status == 'approved' ? 'bg-success' : 'bg-danger') }}  ">{{ $p->status }}</span>
                             </td>
                             <td>
+
                                 <button data-bs-toggle="modal" data-bs-target="#edit" data-id="{{ $p->id }}"
-                                class="btn btn-info btn-sm getData"><i class="bi bi-search"></i></button>
+                                    class="btn btn-info btn-sm getData"><i class="bi bi-search"></i></button>
                             </td>
                         </tr>
                     @endforeach
@@ -46,12 +47,13 @@
         </div>
     </div>
 
-    <form action="{{route('accpermintaan.edit')}}" method="POST">
+    <form action="{{ route('accpermintaan.edit') }}" method="POST">
         @csrf
-    <x-modal-edit size="modal-lg" id="edit" url="accpermintaan.getEdit" tipe='acc' judul='Permintaan Assets'>
+        <x-modal-edit size="modal-lg" id="edit" url="accpermintaan.getEdit" tipe='acc'
+            judul='Permintaan Assets'>
+        </x-modal-edit>
     </form>
-        
-            
 
-    </x-modal>
+
+
 </x-app-layout>

@@ -21,7 +21,8 @@ return new class extends Migration
             $table->double('urutan');
             $table->string('ket');
             $table->integer('cabang_id');
-            $table->enum('status', ['pengajuan', 'disetujui'])->default('pengajuan');
+            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
+            $table->string('ket_presiden')->nullable();
             $table->timestamps();
         });
     }

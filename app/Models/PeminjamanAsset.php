@@ -16,7 +16,8 @@ class PeminjamanAsset extends Model
         'urutan',
         'ket',
         'cabang_id',
-        'status'
+        'status',
+        'ket_presiden'
     ];
     public function barang()
     {

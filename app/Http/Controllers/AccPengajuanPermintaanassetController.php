@@ -8,28 +8,30 @@ use Illuminate\Http\Request;
 
 class AccPengajuanPermintaanassetController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $data = [
             'title' => "Pengajuan Permintaan Asset",
             'permintaan' => PermintaanBarang::orderBy('id', 'desc')->get(),
         ];
-        return view('accpermintaanasset.index',$data);
+        return view('accpermintaanasset.index', $data);
     }
 
-    public function getEdit(Request $r){
+    public function getEdit(Request $r)
+    {
         $data = [
-            'p' => PermintaanBarang::where('id',$r->id)->first()
+            'p' => PermintaanBarang::where('id', $r->id)->first()
         ];
-        return view('accpermintaanasset.accpermintaan',$data);
+        return view('accpermintaanasset.accpermintaan', $data);
     }
 
-    public function edit(Request $r){
-        if($r->tombol == 'tolak'){
-            PermintaanBarang::where('id',$r->id)->update(['status'=>'rejected']);
-        } else
-        {
-            PermintaanBarang::where('id',$r->id)->update(['status'=>'approved']);
-            $permintaan = PermintaanBarang::where('id',$r->id)->first();
+    public function edit(Request $r)
+    {
+        if ($r->status == 'rejected') {
+            PermintaanBarang::where('id', $r->id)->update(['status' => 'rejected', 'ket_presiden' => $r->ket_presiden]);
+        } else {
+            PermintaanBarang::where('id', $r->id)->update(['status' => 'approved']);
+            $permintaan = PermintaanBarang::where('id', $r->id)->first();
 
             if ($permintaan->kategori == 'pembelian') {
                 $data2 = [
@@ -64,8 +66,6 @@ class AccPengajuanPermintaanassetController extends Controller
                 ];
                 Stok::create($data3);
             }
-            
-
         }
 
         return redirect()->route('accpermintaan.index')->with('success', 'Data Berhasil Disimpan');

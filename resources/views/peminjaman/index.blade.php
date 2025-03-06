@@ -33,18 +33,20 @@
                             <td>{{ $p->barang->nama_barang }}</td>
                             <td>{{ $p->qty }}</td>
                             <td>{{ $p->ket }}</td>
-                            <td>{{ $p->status }}</td>
+                            <td><span
+                                    class="badge {{ $p->status == 'pending' ? 'bg-warning' : ($p->status == 'approved' ? 'bg-success' : 'bg-danger') }}  ">{{ $p->status }}</span>
+                            </td>
                             <td>
                                 @if ($role == 'presiden')
-                                    @if ($p->status == 'disetujui')
+                                    @if ($p->status == 'approved')
                                         <span class="badge bg-success"><i class="bi bi-check2-all"></i></span>
                                     @else
-                                        <a href="{{ route('peminjaman.accepted', $p->id) }}"
-                                            onclick="return confirm('Apakah anda yakin menyetuji peminjaman assets?')"
-                                            class="btn btn-info btn-sm"><i class="bi bi-check2-all"></i></a>
+                                        <button data-bs-toggle="modal" data-bs-target="#edit"
+                                            data-id="{{ $p->id }}" class="btn btn-info btn-sm getData"><i
+                                                class="bi bi-search"></i></button>
                                     @endif
                                 @else
-                                    @if ($p->status == 'disetujui')
+                                    @if ($p->status == 'approved')
                                     @else
                                         <a href="#" class="btn btn-warning btn-sm"><i
                                                 class="bi bi-pencil-square"></i></a>
@@ -98,4 +100,12 @@
 
         </x-modal>
     </form>
+    <form action="{{ route('peminjaman.accepted') }}" method="POST">
+        @csrf
+        <x-modal-edit size="modal-lg" id="edit" url="peminjaman.getDataPeminjaman" tipe='acc'
+            judul='Peminjaman Assets'>
+        </x-modal-edit>
+    </form>
+
+
 </x-app-layout>

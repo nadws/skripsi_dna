@@ -152,6 +152,18 @@
                 $(".submit_proses").removeAttr("hidden"); // Tampilkan tombol submit_proses
 
             });
+            $(document).on('change', '.keputusan', function(e) {
+                var keputusan = $(this).val();
+                if (keputusan == 'rejected') {
+                    $('.alasan').attr('hidden', false)
+
+
+                } else {
+                    $('.alasan').attr('hidden', true)
+                }
+
+
+            });
         });
     </script>
     @yield('scripts')

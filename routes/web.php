@@ -83,8 +83,9 @@ Route::middleware('auth')->group(function () {
         ->name('peminjaman.')
         ->group(function () {
             Route::get('/', 'index')->name('index');
+            Route::get('/getDataPeminjaman', 'getDataPeminjaman')->name('getDataPeminjaman');
             Route::post('/store', 'store')->name('store');
-            Route::get('/accepted/{id}', 'accepted')->name('accepted');
+            Route::post('/accepted', 'accepted')->name('accepted');
         });
     Route::controller(SuplierController::class)
         ->prefix('suplier')

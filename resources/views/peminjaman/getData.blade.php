@@ -1,44 +1,50 @@
 <div class="row">
-    <input type="hidden" name="id" value="{{ $p->id }}">
+    <input type="hidden" name="id" value="{{ $peminjaman->id }}">
     <table class="table">
+        <tr>
+            <th>Invoice</th>
+            <th width="2%"> : </th>
+            <th>{{ $peminjaman->invoice }}</th>
+        </tr>
+        <tr>
+            <th>Nama Karyawan</th>
+            <th width="2%"> : </th>
+            <th>{{ $peminjaman->karyawan->nama }}</th>
+        </tr>
         <tr>
             <th>Cabang</th>
             <th width="2%"> : </th>
-            <th>{{ $p->cabang->nama }}</th>
-        </tr>
-        <tr>
-            <th>Nama Asset</th>
-            <th width="2%"> : </th>
-            <th>{{ $p->barang->nama_barang }} ({{ $p->barang->merek }})</th>
-        </tr>
-        <tr>
-            <th>Suplier / Cabang</th>
-            <th width="2%"> : </th>
             <th>
-                {{ empty($p->pembelian->suplier->nama) ? '' : 'Suplier ' . $p->pembelian->suplier->nama }}
-                {{ empty($p->overstock->cabang->nama) ? '' : 'Cabang ' . $p->overstock->cabang->nama }}
+                {{ $peminjaman->cabang->nama }}
             </th>
         </tr>
         <tr>
-            <th>Jumlah</th>
+            <th>Barang</th>
             <th width="2%"> : </th>
             <th>
-                {{ $p->jumlah }}
+                {{ $peminjaman->barang->nama_barang }}
             </th>
         </tr>
         <tr>
-            <th>Kategori</th>
+            <th>Qty</th>
             <th width="2%"> : </th>
             <th>
-                {{ $p->kategori }}
+                {{ $peminjaman->qty }}
             </th>
         </tr>
         <tr>
-            <th>Status</th>
+            <th>Ket</th>
+            <th width="2%"> : </th>
+            <th>
+                {{ $peminjaman->ket }}
+            </th>
+        </tr>
+        <tr>
+            <th>status</th>
             <th width="2%"> : </th>
             <th>
                 <span
-                    class="badge {{ $p->status == 'pending' ? 'bg-warning' : ($p->status == 'approved' ? 'bg-success' : 'bg-danger') }}  ">{{ $p->status }}</span>
+                    class="badge {{ $peminjaman->status == 'pending' ? 'bg-warning' : ($peminjaman->status == 'approved' ? 'bg-success' : 'bg-danger') }}  ">{{ $peminjaman->status }}</span>
             </th>
         </tr>
         @if ($peminjaman->status == 'rejected')
@@ -51,7 +57,9 @@
             </tr>
         @endif
 
+
     </table>
+
     <div class="col-lg-12">
         <label for="">Keputusan</label>
         <select name="status" id="" class="form-control keputusan" required>

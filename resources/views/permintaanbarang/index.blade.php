@@ -58,7 +58,7 @@
                 </div>
                 <div class="col-lg-4">
                     <label for="">Keterangan</label>
-                    <input type="text" class="form-control" name="keterangan">
+                    <input type="text" class="form-control" name="keterangan" required>
                 </div>
                 <div class="col-lg-12">
                     <hr>
@@ -89,7 +89,8 @@
                 </div>
                 <div class="col-lg-6 mt-2">
                     <label for="">Harga Satuan</label>
-                    <input type="number" name="harga_satuan_pembelian" class="form-control">
+                    <input type="number" name="harga_satuan_pembelian" class="form-control" value="0"
+                        min="0">
                 </div>
             </div>
             <div class="row overstock" hidden>

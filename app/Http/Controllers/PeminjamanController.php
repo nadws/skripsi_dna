@@ -35,9 +35,6 @@ class PeminjamanController extends Controller
             $invoice = PeminjamanAsset::latest('urutan')->first();
             $invoice = empty($invoice) ? 1001 : $invoice->urutan + 1001;
             $invoice_kode = 'INV' . $invoice;
-
-
-
             $data = [
                 'karyawan_id' => $request->karyawan_id,
                 'barang_id' => $request->barang_id,
@@ -47,7 +44,7 @@ class PeminjamanController extends Controller
                 'urutan' => $invoice,
                 'ket' => $request->ket,
                 'cabang_id' => Auth::user()->cabang_id,
-                'status' => 'pengajuan',
+                'status' => 'pending',
             ];
             PeminjamanAsset::create($data);
 
@@ -69,25 +66,43 @@ class PeminjamanController extends Controller
         }
     }
 
-    public function accepted($id)
+    public function getDataPeminjaman(Request $r)
+    {
+        $data = [
+            'peminjaman' => PeminjamanAsset::find($r->id)
+        ];
+
+        return view('peminjaman.getData', $data);
+    }
+
+    public function accepted(Request $r)
     {
         try {
-            $peminjaman = PeminjamanAsset::find($id);
-            $data = [
-                'status' => 'disetujui',
-            ];
-            PeminjamanAsset::where('id', $id)->update($data);
 
-            $data2 = [
-                'barang_id' => $peminjaman->barang_id,
-                'debit' => 0,
-                'kredit' => $peminjaman->qty,
-                'ket' => 'Peminjaman ' . $peminjaman->invoice,
-                'cabang_id' => $peminjaman->cabang_id,
-                'harga' => 0,
-                'tanggal' => date('Y-m-d')
-            ];
-            Stok::create($data2);
+            if ($r->status == 'approved') {
+                $peminjaman = PeminjamanAsset::find($r->id);
+                $data = [
+                    'status' => 'approved',
+                ];
+                PeminjamanAsset::where('id', $r->id)->update($data);
+
+                $data2 = [
+                    'barang_id' => $peminjaman->barang_id,
+                    'debit' => 0,
+                    'kredit' => $peminjaman->qty,
+                    'ket' => 'Peminjaman ' . $peminjaman->invoice,
+                    'cabang_id' => $peminjaman->cabang_id,
+                    'harga' => 0,
+                    'tanggal' => date('Y-m-d')
+                ];
+                Stok::create($data2);
+            } else {
+                $data = [
+                    'status' => 'rejected',
+                    'ket_presiden' => $r->ket_presiden,
+                ];
+                PeminjamanAsset::where('id', $r->id)->update($data);
+            }
             return redirect()->route('peminjaman.index')->with('success', 'Data Berhasil Disimpan');
         } catch (\Throwable $th) {
             return redirect()->route('peminjaman.index')->with('error', 'Data Gagal Disimpan');
