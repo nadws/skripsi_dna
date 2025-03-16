@@ -37,21 +37,21 @@
 
 <li class="menu-item {{ request()->routeIs('peminjaman.index') ? 'active' : '' }}">
     <a href="{{ route('peminjaman.index') }}" class="menu-link">
-        <span><i class="bi bi-journal-bookmark"></i></i>Peminjaman Asset</span>
+        <span><i class="bi bi-journal-bookmark"></i></i>Peminjaman Inventaris</span>
     </a>
 </li>
 <li class="menu-item {{ request()->routeIs('permintaan.index') ? 'active' : '' }}">
     <a href="{{ route('permintaan.index') }}" class="menu-link">
-        <span><i class="bi bi-journal-bookmark"></i></i>Permintaan Asset</span>
+        <span><i class="bi bi-journal-bookmark"></i></i>Permintaan Inventaris</span>
     </a>
 </li>
 <li class="menu-item  {{ request()->routeIs('perbaikan.index') ? 'active' : '' }}">
     <a href="{{ route('perbaikan.index') }}" class='menu-link'>
-        <span><i class="bi bi-grid-fill"></i> Perbaikan asset</span>
+        <span><i class="bi bi-grid-fill"></i> Perbaikan Inventaris</span>
     </a>
 </li>
 <li class="menu-item  {{ request()->routeIs('disposal.index') ? 'active' : '' }}">
     <a href="{{ route('disposal.index') }}" class='menu-link'>
-        <span><i class="bi bi-trash"></i> Disposal asset</span>
+        <span><i class="bi bi-trash"></i> Disposal Inventaris</span>
     </a>
 </li>

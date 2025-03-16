@@ -1,12 +1,12 @@
 <ul>
-    <li class="menu-item  ">
-        <a href="{{ route('dashboard') }}" class='menu-link'>
-            <span><i class="bi bi-grid-fill"></i> Disposal asset</span>
+    <li class="menu-item  {{ request()->routeIs('disposal.index') ? 'active' : '' }}">
+        <a href="{{ route('disposal.index') }}" class='menu-link'>
+            <span><i class="bi bi-trash"></i> Disposal Inventaris</span>
         </a>
     </li>
     <li class="menu-item  {{ request()->routeIs('perbaikan.index') ? 'active' : '' }}">
         <a href="{{ route('perbaikan.index') }}" class='menu-link'>
-            <span><i class="bi bi-grid-fill"></i> Perbaikan asset</span>
+            <span><i class="bi bi-grid-fill"></i> Perbaikan Inventaris</span>
         </a>
     </li>
 
