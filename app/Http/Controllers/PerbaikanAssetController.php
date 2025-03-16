@@ -27,7 +27,10 @@ class PerbaikanAssetController extends Controller
 
     public function getAssetKaryawan(Request $r)
     {
-        $barang =  PeminjamanAsset::where('karyawan_id', $r->karyawan_id)->get();
+        $barang = PeminjamanAsset::where('karyawan_id', $r->karyawan_id)
+            ->whereRaw('qty - qty_disposal > 0')
+            ->orderBy('id', 'desc')
+            ->get();
 
         echo "<option value=''>-Pilih Asset-</option>";
         foreach ($barang as $b) {

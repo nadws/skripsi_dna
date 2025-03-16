@@ -41,6 +41,7 @@ class PeminjamanController extends Controller
                 'invoice' => $invoice_kode,
                 'tgl_pinjam' => date('Y-m-d'),
                 'qty' => $request->qty,
+                'qty_disposal' => 0,
                 'urutan' => $invoice,
                 'ket' => $request->ket,
                 'cabang_id' => Auth::user()->cabang_id,

@@ -4,33 +4,31 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PeminjamanAsset extends Model
+class Disposal extends Model
 {
-
-    protected $fillable = [
-        'karyawan_id',
+    protected  $fillable  = [
         'barang_id',
-        'invoice',
-        'tgl_pinjam',
-        'qty',
-        'qty_disposal',
-        'urutan',
-        'ket',
         'cabang_id',
+        'karyawan_id',
+        'jumlah',
+        'keterangan',
+        'from',
         'status',
-        'ket_presiden'
+        'tgl_disposal',
+        'ket_presiden',
+        'invoice_peminjaman'
+
     ];
     public function barang()
     {
         return $this->belongsTo(Barang::class, 'barang_id');
     }
-    public function karyawan()
-    {
-        return $this->belongsTo(Karyawan::class, 'karyawan_id');
-    }
-
     public function cabang()
     {
         return $this->belongsTo(Cabang::class, 'cabang_id');
+    }
+    public function karyawan()
+    {
+        return $this->belongsTo(Karyawan::class, 'karyawan_id');
     }
 }

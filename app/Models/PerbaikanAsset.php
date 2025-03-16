@@ -17,7 +17,8 @@ class PerbaikanAsset extends Model
         'from',
         'status',
         'tgl_perbaikan',
-        'tgl_estimasi'
+        'tgl_estimasi',
+        'ket_presiden'
     ];
     public function barang()
     {

@@ -12,33 +12,30 @@
                         <th>Asset</th>
                         <th>Pemilik</th>
                         <th>Jumlah</th>
-                        <th>Vendor</th>
-                        <th>Biaya</th>
                         <th>Keterangan</th>
                         <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($perbaikan as $p)
+                    @foreach ($disposal as $d)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $p->barang->nama_barang }}</td>
-                            <td>{{ $p->from == 'user' ? $p->karyawan->nama : 'Cabang :' . $p->cabang->nama }}</td>
-                            <td>{{ $p->jumlah }}</td>
-                            <td>{{ $p->vendor->nama }}</td>
-                            <td>Rp. {{ number_format($p->biaya, 0) }}</td>
-                            <td>{{ $p->keterangan }}</td>
+                            <td>{{ $d->barang->nama_barang }}</td>
+                            <td>{{ $d->from == 'user' ? $d->karyawan->nama : 'Cabang :' . $d->cabang->nama }}</td>
+                            <td>{{ $d->jumlah }}</td>
+                            <td>{{ $d->keterangan }}</td>
                             <td><span
-                                    class="badge {{ $p->status == 'pending' ? 'bg-warning' : ($p->status == 'approved' ? 'bg-success' : 'bg-danger') }}  ">{{ $p->status }}</span>
+                                    class="badge {{ $d->status == 'pending' ? 'bg-warning' : ($d->status == 'approved' ? 'bg-success' : 'bg-danger') }}  ">{{ $d->status }}</span>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
+
+
             </table>
         </div>
     </div>
-
-    <form action="{{ route('perbaikan.store') }}" method="post">
+    <form action="{{ route('disposal.store') }}" method="post">
         @csrf
         <x-modal id="tambah" size="modal-lg">
             <div class="row">
@@ -71,26 +68,11 @@
                     <input type="text" class="form-control qty" disabled>
                 </div>
                 <div class="col-lg-6 user mt-2" hidden>
-                    <label for="">Jumlah Yang Diperbaiki</label>
+                    <label for="">Jumlah Yang Disposal</label>
                     <input type="number" class="form-control qty2 user" max="" disabled name="jumlah">
                 </div>
-                <div class="col-lg-6 user mt-2" hidden>
-                    <label for="">Vendor</label>
-                    <select name="vendor_id" id="" class="form-control user" disabled>
-                        <option value="">-Pilih Vendor-</option>
-                        @foreach ($vendor as $v)
-                            <option value="{{ $v->id }}">{{ $v->nama }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="col-lg-6 user mt-2" hidden>
-                    <label for="">Harga Estimasi Perbaikan</label>
-                    <input type="number" class="form-control user" disabled name="biaya">
-                </div>
-                <div class="col-lg-6 user mt-2" hidden>
-                    <label for="">Tanggal Estimasi Selesai</label>
-                    <input type="date" class="form-control user" disabled name="tgl_estimasi">
-                </div>
+
+
                 <div class="col-lg-6 user mt-2" hidden>
                     <label for="">Keterangan</label>
                     <input type="text" class="form-control user" disabled name="keterangan">
@@ -112,25 +94,8 @@
                     <input type="text" class="form-control qty" disabled>
                 </div>
                 <div class="col-lg-6 cabang mt-2" hidden>
-                    <label for="">Jumlah Yang Diperbaiki</label>
+                    <label for="">Jumlah Yang Disposal</label>
                     <input type="number" class="form-control qty2 cabang" max="" disabled name="jumlah">
-                </div>
-                <div class="col-lg-6 cabang mt-2" hidden>
-                    <label for="">Vendor</label>
-                    <select name="vendor_id" id="" class="form-control cabang" disabled>
-                        <option value="">-Pilih Vendor-</option>
-                        @foreach ($vendor as $v)
-                            <option value="{{ $v->id }}">{{ $v->nama }}</option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="col-lg-6 cabang mt-2" hidden>
-                    <label for="">Harga Estimasi Perbaikan</label>
-                    <input type="number" class="form-control cabang" disabled name="biaya">
-                </div>
-                <div class="col-lg-6 cabang mt-2" hidden>
-                    <label for="">Tanggal Estimasi Selesai</label>
-                    <input type="date" class="form-control cabang" disabled name="tgl_estimasi">
                 </div>
                 <div class="col-lg-6 cabang mt-2" hidden>
                     <label for="">Keterangan</label>

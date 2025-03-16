@@ -24,6 +24,7 @@ return new class extends Migration
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->date('tgl_perbaikan');
             $table->date('tgl_estimasi');
+            $table->string('ket_presiden')->nullable();
             $table->timestamps();
         });
     }

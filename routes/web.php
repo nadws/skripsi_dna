@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\AccDisposalController;
 use App\Http\Controllers\AccPengajuanPermintaanassetController;
+use App\Http\Controllers\AccPerbaikanAssetController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DepartemenCOntroller;
 use App\Http\Controllers\CabangController;
+use App\Http\Controllers\DisposalController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\KategoriAssetController;
@@ -13,6 +16,7 @@ use App\Http\Controllers\PermintaanBarangController;
 use App\Http\Controllers\SuplierController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VendorController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -130,6 +134,29 @@ Route::middleware('auth')->group(function () {
             Route::get('/getStockCabang', 'getStockCabang')->name('getStockCabang');
             Route::post('/store', 'store')->name('store');
             Route::get('/getEdit', 'getEdit')->name('getEdit');
+            Route::post('/edit', 'edit')->name('edit');
+        });
+    Route::controller(AccPerbaikanAssetController::class)
+        ->prefix('accperbaikan')
+        ->name('accperbaikan.')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/getPerbaikan', 'getPerbaikan')->name('getPerbaikan');
+            Route::post('/edit', 'edit')->name('edit');
+        });
+    Route::controller(DisposalController::class)
+        ->prefix('disposal')
+        ->name('disposal.')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::post('/store', 'store')->name('store');
+        });
+    Route::controller(AccDisposalController::class)
+        ->prefix('accdisposal')
+        ->name('accdisposal.')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/getDisposal', 'getDisposal')->name('getDisposal');
             Route::post('/edit', 'edit')->name('edit');
         });
 });

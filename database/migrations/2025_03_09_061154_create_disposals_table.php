@@ -11,18 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('peminjaman_assets', function (Blueprint $table) {
+        Schema::create('disposals', function (Blueprint $table) {
             $table->id();
-            $table->integer('karyawan_id');
             $table->integer('barang_id');
-            $table->string('invoice');
-            $table->date('tgl_pinjam');
-            $table->double('qty');
-            $table->double('qty_disposal');
-            $table->double('urutan');
-            $table->string('ket');
             $table->integer('cabang_id');
+            $table->integer('karyawan_id')->nullable();
+            $table->string('invoice_peminjaman')->nullable();
+            $table->double('jumlah');
+            $table->text('keterangan');
+            $table->enum('from', ['cabang', 'user']);
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
+            $table->date('tgl_disposal');
             $table->string('ket_presiden')->nullable();
             $table->timestamps();
         });
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('peminjaman_assets');
+        Schema::dropIfExists('disposals');
     }
 };
