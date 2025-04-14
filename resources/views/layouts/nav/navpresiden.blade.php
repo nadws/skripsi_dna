@@ -41,8 +41,8 @@
         <!-- Wrap to submenu-group-wrapper if you want 3-level submenu. Otherwise remove it. -->
         <div class="submenu-group-wrapper">
             <ul class="submenu-group">
-                <li class="submenu-item">
-                    <a href="#" class='submenu-link'>
+                <li class="submenu-item {{ request()->routeIs('stok_inventaris.index') ? 'active' : '' }}">
+                    <a href="{{ route('stok_inventaris.index') }}" class='submenu-link'>
                         Stok Inventaris
                     </a>
                 </li>

@@ -11,6 +11,7 @@ use App\Http\Controllers\DisposalController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\KategoriAssetController;
+use App\Http\Controllers\LaporanStokInventaris;
 use App\Http\Controllers\PerbaikanAssetController;
 use App\Http\Controllers\PermintaanBarangController;
 use App\Http\Controllers\SuplierController;
@@ -158,6 +159,14 @@ Route::middleware('auth')->group(function () {
             Route::get('/', 'index')->name('index');
             Route::get('/getDisposal', 'getDisposal')->name('getDisposal');
             Route::post('/edit', 'edit')->name('edit');
+        });
+    Route::controller(LaporanStokInventaris::class)
+        ->prefix('stok_inventaris')
+        ->name('stok_inventaris.')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/getStok', 'getStok')->name('getStok');
+            Route::get('/print', 'print')->name('print');
         });
 });
 
