@@ -15,7 +15,8 @@ class Karyawan extends Model
         'tempat_lahir',
         'tgl_gabung',
         'alamat',
-        'jenis_kelamin'
+        'jenis_kelamin',
+        'foto'
     ];
     public function cabang()
     {

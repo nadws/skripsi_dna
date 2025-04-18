@@ -58,11 +58,11 @@ class BarangController extends Controller
 
             $data2 = [
                 'barang_id' => $barang->id,
-                'debit' => $r->stok_awal,
+                'debit' => 0,
                 'kredit' => 0,
                 'ket' => 'Stok Awal',
                 'cabang_id' => $r->cabang_id,
-                'harga' => $r->harga,
+                'harga' => 0,
                 'tanggal' => date('Y-m-d')
             ];
             Stok::create($data2);

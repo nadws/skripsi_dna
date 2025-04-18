@@ -20,7 +20,7 @@ return new class extends Migration
             $table->enum('kategori', ['pembelian', 'overstock']);
             $table->string('keterangan');
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
-            $table->string('ket_presiden');
+            $table->string('ket_presiden')->nullable();
             $table->timestamps();
         });
         Schema::create('pembelian_barangs', function (Blueprint $table) {

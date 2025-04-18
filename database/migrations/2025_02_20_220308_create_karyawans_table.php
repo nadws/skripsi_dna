@@ -21,6 +21,7 @@ return new class extends Migration
             $table->date('tgl_gabung');
             $table->string('alamat');
             $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan']);
+            $table->string('foto');
             $table->timestamps();
         });
     }

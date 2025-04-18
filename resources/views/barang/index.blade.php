@@ -30,7 +30,8 @@
                             <td class="text-end">{{ $c->stok }}</td>
                             <td class="text-end">{{ number_format($c->harga_terbaru, 0) }}</td>
                             <td class="text-center">
-                                <img src="{{ asset('product_image/' . $c->image) }}" alt="" width="80px">
+                                <img src="{{ asset('product_image/' . $c->image) }}" alt="" width="80px"
+                                    height="80px">
                             </td>
                             <td class="text-center">
                                 @if ($role == 'presiden')
@@ -100,14 +101,14 @@
                             </div>
                         @endif
 
-                        <div class="col-lg-6">
+                        {{-- <div class="col-lg-6">
                             <label for="">Stok Awal</label>
                             <input type="text" class="form-control" name="stok_awal">
                         </div>
                         <div class="col-lg-6">
                             <label for="">Harga Satuan Beli</label>
                             <input type="text" class="form-control" name="harga">
-                        </div>
+                        </div> --}}
 
                     </div>
 

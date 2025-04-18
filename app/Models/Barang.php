@@ -34,7 +34,7 @@ class Barang extends Model
                 ) as b on a.id = b.barang_id
 
                 left join kategori_assets as c on c.id = a.kategori_id
-                where (Coalesce(b.debit, 0) - Coalesce(b.kredit, 0)) != 0
+                
 
                 order by a.id DESC
                

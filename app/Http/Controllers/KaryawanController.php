@@ -24,17 +24,28 @@ class KaryawanController extends Controller
 
     public function store(Request $request)
     {
-        $data = [
-            'nama' => $request->nama,
-            'cabang_id' => $request->cabang_id,
-            'departemen_id' => $request->departemen_id,
-            'tempat_lahir' => $request->tempat_lahir,
-            'tgl_lahir' => $request->tgl_lahir,
-            'jenis_kelamin' => $request->jenis_kelamin,
-            'tgl_gabung' => $request->tgl_gabung,
-            'alamat' => $request->alamat,
-        ];
-        Karyawan::create($data);
-        return redirect()->route('karyawan.index')->with('success', 'Data Berhasil Disimpan');
+        try {
+            $imageName = null;
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $imageName = $request->nama . '.' . $request->tgl_lahir;
+                $image->move(public_path('karyawan_image'), $imageName);
+            }
+            $data = [
+                'nama' => $request->nama,
+                'cabang_id' => $request->cabang_id,
+                'departemen_id' => $request->departemen_id,
+                'tempat_lahir' => $request->tempat_lahir,
+                'tgl_lahir' => $request->tgl_lahir,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'tgl_gabung' => $request->tgl_gabung,
+                'alamat' => $request->alamat,
+                'foto' => $imageName
+            ];
+            Karyawan::create($data);
+            return redirect()->route('karyawan.index')->with('success', 'Data Berhasil Disimpan');
+        } catch (\Throwable $th) {
+            return redirect()->route('karyawan.index')->with('error', 'Data Gagal Disimpan');
+        }
     }
 }

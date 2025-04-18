@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('cabang_id');
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->string('ket_presiden')->nullable();
+            $table->string('file');
             $table->timestamps();
         });
     }

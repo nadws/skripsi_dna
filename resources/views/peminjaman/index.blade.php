@@ -2,6 +2,7 @@
     <div class="card">
         <div class="card-header">
             @if ($role == 'admin')
+                <a class="btn btn-primary float-end ms-2"><i class="bi bi-download"></i> Download Formulir</a>
                 <button data-bs-toggle="modal" data-bs-target="#tambah" class="btn btn-primary float-end">Tambah
                     Data</button>
             @else
@@ -13,7 +14,7 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Invoice</th>
+                        <th>Kode Peminjaman</th>
                         <th>Nama Karyawan</th>
                         <th>Cabang</th>
                         <th>Barang</th>
@@ -48,6 +49,8 @@
                                 @else
                                     @if ($p->status == 'approved')
                                     @else
+                                        <a href="#" class="btn btn-primary btn-sm"><i
+                                                class="bi bi-download"></i></a>
                                         <a href="#" class="btn btn-warning btn-sm"><i
                                                 class="bi bi-pencil-square"></i></a>
                                         <a href="{{ route('cabang.delete', $p->id) }}"
