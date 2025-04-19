@@ -37,6 +37,15 @@
         border-bottom: 3px solid white;
         /* Underline untuk menu aktif */
     }
+
+    .notification-icon {
+        width: 40px !important;
+        height: 40px !important;
+        border-radius: 50% !important;
+        color: #fff !important;
+        text-align: center !important;
+        vertical-align: middle !important;
+    }
 </style>
 
 <body>
@@ -49,7 +58,52 @@
                         <div class="logo">
                             <a href="index.html"><img src="./image/logo.png" alt="Logo"></a>
                         </div>
+                        @php
+                            $jumlah = DB::table('notifikasis')
+                                ->where('read', 'unread')
+                                ->where('user_id', Auth::user()->id)
+                                ->count();
+                            $notifikasi = DB::table('notifikasis')
+                                ->where('read', 'unread')
+                                ->where('user_id', Auth::user()->id)
+                                ->get();
+                        @endphp
                         <div class="header-top-right">
+                            <div class="dropdown">
+                                <a href="#" id="topbarUserDropdown"
+                                    class="user-dropdown d-flex align-items-center dropend dropdown-toggle "
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+
+                                    <div class="text">
+                                        <i class='bi bi-bell bi-sub fs-4'></i>
+                                        <span class="badge badge-notification bg-danger">{{ $jumlah }}</span>
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end shadow-lg"
+                                    aria-labelledby="topbarUserDropdown">
+                                    <li class="dropdown-header">
+                                        <h6>Notifications </h6>
+                                    </li>
+                                    @foreach ($notifikasi as $n)
+                                        <li class="dropdown-item notification-item">
+                                            <a class="d-flex align-items-center"
+                                                href="{{ route('notifikasi.edit', ['id' => $n->id]) }}">
+                                                <div
+                                                    class="notification-icon {{ $n->status == 'berhasil' ? 'bg-success' : 'bg-danger' }}">
+                                                    <i class="{{ $n->icon }} "></i>
+                                                </div>
+                                                <div class="notification-text ms-4">
+                                                    <p class="notification-title font-bold">{{ $n->judul }}</p>
+                                                    <p class="notification-subtitle font-thin text-sm">
+                                                        {{ $n->deskripsi }}</p>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    @endforeach
+
+
+                                </ul>
+                            </div>
                             <div class="dropdown">
                                 <a href="#" id="topbarUserDropdown"
                                     class="user-dropdown d-flex align-items-center dropend dropdown-toggle "

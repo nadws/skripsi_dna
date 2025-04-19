@@ -39,7 +39,7 @@
                                     class="badge {{ $p->status == 'pending' ? 'bg-warning' : ($p->status == 'approved' ? 'bg-success' : 'bg-danger') }}  ">{{ $p->status }}</span>
                             </td>
                             <td>
-                                @if ($role == 'presiden')
+                                @if ($role == 'manager')
                                     @if ($p->status == 'approved')
                                         <span class="badge bg-success"><i class="bi bi-check2-all"></i></span>
                                     @else
@@ -111,7 +111,7 @@
     </form>
     <form action="{{ route('peminjaman.accepted') }}" method="POST">
         @csrf
-        <x-modal-edit size="modal-lg" id="edit" url="peminjaman.getDataPeminjaman" tipe='acc'
+        <x-modal-edit size="modal-lg" id="edit" url="peminjaman.getDataPeminjaman" tipe='edit'
             judul='Peminjaman Assets'>
         </x-modal-edit>
     </form>

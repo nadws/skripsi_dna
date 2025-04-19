@@ -16,7 +16,9 @@
                         <th>Kategori</th>
                         <th>Keterangan</th>
                         <th>Status</th>
+
                         <th>Aksi</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -36,9 +38,10 @@
                                     class="badge {{ $p->status == 'pending' ? 'bg-warning' : ($p->status == 'approved' ? 'bg-success' : 'bg-danger') }}  ">{{ $p->status }}</span>
                             </td>
                             <td>
-
-                                <button data-bs-toggle="modal" data-bs-target="#edit" data-id="{{ $p->id }}"
-                                    class="btn btn-info btn-sm getData"><i class="bi bi-search"></i></button>
+                                @if ($p->status == 'pending')
+                                    <button data-bs-toggle="modal" data-bs-target="#edit" data-id="{{ $p->id }}"
+                                        class="btn btn-info btn-sm getData"><i class="bi bi-search"></i></button>
+                                @endif
                             </td>
                         </tr>
                     @endforeach
@@ -49,7 +52,7 @@
 
     <form action="{{ route('accpermintaan.edit') }}" method="POST">
         @csrf
-        <x-modal-edit size="modal-lg" id="edit" url="accpermintaan.getEdit" tipe='acc'
+        <x-modal-edit size="modal-lg" id="edit" url="accpermintaan.getEdit" tipe='edit'
             judul='Permintaan Assets'>
         </x-modal-edit>
     </form>

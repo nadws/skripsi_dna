@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notifikasi;
 use App\Models\PermintaanBarang;
 use App\Models\Stok;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AccPengajuanPermintaanassetController extends Controller
@@ -27,11 +29,39 @@ class AccPengajuanPermintaanassetController extends Controller
 
     public function edit(Request $r)
     {
+        $permintaan = PermintaanBarang::where('id', $r->id)->first();
         if ($r->status == 'rejected') {
             PermintaanBarang::where('id', $r->id)->update(['status' => 'rejected', 'ket_presiden' => $r->ket_presiden]);
+            $user = User::where('cabang_id', $permintaan->cabang_id)->get();
+            foreach ($user as $u) {
+                $data3 = [
+                    'judul' => 'Permintaan asset ' . $permintaan->invoice,
+                    'deskripsi' => 'Permintaan asset ditolak',
+                    'link' => 'permintaan.index',
+                    'user_id' => $u->id,
+                    'read' => 'unread',
+                    'icon' => 'bi bi-journal-bookmark',
+                    'status' => 'gagal'
+                ];
+                Notifikasi::create($data3);
+            }
         } else {
             PermintaanBarang::where('id', $r->id)->update(['status' => 'approved']);
-            $permintaan = PermintaanBarang::where('id', $r->id)->first();
+
+
+            $user = User::where('cabang_id', $permintaan->cabang_id)->get();
+            foreach ($user as $u) {
+                $data3 = [
+                    'judul' => 'Permintaan asset ' . $permintaan->invoice,
+                    'deskripsi' => 'Permintaan asset disetujui',
+                    'link' => 'permintaan.index',
+                    'user_id' => $u->id,
+                    'read' => 'unread',
+                    'icon' => 'bi bi-journal-bookmark',
+                    'status' => 'berhasil'
+                ];
+                Notifikasi::create($data3);
+            }
 
             if ($permintaan->kategori == 'pembelian') {
                 $data2 = [

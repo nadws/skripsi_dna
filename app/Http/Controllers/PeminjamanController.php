@@ -7,8 +7,11 @@ use App\Models\Cabang;
 use App\Models\Karyawan;
 use App\Models\PeminjamanAsset;
 use App\Models\Stok;
+use App\Models\User;
+use App\Models\Notifikasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PeminjamanController extends Controller
 {
@@ -67,7 +70,19 @@ class PeminjamanController extends Controller
             ];
             PeminjamanAsset::create($data);
 
-
+            $user = User::where('role', 'manager')->get();
+            foreach ($user as $u) {
+                $data3 = [
+                    'judul' => 'Peminjaman ' . $invoice_kode,
+                    'deskripsi' => 'Peminjaman asset baru',
+                    'link' => 'peminjaman.index',
+                    'user_id' => $u->id,
+                    'read' => 'unread',
+                    'icon' => 'bi bi-journal-bookmark',
+                    'status' => 'berhasil'
+                ];
+                Notifikasi::create($data3);
+            }
 
 
             return redirect()->route('peminjaman.index')->with('success', 'Data Berhasil Disimpan');
@@ -88,35 +103,58 @@ class PeminjamanController extends Controller
 
     public function accepted(Request $r)
     {
-        try {
 
-            if ($r->status == 'approved') {
-                $peminjaman = PeminjamanAsset::find($r->id);
-                $data = [
-                    'status' => 'approved',
-                ];
-                PeminjamanAsset::where('id', $r->id)->update($data);
+        $peminjaman = PeminjamanAsset::find($r->id);
+        if ($r->status == 'approved') {
+            $data = [
+                'status' => 'approved',
+            ];
+            PeminjamanAsset::where('id', $r->id)->update($data);
 
-                $data2 = [
-                    'barang_id' => $peminjaman->barang_id,
-                    'debit' => 0,
-                    'kredit' => $peminjaman->qty,
-                    'ket' => 'Peminjaman ' . $peminjaman->invoice,
-                    'cabang_id' => $peminjaman->cabang_id,
-                    'harga' => 0,
-                    'tanggal' => date('Y-m-d')
+            $data2 = [
+                'barang_id' => $peminjaman->barang_id,
+                'debit' => 0,
+                'kredit' => $peminjaman->qty,
+                'ket' => 'Peminjaman ' . $peminjaman->invoice,
+                'cabang_id' => $peminjaman->cabang_id,
+                'harga' => 0,
+                'tanggal' => date('Y-m-d')
+            ];
+            Stok::create($data2);
+
+            $user = User::where('cabang_id', $peminjaman->cabang_id)->get();
+            foreach ($user as $u) {
+                $data3 = [
+                    'judul' => 'Peminjaman ' . $peminjaman->invoice,
+                    'deskripsi' => 'Peminjaman asset disetujui',
+                    'link' => 'peminjaman.index',
+                    'user_id' => $u->id,
+                    'read' => 'unread',
+                    'icon' => 'bi bi-journal-bookmark',
+                    'status' => 'berhasil'
                 ];
-                Stok::create($data2);
-            } else {
-                $data = [
-                    'status' => 'rejected',
-                    'ket_presiden' => $r->ket_presiden,
-                ];
-                PeminjamanAsset::where('id', $r->id)->update($data);
+                Notifikasi::create($data3);
             }
-            return redirect()->route('peminjaman.index')->with('success', 'Data Berhasil Disimpan');
-        } catch (\Throwable $th) {
-            return redirect()->route('peminjaman.index')->with('error', 'Data Gagal Disimpan');
+        } else {
+            $data = [
+                'status' => 'rejected',
+                'ket_presiden' => $r->ket_presiden,
+            ];
+            PeminjamanAsset::where('id', $r->id)->update($data);
+            $user = User::where('cabang_id', $peminjaman->cabang_id)->get();
+            foreach ($user as $u) {
+                $data3 = [
+                    'judul' => 'Peminjaman ' . $peminjaman->invoice,
+                    'deskripsi' => 'Peminjaman asset ditolak',
+                    'link' => 'peminjaman.index',
+                    'user_id' => $u->id,
+                    'read' => 'unread',
+                    'icon' => 'bi bi-journal-bookmark',
+                    'status' => 'berhasil'
+                ];
+                Notifikasi::create($data3);
+            }
         }
+        return redirect()->route('peminjaman.index')->with('success', 'Data Berhasil Disimpan');
     }
 }

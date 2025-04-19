@@ -12,6 +12,7 @@ use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\KategoriAssetController;
 use App\Http\Controllers\LaporanStokInventaris;
+use App\Http\Controllers\NotifikasiController;
 use App\Http\Controllers\PerbaikanAssetController;
 use App\Http\Controllers\PermintaanBarangController;
 use App\Http\Controllers\SuplierController;
@@ -42,6 +43,12 @@ Route::middleware('auth')->group(function () {
             Route::post('/store', 'store')->name('store');
             Route::get('/getEdit', 'getEdit')->name('getEdit');
             Route::post('/update', 'update')->name('update');
+        });
+    Route::controller(NotifikasiController::class)
+        ->prefix('notifikasi')
+        ->name('notifikasi.')
+        ->group(function () {
+            Route::get('/edit', 'edit')->name('edit');
         });
 
     Route::controller(CabangController::class)
