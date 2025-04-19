@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
+use App\Models\Cabang;
 use App\Models\Karyawan;
 use App\Models\PeminjamanAsset;
 use App\Models\Stok;
@@ -15,7 +16,7 @@ class PeminjamanController extends Controller
     {
         if (Auth::user()->role == 'admin') {
             $peminjaman = PeminjamanAsset::where('cabang_id', Auth::user()->cabang_id)->orderBy('id', 'desc')->get();
-        } elseif (Auth::user()->role == 'presiden') {
+        } elseif (Auth::user()->role == 'manager') {
             $peminjaman = PeminjamanAsset::orderBy('id', 'desc')->get();
         }
         $data = [
@@ -29,12 +30,28 @@ class PeminjamanController extends Controller
         ];
         return view('peminjaman.index', $data);
     }
+
+    public function formulir()
+    {
+        $data = [
+            'title' => 'Formulir Peminjaman',
+            'cabang' => Cabang::where('id', Auth::user()->cabang_id)->first(),
+        ];
+        return view('peminjaman.formulir', $data);
+    }
     public function store(Request $request)
     {
         try {
+            $imageName = null;
+
             $invoice = PeminjamanAsset::latest('urutan')->first();
             $invoice = empty($invoice) ? 1001 : $invoice->urutan + 1001;
-            $invoice_kode = 'INV' . $invoice;
+            $invoice_kode = 'KPA' . $invoice;
+            if ($request->hasFile('file')) {
+                $image = $request->file('file');
+                $imageName = $invoice_kode;
+                $image->move(public_path('peminjaman_image'), $imageName);
+            }
             $data = [
                 'karyawan_id' => $request->karyawan_id,
                 'barang_id' => $request->barang_id,
@@ -46,19 +63,11 @@ class PeminjamanController extends Controller
                 'ket' => $request->ket,
                 'cabang_id' => Auth::user()->cabang_id,
                 'status' => 'pending',
+                'file' => $imageName
             ];
             PeminjamanAsset::create($data);
 
-            // $data2 = [
-            //     'barang_id' => $request->barang_id,
-            //     'debit' => 0,
-            //     'kredit' => $request->qty,
-            //     'ket' => 'Peminjaman ' . $invoice_kode,
-            //     'cabang_id' => Auth::user()->cabang_id,
-            //     'harga' => 0,
-            //     'tanggal' => date('Y-m-d')
-            // ];
-            // Stok::create($data2);
+
 
 
             return redirect()->route('peminjaman.index')->with('success', 'Data Berhasil Disimpan');
@@ -70,7 +79,8 @@ class PeminjamanController extends Controller
     public function getDataPeminjaman(Request $r)
     {
         $data = [
-            'peminjaman' => PeminjamanAsset::find($r->id)
+            'peminjaman' => PeminjamanAsset::find($r->id),
+            'role' => Auth::user()->role,
         ];
 
         return view('peminjaman.getData', $data);

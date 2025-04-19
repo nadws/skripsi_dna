@@ -56,20 +56,28 @@
                 </th>
             </tr>
         @endif
+        <tr>
+            <th colspan="3">
+                <image src="{{ asset('peminjaman_image/' . $peminjaman->file) }}" width="50%" height="50%"
+                    alt="">
+            </th>
+        </tr>
 
 
     </table>
+    @if ($role == 'manager')
+        <div class="col-lg-12">
+            <label for="">Keputusan</label>
+            <select name="status" id="" class="form-control keputusan" required>
+                <option value="">-Pilih Keputusan-</option>
+                <option value="approved">Setujui</option>
+                <option value="rejected">Tolak</option>
+            </select>
+        </div>
+        <div class="col-lg-12 mt-2 alasan" hidden>
+            <label for="">Alasan Penolakan</label>
+            <textarea name="ket_presiden" id="" cols="8" rows="5" class="form-control"></textarea>
+        </div>
+    @endif
 
-    <div class="col-lg-12">
-        <label for="">Keputusan</label>
-        <select name="status" id="" class="form-control keputusan" required>
-            <option value="">-Pilih Keputusan-</option>
-            <option value="approved">Setujui</option>
-            <option value="rejected">Tolak</option>
-        </select>
-    </div>
-    <div class="col-lg-12 mt-2 alasan" hidden>
-        <label for="">Alasan Penolakan</label>
-        <textarea name="ket_presiden" id="" cols="8" rows="5" class="form-control"></textarea>
-    </div>
 </div>

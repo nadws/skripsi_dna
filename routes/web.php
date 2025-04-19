@@ -88,6 +88,7 @@ Route::middleware('auth')->group(function () {
         ->name('peminjaman.')
         ->group(function () {
             Route::get('/', 'index')->name('index');
+            Route::get('/formulir', 'formulir')->name('formulir');
             Route::get('/getDataPeminjaman', 'getDataPeminjaman')->name('getDataPeminjaman');
             Route::post('/store', 'store')->name('store');
             Route::post('/accepted', 'accepted')->name('accepted');

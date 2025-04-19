@@ -2,7 +2,8 @@
     <div class="card">
         <div class="card-header">
             @if ($role == 'admin')
-                <a class="btn btn-primary float-end ms-2"><i class="bi bi-download"></i> Download Formulir</a>
+                <a href="{{ route('peminjaman.formulir') }}" target="_blank" class="btn btn-primary float-end ms-2"><i
+                        class="bi bi-printer"></i> Print Formulir</a>
                 <button data-bs-toggle="modal" data-bs-target="#tambah" class="btn btn-primary float-end">Tambah
                     Data</button>
             @else
@@ -49,8 +50,9 @@
                                 @else
                                     @if ($p->status == 'approved')
                                     @else
-                                        <a href="#" class="btn btn-primary btn-sm"><i
-                                                class="bi bi-download"></i></a>
+                                        <button data-bs-toggle="modal" data-bs-target="#view"
+                                            data-id="{{ $p->id }}" class="btn btn-primary btn-sm getData"><i
+                                                class="bi bi-eye-fill"></i></button>
                                         <a href="#" class="btn btn-warning btn-sm"><i
                                                 class="bi bi-pencil-square"></i></a>
                                         <a href="{{ route('cabang.delete', $p->id) }}"
@@ -66,7 +68,7 @@
         </div>
     </div>
 
-    <form action="{{ route('peminjaman.store') }}" method="post">
+    <form action="{{ route('peminjaman.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <x-modal size="modal-lg" id="tambah">
             <div class="row">
@@ -97,6 +99,10 @@
                     <label for="">Ket</label>
                     <input type="text" class="form-control" name="ket">
                 </div>
+                <div class="col-lg-6 mt-2">
+                    <label for="">Lampirkan Formulir </label>
+                    <input type="file" class="form-control" name="file">
+                </div>
 
 
             </div>
@@ -109,6 +115,11 @@
             judul='Peminjaman Assets'>
         </x-modal-edit>
     </form>
+
+    <x-modal-edit size="modal-lg" id="view" url="peminjaman.getDataPeminjaman" tipe='acc'
+        judul='Peminjaman Assets'>
+    </x-modal-edit>
+
 
 
 </x-app-layout>

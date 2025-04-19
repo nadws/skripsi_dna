@@ -17,10 +17,10 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create(
             [
-                'name' => 'Presiden',
-                'email' => 'presiden@gmail.com',
-                'password' => bcrypt('presiden'),
-                'role' => 'presiden'
+                'name' => 'Manager',
+                'email' => 'manager@gmail.com',
+                'password' => bcrypt('manager'),
+                'role' => 'manager'
             ]
 
         );
@@ -35,13 +35,6 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'password' => bcrypt('admin'),
             'role' => 'admin',
-            'cabang_id' => 1,
-        ]);
-        User::factory()->create([
-            'name' => 'User',
-            'email' => 'user@gmail.com',
-            'password' => bcrypt('user'),
-            'role' => 'user',
             'cabang_id' => 1,
         ]);
     }
