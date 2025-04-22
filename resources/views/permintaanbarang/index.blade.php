@@ -8,7 +8,7 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Invoice</th>
+                        <th>Kode Permintaan</th>
                         <th>Asset</th>
                         <th>Suplier / Cabang</th>
                         <th>Jumlah</th>

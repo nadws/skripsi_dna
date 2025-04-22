@@ -141,9 +141,10 @@ Route::middleware('auth')->group(function () {
             Route::get('/getAssetKaryawan', 'getAssetKaryawan')->name('getAssetKaryawan');
             Route::get('/getQtyAssetKaryawan', 'getQtyAssetKaryawan')->name('getQtyAssetKaryawan');
             Route::get('/getStockCabang', 'getStockCabang')->name('getStockCabang');
+            Route::get('/getPerbaikan', 'getPerbaikan')->name('getPerbaikan');
             Route::post('/store', 'store')->name('store');
             Route::get('/getEdit', 'getEdit')->name('getEdit');
-            Route::post('/edit', 'edit')->name('edit');
+            Route::post('/selesai', 'selesai')->name('selesai');
         });
     Route::controller(AccPerbaikanAssetController::class)
         ->prefix('accperbaikan')

@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use App\Models\Karyawan;
+use App\Models\Notifikasi;
 use App\Models\PeminjamanAsset;
 use App\Models\PerbaikanAsset;
+use App\Models\User;
 use App\Models\Vendor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -51,41 +53,84 @@ class PerbaikanAssetController extends Controller
 
         echo $barang->stok;
     }
+    public function getPerbaikan(Request $r)
+    {
+        $data = [
+            'p' => PerbaikanAsset::where('id', $r->id)->first()
+        ];
+        return view('pengajuan-perbaikan.selesai', $data);
+    }
+
+    public function selesai(Request $r)
+    {
+        $data = [
+            'biaya' => $r->biaya,
+            'status_perbaikan' => 'finish'
+        ];
+        PerbaikanAsset::where('id', $r->id)->update($data);
+        $user = User::where('role', 'manager')->get();
+        foreach ($user as $u) {
+            $data3 = [
+                'judul' => 'Perbaikan Asset selesai' . $r->barang_id,
+                'deskripsi' => 'Perbaikan asset karywan selesai',
+                'link' => 'accperbaikan.index',
+                'user_id' => $u->id,
+                'read' => 'unread',
+                'icon' => 'bi bi-grid-fill',
+                'status' => 'berhasil'
+            ];
+            Notifikasi::create($data3);
+        }
+        return redirect()->route('perbaikan.index')->with('success', 'Data Berhasil Disimpan');
+    }
 
     public function store(Request $r)
     {
-        if ($r->from == 'user') {
-            $barang =  PeminjamanAsset::where('invoice', $r->barang_id)->first();
-            $data = [
-                'barang_id' => $barang->barang_id,
-                'cabang_id' => Auth::user()->cabang_id,
-                'vendor_id' => $r->vendor_id,
-                'karyawan_id' => $r->karyawan_id,
-                'jumlah' => $r->jumlah,
-                'biaya' => $r->biaya,
-                'keterangan' => $r->keterangan,
-                'from' => $r->from,
-                'status' => 'pending',
-                'tgl_perbaikan' => date('Y-m-d'),
-                'tgl_estimasi' => $r->tgl_estimasi,
+        // if ($r->from == 'user') {
+        $barang =  PeminjamanAsset::where('invoice', $r->barang_id)->first();
+        $data = [
+            'barang_id' => $barang->barang_id,
+            'cabang_id' => Auth::user()->cabang_id,
+            'vendor_id' => $r->vendor_id,
+            'karyawan_id' => $r->karyawan_id,
+            'jumlah' => $r->jumlah,
+            'biaya' => $r->biaya,
+            'keterangan' => $r->keterangan,
+            'from' => 'user',
+            'status' => 'pending',
+            'tgl_perbaikan' => date('Y-m-d'),
+            'tgl_estimasi' => $r->tgl_estimasi,
+        ];
+        PerbaikanAsset::create($data);
+        $user = User::where('role', 'manager')->get();
+        foreach ($user as $u) {
+            $data3 = [
+                'judul' => 'Perbaikan Asset ' . $r->barang_id,
+                'deskripsi' => 'Perbaikan asset karywan',
+                'link' => 'accperbaikan.index',
+                'user_id' => $u->id,
+                'read' => 'unread',
+                'icon' => 'bi bi-grid-fill',
+                'status' => 'berhasil'
             ];
-            PerbaikanAsset::create($data);
-        } else {
-            $data = [
-                'barang_id' => $r->barang_id,
-                'cabang_id' => Auth::user()->cabang_id,
-                'vendor_id' => $r->vendor_id,
-                'karyawan_id' => 0,
-                'jumlah' => $r->jumlah,
-                'biaya' => $r->biaya,
-                'keterangan' => $r->keterangan,
-                'from' => $r->from,
-                'status' => 'pending',
-                'tgl_perbaikan' => date('Y-m-d'),
-                'tgl_estimasi' => $r->tgl_estimasi,
-            ];
-            PerbaikanAsset::create($data);
+            Notifikasi::create($data3);
         }
+        // } else {
+        //     $data = [
+        //         'barang_id' => $r->barang_id,
+        //         'cabang_id' => Auth::user()->cabang_id,
+        //         'vendor_id' => $r->vendor_id,
+        //         'karyawan_id' => 0,
+        //         'jumlah' => $r->jumlah,
+        //         'biaya' => $r->biaya,
+        //         'keterangan' => $r->keterangan,
+        //         'from' => $r->from,
+        //         'status' => 'pending',
+        //         'tgl_perbaikan' => date('Y-m-d'),
+        //         'tgl_estimasi' => $r->tgl_estimasi,
+        //     ];
+        //     PerbaikanAsset::create($data);
+        // }
 
         return redirect()->route('perbaikan.index')->with('success', 'Data Berhasil Disimpan');
     }

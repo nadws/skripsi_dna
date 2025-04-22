@@ -48,7 +48,7 @@
     </div>
     <form action="{{ route('accperbaikan.edit') }}" method="POST">
         @csrf
-        <x-modal-edit size="modal-lg" id="edit" url="accperbaikan.getPerbaikan" tipe='acc'
+        <x-modal-edit size="modal-lg" id="edit" url="accperbaikan.getPerbaikan" tipe='edit'
             judul='Perbaikan Assets'>
         </x-modal-edit>
     </form>

@@ -20,11 +20,13 @@ return new class extends Migration
             $table->double('jumlah');
             $table->double('biaya');
             $table->text('keterangan');
-            $table->enum('from', ['cabang', 'user']);
+            $table->enum('from', ['cabang', 'user'])->default('user');
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->date('tgl_perbaikan');
             $table->date('tgl_estimasi');
             $table->string('ket_presiden')->nullable();
+            $table->enum('status_perbaikan', ['repair', 'finish', 'crash'])->default('repair');
+            $table->string('keterangan_crash')->nullable();
             $table->timestamps();
         });
     }
