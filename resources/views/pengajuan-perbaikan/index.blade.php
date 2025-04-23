@@ -169,7 +169,6 @@
                         $('.user').attr('disabled', false);
                         $('.cabang').attr('hidden', true);
                         $('.cabang').attr('disabled', true);
-
                     } else {
                         $('.cabang').attr('hidden', false);
                         $('.cabang').attr('disabled', false);
@@ -181,6 +180,7 @@
                 $(document).on('change', '#karyawan_id', function(e) {
 
                     var karyawan_id = $(this).val();
+                    alert(karyawan_id);
                     $.ajax({
                         type: "get",
                         url: "{{ route('perbaikan.getAssetKaryawan') }}",
@@ -226,20 +226,16 @@
                     });
 
                 });
-                $(document).on('change', '#pemilik', function(e) {
-                    var pemilik = $(this).val()
-                    if (pemilik == 'user') {
-                        $('.user').attr('hidden', false);
-                        $('.user').attr('disabled', false);
-                        $('.cabang').attr('hidden', true);
-                        $('.cabang').attr('disabled', true);
-
+                $(document).on('change', '.status', function(e) {
+                    var status = $(this).val()
+                    if (status == 'finish') {
+                        $('.finish').attr('hidden', false);
+                        $('.detail_finish').attr('disabled', false);
                     } else {
-                        $('.cabang').attr('hidden', false);
-                        $('.cabang').attr('disabled', false);
-                        $('.user').attr('hidden', true);
-                        $('.user').attr('disabled', true);
+                        $('.crash').attr('hidden', false);
+                        $('.detail_crash').attr('disabled', false);
                     }
+
 
                 });
 

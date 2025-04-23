@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Barang;
+use App\Models\Disposal;
 use App\Models\Karyawan;
 use App\Models\Notifikasi;
 use App\Models\PeminjamanAsset;
@@ -63,24 +64,81 @@ class PerbaikanAssetController extends Controller
 
     public function selesai(Request $r)
     {
-        $data = [
-            'biaya' => $r->biaya,
-            'status_perbaikan' => 'finish'
-        ];
-        PerbaikanAsset::where('id', $r->id)->update($data);
-        $user = User::where('role', 'manager')->get();
-        foreach ($user as $u) {
-            $data3 = [
-                'judul' => 'Perbaikan Asset selesai' . $r->barang_id,
-                'deskripsi' => 'Perbaikan asset karywan selesai',
-                'link' => 'accperbaikan.index',
-                'user_id' => $u->id,
-                'read' => 'unread',
-                'icon' => 'bi bi-grid-fill',
-                'status' => 'berhasil'
+        if ($r->status == 'finish') {
+            $data = [
+                'biaya' => $r->biaya,
+                'status_perbaikan' => 'finish'
             ];
-            Notifikasi::create($data3);
+            PerbaikanAsset::where('id', $r->id)->update($data);
+            $user = User::where('role', 'manager')->get();
+            foreach ($user as $u) {
+                $data3 = [
+                    'judul' => 'Perbaikan Asset selesai' . $r->barang_id,
+                    'deskripsi' => 'Perbaikan asset karywan selesai',
+                    'link' => 'accperbaikan.index',
+                    'user_id' => $u->id,
+                    'read' => 'unread',
+                    'icon' => 'bi bi-grid-fill',
+                    'status' => 'berhasil'
+                ];
+                Notifikasi::create($data3);
+            }
+        } else {
+            $data = [
+                'status_perbaikan' => 'crash',
+                'keterangan_crash' => $r->keterangan,
+            ];
+            PerbaikanAsset::where('id', $r->id)->update($data);
+            $user = User::where('role', 'manager')->get();
+            foreach ($user as $u) {
+                $data3 = [
+                    'judul' => 'Perbaikan Asset tidak berhasil' . $r->barang_id,
+                    'deskripsi' => 'Perbaikan asset karywan tidak berhasil',
+                    'link' => 'accperbaikan.index',
+                    'user_id' => $u->id,
+                    'read' => 'unread',
+                    'icon' => 'bi bi-grid-fill',
+                    'status' => 'berhasil'
+                ];
+                Notifikasi::create($data3);
+            }
+            $barang =  PerbaikanAsset::where('id', $r->id)->first();
+            $cabang = Karyawan::where('id', $barang->karyawan_id)->first();
+            if ($r->disposal == 'disposal') {
+                $data = [
+                    'barang_id' => $barang->barang_id,
+                    'cabang_id' => $cabang->cabang_id,
+                    'karyawan_id' => $barang->karyawan_id,
+                    'invoice_peminjaman' => $barang->barang_id,
+                    'jumlah' => $barang->jumlah,
+                    'keterangan' => $r->ket_presiden,
+                    'from' => 'user',
+                    'status' => 'pending',
+                    'tgl_disposal' => date('Y-m-d'),
+                    'ket_presiden' => $r->ket_presiden
+                ];
+                Disposal::create($data);
+                $data2 = [
+                    'qty_disposal' => $barang->jumlah
+                ];
+                PeminjamanAsset::where('barang_id', $barang->barang_id)->where('karyawan_id', $barang->karyawan_id)->update($data2);
+                $user = User::where('role', 'manager')->get();
+                foreach ($user as $u) {
+                    $data3 = [
+                        'judul' => 'Pengajuan disposal asset' . $r->barang_id,
+                        'deskripsi' => 'Pengajuan disposal asset karyawan',
+                        'link' => 'accdisposal.index',
+                        'user_id' => $u->id,
+                        'read' => 'unread',
+                        'icon' => 'bi bi-grid-fill',
+                        'status' => 'berhasil'
+                    ];
+                    Notifikasi::create($data3);
+                }
+            }
         }
+
+
         return redirect()->route('perbaikan.index')->with('success', 'Data Berhasil Disimpan');
     }
 
