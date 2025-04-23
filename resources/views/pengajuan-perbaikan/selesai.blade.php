@@ -20,7 +20,7 @@
 
     <div class="col-lg-6 mt-2 crash" hidden>
         <label for="">Keterangan</label>
-        <input type="text" class="form-control" name="keterangan" disabled>
+        <input type="text" class="form-control detail_crash" name="keterangan" disabled>
     </div>
     <div class="col-lg-6 mt-2 crash" hidden>
         <label for="">Ajukan ke disposal asset ?</label>

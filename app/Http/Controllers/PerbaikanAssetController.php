@@ -46,7 +46,7 @@ class PerbaikanAssetController extends Controller
     {
         $barang =  PeminjamanAsset::where('invoice', $r->invoice)->first();
 
-        echo $barang->qty;
+        echo $barang->qty - $barang->qty_disposal;
     }
     public function getStockCabang(Request $r)
     {
@@ -111,11 +111,11 @@ class PerbaikanAssetController extends Controller
                     'karyawan_id' => $barang->karyawan_id,
                     'invoice_peminjaman' => $barang->barang_id,
                     'jumlah' => $barang->jumlah,
-                    'keterangan' => $r->ket_presiden,
+                    'keterangan' => $r->keterangan,
                     'from' => 'user',
                     'status' => 'pending',
                     'tgl_disposal' => date('Y-m-d'),
-                    'ket_presiden' => $r->ket_presiden
+
                 ];
                 Disposal::create($data);
                 $data2 = [

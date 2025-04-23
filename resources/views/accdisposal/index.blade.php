@@ -46,7 +46,7 @@
     </div>
     <form action="{{ route('accdisposal.edit') }}" method="POST">
         @csrf
-        <x-modal-edit size="modal-lg" id="edit" url="accdisposal.getDisposal" tipe='acc'
+        <x-modal-edit size="modal-lg" id="edit" url="accdisposal.getDisposal" tipe='edit'
             judul='Permintaan Assets'>
         </x-modal-edit>
     </form>

@@ -155,7 +155,7 @@
     </form>
     <form action="{{ route('perbaikan.selesai') }}" method="POST">
         @csrf
-        <x-modal-edit size="modal-md" id="edit" url="perbaikan.getPerbaikan" tipe='edit'
+        <x-modal-edit size="modal-md" id="edit" url="perbaikan.getPerbaikan" tipe='selesai'
             judul='Perbaikan Assets'>
         </x-modal-edit>
     </form>
@@ -180,7 +180,7 @@
                 $(document).on('change', '#karyawan_id', function(e) {
 
                     var karyawan_id = $(this).val();
-                    alert(karyawan_id);
+
                     $.ajax({
                         type: "get",
                         url: "{{ route('perbaikan.getAssetKaryawan') }}",
@@ -237,6 +237,21 @@
                     }
 
 
+                });
+
+                $(document).on('click', '.getData', function(e) {
+                    var id = $(this).attr('data-id');
+                    $.ajax({
+                        url: "{{ route('perbaikan.getPerbaikan') }}",
+                        type: "GET",
+                        data: {
+                            id: id
+                        },
+                        success: function(data) {
+                            $(".load-data").html(data);
+
+                        }
+                    });
                 });
 
             });

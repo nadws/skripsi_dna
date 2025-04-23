@@ -15,6 +15,7 @@
                         <th>Biaya</th>
                         <th>Keterangan</th>
                         <th>Status</th>
+                        <th>Status Perbaikan</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -31,13 +32,16 @@
                             <td><span
                                     class="badge {{ $p->status == 'pending' ? 'bg-warning' : ($p->status == 'approved' ? 'bg-success' : 'bg-danger') }}  ">{{ $p->status }}</span>
                             </td>
+                            <td><span
+                                    class="badge {{ $p->status_perbaikan == 'repair' ? 'bg-warning' : ($p->status_perbaikan == 'finish' ? 'bg-success' : 'bg-danger') }}  ">{{ $p->status_perbaikan }}</span>
+                            </td>
                             <td>
 
-                                @if ($p->status == 'approved')
-                                    <span class="badge bg-success"><i class="bi bi-check2-all"></i></span>
-                                @else
+                                @if ($p->status == 'pending')
                                     <button data-bs-toggle="modal" data-bs-target="#edit" data-id="{{ $p->id }}"
                                         class="btn btn-info btn-sm getData"><i class="bi bi-search"></i></button>
+                                @else
+                                    <span class="badge bg-success"><i class="bi bi-check2-all"></i></span>
                                 @endif
                             </td>
                         </tr>

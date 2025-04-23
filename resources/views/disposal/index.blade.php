@@ -39,47 +39,47 @@
         @csrf
         <x-modal id="tambah" size="modal-lg">
             <div class="row">
-                <div class="col-lg-12">
+                {{-- <div class="col-lg-12">
                     <label for="">Barang dari</label>
                     <select name="from" id="pemilik" class="form-control">
                         <option value="">Pilih Barang dari</option>
                         <option value="cabang">Cabang</option>
                         <option value="user">Karyawan</option>
                     </select>
-                </div>
+                </div> --}}
                 {{-- user --}}
-                <div class="col-lg-6 user mt-2" hidden>
+                <div class="col-lg-6  mt-2">
                     <label for="">Karyawan</label>
-                    <select name="karyawan_id" id="karyawan_id" class="form-control user" disabled>
+                    <select name="karyawan_id" id="karyawan_id" class="form-control ">
                         <option value="">-Pilih Karyawan-</option>
                         @foreach ($karyawan as $k)
                             <option value="{{ $k->id }}">{{ $k->nama }}</option>
                         @endforeach
                     </select>
                 </div>
-                <div class="col-lg-6 user mt-2" hidden>
+                <div class="col-lg-6  mt-2">
                     <label for="">Asset</label>
-                    <select name="barang_id" id="barang_id" class="form-control user" disabled>
+                    <select name="barang_id" id="barang_id" class="form-control ">
 
                     </select>
                 </div>
-                <div class="col-lg-6 user mt-2" hidden>
+                <div class="col-lg-6  mt-2">
                     <label for="">Jumlah Peminjaman</label>
-                    <input type="text" class="form-control qty" disabled>
+                    <input type="text" class="form-control qty">
                 </div>
-                <div class="col-lg-6 user mt-2" hidden>
+                <div class="col-lg-6  mt-2">
                     <label for="">Jumlah Yang Disposal</label>
-                    <input type="number" class="form-control qty2 user" max="" disabled name="jumlah">
+                    <input type="number" class="form-control qty2 " max="" name="jumlah">
                 </div>
 
 
-                <div class="col-lg-6 user mt-2" hidden>
+                <div class="col-lg-6  mt-2">
                     <label for="">Keterangan</label>
-                    <input type="text" class="form-control user" disabled name="keterangan">
+                    <input type="text" class="form-control " name="keterangan">
                 </div>
                 {{-- user --}}
                 {{-- cabang --}}
-                <div class="col-lg-6 cabang mt-2" hidden>
+                {{-- <div class="col-lg-6 cabang mt-2" hidden>
                     <label for="">Asset</label>
                     <select name="barang_id" id="asset_id" class="form-control cabang" disabled>
                         <option value="">-Pilih Asset-</option>
@@ -100,7 +100,7 @@
                 <div class="col-lg-6 cabang mt-2" hidden>
                     <label for="">Keterangan</label>
                     <input type="text" class="form-control cabang" disabled name="keterangan">
-                </div>
+                </div> --}}
             </div>
         </x-modal>
     </form>

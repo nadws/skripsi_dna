@@ -11,35 +11,38 @@
                 <div class="load-data"></div>
             </div>
             <div class="modal-footer">
-                @if ($tipe != 'edit')
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                @else
+                @if ($tipe == 'edit' || $tipe == 'selesai' || $tipe == 'acc')
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary submit">Simpan</button>
                     <button type="button" disabled class="btn btn-primary submit_proses" hidden>Proses ..</button>
+                @else
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 @endif
 
             </div>
         </div>
     </div>
 </div>
-@section('scripts')
-    <script>
-        $(document).ready(function() {
-            $(document).on('click', '.getData', function(e) {
-                var id = $(this).attr('data-id');
-                $.ajax({
-                    url: "{{ route($url) }}",
-                    type: "GET",
-                    data: {
-                        id: id
-                    },
-                    success: function(data) {
-                        $(".load-data").html(data);
+@if ($tipe != 'edit')
+@else
+    @section('scripts')
+        <script>
+            $(document).ready(function() {
+                $(document).on('click', '.getData', function(e) {
+                    var id = $(this).attr('data-id');
+                    $.ajax({
+                        url: "{{ route($url) }}",
+                        type: "GET",
+                        data: {
+                            id: id
+                        },
+                        success: function(data) {
+                            $(".load-data").html(data);
 
-                    }
+                        }
+                    });
                 });
             });
-        });
-    </script>
-@endsection
+        </script>
+    @endsection
+@endif
