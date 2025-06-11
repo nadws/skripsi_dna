@@ -34,7 +34,7 @@
     </div>
 </li>
 <li
-    class="menu-item {{ request()->routeIs('stok_inventaris.index') || request()->routeIs('laporan_karyawan.index') || request()->routeIs('laporan_cabang.index') ? 'active' : '' }}  has-sub">
+    class="menu-item {{ request()->routeIs('stok_inventaris.index') || request()->routeIs('laporan_karyawan.index') || request()->routeIs('laporan_cabang.index') || request()->routeIs('laporan_peminjaman_inventaris.index') || request()->routeIs('laporan_perbaikan_inventaris.index') || request()->routeIs('laporan_permintaan_inventaris.index') || request()->routeIs('laporan_disposal.index') ? 'active' : '' }}  has-sub">
     <a href="#" class='menu-link'>
         <span><i class="bi bi-printer-fill"></i> Laporan</span>
     </a>
@@ -62,23 +62,26 @@
                         Data Departemen
                     </a>
                 </li>
-                <li class="submenu-item">
-                    <a href="#" class='submenu-link'>
+                <li
+                    class="submenu-item {{ request()->routeIs('laporan_peminjaman_inventaris.index') ? 'active' : '' }}">
+                    <a href="{{ route('laporan_peminjaman_inventaris.index') }}" class='submenu-link'>
                         Peminjaman Inventaris Karyawan
                     </a>
                 </li>
-                <li class="submenu-item">
-                    <a href="#" class='submenu-link'>
+                <li
+                    class="submenu-item {{ request()->routeIs('laporan_perbaikan_inventaris.index') ? 'active' : '' }}">
+                    <a href="{{ route('laporan_perbaikan_inventaris.index') }}" class='submenu-link'>
                         Perbaikan Inventaris
                     </a>
                 </li>
-                <li class="submenu-item">
-                    <a href="#" class='submenu-link'>
+                <li
+                    class="submenu-item {{ request()->routeIs('laporan_permintaan_inventaris.index') ? 'active' : '' }}">
+                    <a href="{{ route('laporan_permintaan_inventaris.index') }}" class='submenu-link'>
                         Permintaan Inventaris
                     </a>
                 </li>
-                <li class="submenu-item">
-                    <a href="#" class='submenu-link'>
+                <li class="submenu-item {{ request()->routeIs('laporan_disposal.index') ? 'active' : '' }}">
+                    <a href="{{ route('laporan_disposal.index') }}" class='submenu-link'>
                         Disposal Inventaris
                     </a>
                 </li>

@@ -15,6 +15,10 @@ use App\Http\Controllers\laporanKaryawan;
 use App\Http\Controllers\LaporanStokInventaris;
 use App\Http\Controllers\LaporanDepartemen;
 use App\Http\Controllers\LaporanCabang;
+use App\Http\Controllers\LaporanDisposal;
+use App\Http\Controllers\LaporanPeminjamanIventaris;
+use App\Http\Controllers\LaporanPerbaikanIventaris;
+use App\Http\Controllers\LaporanPermintaanInventaris;
 use App\Http\Controllers\NotifikasiController;
 use App\Http\Controllers\PerbaikanAssetController;
 use App\Http\Controllers\PermintaanBarangController;
@@ -202,6 +206,38 @@ Route::middleware('auth')->group(function () {
         ->group(function () {
             Route::get('/', 'index')->name('index');
             Route::get('/getdepartemen', 'getdepartemen')->name('getdepartemen');
+            Route::get('/print', 'print')->name('print');
+        });
+    Route::controller(LaporanPeminjamanIventaris::class)
+        ->prefix('laporan_peminjaman_inventaris')
+        ->name('laporan_peminjaman_inventaris.')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/getdata', 'getdata')->name('getdata');
+            Route::get('/print', 'print')->name('print');
+        });
+    Route::controller(LaporanPerbaikanIventaris::class)
+        ->prefix('laporan_perbaikan_inventaris')
+        ->name('laporan_perbaikan_inventaris.')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/getdata', 'getdata')->name('getdata');
+            Route::get('/print', 'print')->name('print');
+        });
+    Route::controller(LaporanPermintaanInventaris::class)
+        ->prefix('laporan_permintaan_inventaris')
+        ->name('laporan_permintaan_inventaris.')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/getdata', 'getdata')->name('getdata');
+            Route::get('/print', 'print')->name('print');
+        });
+    Route::controller(LaporanDisposal::class)
+        ->prefix('laporan_disposal')
+        ->name('laporan_disposal.')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/getdata', 'getdata')->name('getdata');
             Route::get('/print', 'print')->name('print');
         });
 });
