@@ -34,4 +34,14 @@ class CabangController extends Controller
         Cabang::find($id)->delete();
         return redirect()->route('cabang.index')->with('success', 'Data Berhasil Dihapus');
     }
+
+    public function laporan()
+    {
+        $data = [
+            'title' => 'Laporan Data Cabang',
+            'cabang' => Cabang::orderBY('id', 'desc')->get()
+        ];
+
+        return view('laporan.cabang.index', $data);
+    }
 }

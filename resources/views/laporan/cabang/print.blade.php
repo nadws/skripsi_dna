@@ -22,36 +22,26 @@
                 <h5 class="text-center fw-bold text-decoration-underline">{{ $title }}</h5>
 
             </div>
-            <div class="col-lg-4">
-                <p>Cabang : {{ $cabang->nama }}</p>
-            </div>
+
             <div class="col-12">
                 <table class="table table-bordered" id="table1">
                     <thead>
                         <tr>
-                            <th class="text-center">No</th>
-                            <th class="text-center">Kode Barang</th>
-                            <th class="text-center">Nama Barang</th>
-                            <th class="text-center">Kategori</th>
-                            <th class="text-center">Merek</th>
-                            <th class="text-center">Stok</th>
-                            <th class="text-center">Harga Satuan</th>
-                            <th class="text-center">Foto</th>
+                            <th>No</th>
+                            <th>Nama Cabang</th>
+                            <th>Alamat</th>
+                            <th>Keterangan</th>
+
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($barang as $c)
+                        @foreach ($cabang as $c)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $c->kode }}</td>
-                                <td>{{ $c->nama_barang }}</td>
-                                <td>{{ $c->kategori }}</td>
-                                <td>{{ $c->merek }}</td>
-                                <td class="text-end">{{ $c->stok }}</td>
-                                <td class="text-end">{{ number_format($c->harga_terbaru, 0) }}</td>
-                                <td class="text-center">
-                                    <img src="{{ asset('product_image/' . $c->image) }}" alt="" width="80px">
-                                </td>
+                                <td>{{ $c->nama }}</td>
+                                <td>{{ $c->alamat }}</td>
+                                <td>{{ $c->ket }}</td>
+
                             </tr>
                         @endforeach
                     </tbody>

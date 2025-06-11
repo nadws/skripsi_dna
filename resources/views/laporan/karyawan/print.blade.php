@@ -29,29 +29,34 @@
                 <table class="table table-bordered" id="table1">
                     <thead>
                         <tr>
-                            <th class="text-center">No</th>
-                            <th class="text-center">Kode Barang</th>
-                            <th class="text-center">Nama Barang</th>
-                            <th class="text-center">Kategori</th>
-                            <th class="text-center">Merek</th>
-                            <th class="text-center">Stok</th>
-                            <th class="text-center">Harga Satuan</th>
+                            <th>No</th>
+                            <th>Nama Karyawan</th>
+                            <th>Cabang</th>
+                            <th>Departemen</th>
+                            <th>Tempat/tanggal lahir</th>
+                            <th>Jenis kelamin</th>
+                            <th>Tanggal Bergabung</th>
+                            <th>Alamat</th>
                             <th class="text-center">Foto</th>
+
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($barang as $c)
+                        @foreach ($karyawan as $c)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $c->kode }}</td>
-                                <td>{{ $c->nama_barang }}</td>
-                                <td>{{ $c->kategori }}</td>
-                                <td>{{ $c->merek }}</td>
-                                <td class="text-end">{{ $c->stok }}</td>
-                                <td class="text-end">{{ number_format($c->harga_terbaru, 0) }}</td>
+                                <td>{{ $c->nama }}</td>
+                                <td>{{ $c->cabang->nama }}</td>
+                                <td>{{ $c->departemen->nama }}</td>
+                                <td>{{ $c->tempat_lahir }}, {{ date('d-m-Y', strtotime($c->tgl_lahir)) }}</td>
+                                <td>{{ $c->jenis_kelamin }}</td>
+                                <td>{{ date('d-m-Y', strtotime($c->tgl_gabung)) }}</td>
+                                <td>{{ $c->alamat }}</td>
                                 <td class="text-center">
-                                    <img src="{{ asset('product_image/' . $c->image) }}" alt="" width="80px">
+                                    <img src="{{ asset('karyawan_image/' . $c->foto) }}" alt="" width="80px"
+                                        height="80px">
                                 </td>
+
                             </tr>
                         @endforeach
                     </tbody>

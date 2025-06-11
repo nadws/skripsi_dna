@@ -28,8 +28,9 @@ class LaporanStokInventaris extends Controller
     public function print(Request $r)
     {
         $data = [
-            'title' => 'Daftar Barang',
+            'title' => 'Laporan Daftar Barang',
             'barang' =>  Barang::getBarang($r->cabang),
+            'cabang' => Cabang::where('id', $r->cabang)->first()
         ];
         return view('laporan.stok_inventaris.print', $data);
     }

@@ -33,7 +33,8 @@
         </div>
     </div>
 </li>
-<li class="menu-item  has-sub">
+<li
+    class="menu-item {{ request()->routeIs('stok_inventaris.index') || request()->routeIs('laporan_karyawan.index') || request()->routeIs('laporan_cabang.index') ? 'active' : '' }}  has-sub">
     <a href="#" class='menu-link'>
         <span><i class="bi bi-printer-fill"></i> Laporan</span>
     </a>
@@ -46,18 +47,18 @@
                         Stok Inventaris
                     </a>
                 </li>
-                <li class="submenu-item">
-                    <a href="#" class='submenu-link'>
+                <li class="submenu-item {{ request()->routeIs('laporan_karyawan.index') ? 'active' : '' }}">
+                    <a href="{{ route('laporan_karyawan.index') }}" class='submenu-link'>
                         Data Karyawan
                     </a>
                 </li>
-                <li class="submenu-item">
-                    <a href="#" class='submenu-link'>
+                <li class="submenu-item {{ request()->routeIs('laporan_cabang.index') ? 'active' : '' }}">
+                    <a href="{{ route('laporan_cabang.index') }}" class='submenu-link'>
                         Data Cabang
                     </a>
                 </li>
-                <li class="submenu-item">
-                    <a href="#" class='submenu-link'>
+                <li class="submenu-item {{ request()->routeIs('laporan_departemen.index') ? 'active' : '' }}">
+                    <a href="{{ route('laporan_departemen.index') }}" class='submenu-link'>
                         Data Departemen
                     </a>
                 </li>

@@ -11,7 +11,10 @@ use App\Http\Controllers\DisposalController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\KategoriAssetController;
+use App\Http\Controllers\laporanKaryawan;
 use App\Http\Controllers\LaporanStokInventaris;
+use App\Http\Controllers\LaporanDepartemen;
+use App\Http\Controllers\LaporanCabang;
 use App\Http\Controllers\NotifikasiController;
 use App\Http\Controllers\PerbaikanAssetController;
 use App\Http\Controllers\PermintaanBarangController;
@@ -175,6 +178,30 @@ Route::middleware('auth')->group(function () {
         ->group(function () {
             Route::get('/', 'index')->name('index');
             Route::get('/getStok', 'getStok')->name('getStok');
+            Route::get('/print', 'print')->name('print');
+        });
+    Route::controller(laporanKaryawan::class)
+        ->prefix('laporan_karyawan')
+        ->name('laporan_karyawan.')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/getKaryawan', 'getKaryawan')->name('getKaryawan');
+            Route::get('/print', 'print')->name('print');
+        });
+    Route::controller(LaporanCabang::class)
+        ->prefix('laporan_cabang')
+        ->name('laporan_cabang.')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+
+            Route::get('/print', 'print')->name('print');
+        });
+    Route::controller(LaporanDepartemen::class)
+        ->prefix('laporan_departemen')
+        ->name('laporan_departemen.')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/getdepartemen', 'getdepartemen')->name('getdepartemen');
             Route::get('/print', 'print')->name('print');
         });
 });
