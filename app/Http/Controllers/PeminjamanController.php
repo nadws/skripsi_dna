@@ -12,6 +12,7 @@ use App\Models\Notifikasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class PeminjamanController extends Controller
 {
@@ -50,11 +51,13 @@ class PeminjamanController extends Controller
             $invoice = PeminjamanAsset::latest('urutan')->first();
             $invoice = empty($invoice) ? 1001 : $invoice->urutan + 1001;
             $invoice_kode = 'KPA' . $invoice;
+
             if ($request->hasFile('file')) {
                 $image = $request->file('file');
                 $imageName = $invoice_kode;
                 $image->move(public_path('peminjaman_image'), $imageName);
             }
+
             $data = [
                 'karyawan_id' => $request->karyawan_id,
                 'barang_id' => $request->barang_id,
@@ -68,7 +71,15 @@ class PeminjamanController extends Controller
                 'status' => 'pending',
                 'file' => $imageName
             ];
-            PeminjamanAsset::create($data);
+            $peminjaman = PeminjamanAsset::create($data);
+
+            // Generate QR Code
+            $url = url('peminjaman/detail/' . $invoice_kode);
+            $qrCodePath = public_path('qrcodes/' . $invoice_kode . '.png');
+            QrCode::format('png')->size(300)->generate($url, $qrCodePath);
+
+            // Optional: simpan path QR di database kalau mau
+            $peminjaman->update(['qr_code' => $invoice_kode . '.png']);
 
             $user = User::where('role', 'manager')->get();
             foreach ($user as $u) {
@@ -84,12 +95,12 @@ class PeminjamanController extends Controller
                 Notifikasi::create($data3);
             }
 
-
             return redirect()->route('peminjaman.index')->with('success', 'Data Berhasil Disimpan');
         } catch (\Throwable $th) {
             return redirect()->route('peminjaman.index')->with('error', 'Data Gagal Disimpan');
         }
     }
+
 
     public function getDataPeminjaman(Request $r)
     {
