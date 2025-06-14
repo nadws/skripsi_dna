@@ -27,8 +27,8 @@
                             <td>
                                 <button data-bs-toggle="modal" data-bs-target="#edit"
                                     class="btn btn-warning btn-sm getData" data-id="{{ $u->id }}"><i
-                                        class="bi bi-pencil-square"></i></a>
-                                    {{-- <a href="#" onclick="return confirm('Apakah anda yakin?')"
+                                        class="bi bi-pencil-square"></i></button>
+                                {{-- <a href="#" onclick="return confirm('Apakah anda yakin?')"
                                     class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a> --}}
                             </td>
                         </tr>
