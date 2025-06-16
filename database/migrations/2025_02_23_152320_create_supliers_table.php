@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('alamat');
             $table->string('telp');
             $table->string('keterangan');
+            $table->integer('cabang_id');
+            $table->integer('kategori_id');
             $table->timestamps();
         });
     }
