@@ -36,8 +36,10 @@
                                     height="80px">
                             </td>
                             <td class="text-center">
-                                <a href="#" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
-                                <a href="{{ route('cabang.delete', $c->id) }}"
+                                <button data-bs-toggle="modal" data-bs-target="#edit"
+                                    class="btn btn-warning btn-sm getData" data-id="{{ $c->id }}"><i
+                                        class="bi bi-pencil-square"></i></button>
+                                <a href="{{ route('karyawan.delete', $c->id) }}"
                                     onclick="return confirm('Apakah anda yakin?')" class="btn btn-danger btn-sm"><i
                                         class="bi bi-trash"></i></a>
                             </td>
@@ -107,5 +109,9 @@
             </div>
 
         </x-modal>
+    </form>
+    <form action="{{ route('karyawan.update') }}" method="post" enctype="multipart/form-data">
+        @csrf
+        <x-modal-edit id="edit" size="modal-lg" judul="Edit Karyawan" url="karyawan.getEdit"></x-modal-edit>
     </form>
 </x-app-layout>

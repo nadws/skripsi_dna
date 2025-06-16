@@ -37,10 +37,12 @@
                                 @if ($role == 'presiden')
                                     <a href="#" class="btn btn-info btn-sm"><i class="bi bi-eye"></i></a>
                                 @else
-                                    <a href="#" class="btn btn-warning btn-sm"><i
-                                            class="bi bi-pencil-square"></i></a>
-                                    <a href="#" onclick="return confirm('Apakah anda yakin?')"
-                                        class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
+                                    <button data-bs-toggle="modal" data-bs-target="#edit"
+                                        class="btn btn-warning btn-sm getData" data-id="{{ $c->id }}"><i
+                                            class="bi bi-pencil-square"></i></button>
+                                    <a href="{{ route('barang.delete', $c->id) }}"
+                                        onclick="return confirm('Apakah anda yakin?')" class="btn btn-danger btn-sm"><i
+                                            class="bi bi-trash"></i></a>
                                 @endif
 
                             </td>
@@ -117,6 +119,11 @@
             </div>
 
         </x-modal>
+    </form>
+
+    <form action="{{ route('barang.update') }}" method="post" enctype="multipart/form-data">
+        @csrf
+        <x-modal-edit id="edit" size="modal-lg" judul="Edit Barang" url="barang.getEdit"></x-modal-edit>
     </form>
 
 </x-app-layout>

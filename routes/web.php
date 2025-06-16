@@ -108,6 +108,9 @@ Route::middleware('auth')->group(function () {
         ->group(function () {
             Route::get('/', 'index')->name('index');
             Route::post('/store', 'store')->name('store');
+            Route::get('/delete/{id}', 'delete')->name('delete');
+            Route::get('/getEdit', 'getEdit')->name('getEdit');
+            Route::post('/update', 'update')->name('update');
         });
 
     Route::controller(KaryawanController::class)
@@ -116,6 +119,9 @@ Route::middleware('auth')->group(function () {
         ->group(function () {
             Route::get('/', 'index')->name('index');
             Route::post('/store', 'store')->name('store');
+            Route::get('/delete/{id}', 'delete')->name('delete');
+            Route::get('/getEdit', 'getEdit')->name('getEdit');
+            Route::post('/update', 'update')->name('update');
         });
     Route::controller(BarangController::class)
         ->prefix('barang')
@@ -123,6 +129,9 @@ Route::middleware('auth')->group(function () {
         ->group(function () {
             Route::get('/', 'index')->name('index');
             Route::post('/store', 'store')->name('store');
+            Route::get('/delete/{id}', 'delete')->name('delete');
+            Route::get('/getEdit', 'getEdit')->name('getEdit');
+            Route::post('/update', 'update')->name('update');
         });
     Route::controller(PeminjamanController::class)
         ->prefix('peminjaman')
