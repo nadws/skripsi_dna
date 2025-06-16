@@ -12,6 +12,8 @@
                         <th>Nama Vendor</th>
                         <th>No telpon</th>
                         <th>Alamat</th>
+                        <th>Cabang</th>
+                        <th>Kategori</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -22,10 +24,15 @@
                             <td>{{ $v->nama }}</td>
                             <td>{{ $v->telepon }}</td>
                             <td>{{ $v->alamat }}</td>
+                            <td>{{ $v->cabang->nama }}</td>
+                            <td>{{ $v->kategori->kategori }}</td>
                             <td>
-                                <a href="#" class="btn btn-warning btn-sm"><i class="bi bi-pencil-square"></i></a>
-                                <a href="#" onclick="return confirm('Apakah anda yakin?')"
-                                    class="btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
+                                <button data-bs-toggle="modal" data-bs-target="#edit"
+                                    class="btn btn-warning btn-sm getData" data-id="{{ $v->id }}"><i
+                                        class="bi bi-pencil-square"></i></button>
+                                <a href="{{ route('vendor.delete', $v->id) }}"
+                                    onclick="return confirm('Apakah anda yakin?')" class="btn btn-danger btn-sm"><i
+                                        class="bi bi-trash"></i></a>
                             </td>
                         </tr>
                     @endforeach
@@ -46,10 +53,34 @@
                     <input type="text" class="form-control" name="telepon">
                 </div>
                 <div class="col-lg-6">
+                    <label for="">Kategori</label>
+                    <select name="kategori_id" class="form-control" id="">
+                        <option value="">Pilih Kategori</option>
+                        @foreach ($kategori as $k)
+                            <option value="{{ $k->id }}">{{ $k->kategori }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-lg-6">
+                    <label for="">Cabang</label>
+                    <select name="cabang_id" class="form-control" id="">
+                        <option value="">-Pilih Cabang-</option>
+                        @foreach ($cabang as $c)
+                            <option value="{{ $c->id }}">{{ $c->nama }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="col-lg-6">
                     <label for="">Alamat</label>
                     <input type="text" class="form-control" name="alamat">
                 </div>
             </div>
         </x-modal>
+    </form>
+
+    <form action="{{ route('vendor.update') }}" method="post">
+        @csrf
+        <x-modal-edit id="edit" size="modal-lg" judul="Edit Vendor" url="vendor.getEdit"></x-modal-edit>
     </form>
 </x-app-layout>

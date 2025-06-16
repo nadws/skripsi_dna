@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use App\Models\KategoriAsset;
+use App\Models\Suplier;
+use App\Models\Vendor;
 use Illuminate\Http\Request;
 
 class KategoriAssetController extends Controller
@@ -29,7 +31,9 @@ class KategoriAssetController extends Controller
     public function delete($id)
     {
         $asset = Barang::where('kategori_id', $id)->first();
-        if (empty($asset)) {
+        $suplier = Suplier::where('kategori_id', $id)->first();
+        $vendor = Vendor::where('kategori_id', $id)->first();
+        if (empty($asset) || empty($suplier) || empty($vendor)) {
             KategoriAsset::find($id)->delete();
             return redirect()->route('kategori.index')->with('success', 'Data Berhasil Dihapus');
         } else {

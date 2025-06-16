@@ -6,6 +6,8 @@ use App\Models\Barang;
 use Illuminate\Http\Request;
 use App\Models\Cabang;
 use App\Models\Stok;
+use App\Models\Suplier;
+use App\Models\Vendor;
 
 class CabangController extends Controller
 {
@@ -33,7 +35,9 @@ class CabangController extends Controller
     public function delete($id)
     {
         $asset = Stok::where('cabang_id', $id)->first();
-        if (empty($asset)) {
+        $suplier = Suplier::where('kategori_id', $id)->first();
+        $vendor = Vendor::where('kategori_id', $id)->first();
+        if (empty($asset) || empty($suplier) || empty($vendor)) {
             Cabang::find($id)->delete();
             return redirect()->route('cabang.index')->with('success', 'Data Berhasil Dihapus');
         } else {

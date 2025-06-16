@@ -80,6 +80,28 @@ Route::middleware('auth')->group(function () {
             Route::post('/update', 'update')->name('update');
         });
 
+    Route::controller(SuplierController::class)
+        ->prefix('suplier')
+        ->name('suplier.')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::post('/store', 'store')->name('store');
+            Route::get('/delete/{id}', 'delete')->name('delete');
+            Route::get('/getEdit', 'getEdit')->name('getEdit');
+            Route::post('/update', 'update')->name('update');
+        });
+
+    Route::controller(VendorController::class)
+        ->prefix('vendor')
+        ->name('vendor.')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::post('/store', 'store')->name('store');
+            Route::get('/getEdit', 'getEdit')->name('getEdit');
+            Route::post('/update', 'update')->name('update');
+            Route::get('/delete/{id}', 'delete')->name('delete');
+        });
+
     Route::controller(DepartemenCOntroller::class)
         ->prefix('departemen')
         ->name('departemen.')
@@ -112,13 +134,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/store', 'store')->name('store');
             Route::post('/accepted', 'accepted')->name('accepted');
         });
-    Route::controller(SuplierController::class)
-        ->prefix('suplier')
-        ->name('suplier.')
-        ->group(function () {
-            Route::get('/', 'index')->name('index');
-            Route::post('/store', 'store')->name('store');
-        });
+
     Route::controller(PermintaanBarangController::class)
         ->prefix('permintaan')
         ->name('permintaan.')
@@ -136,15 +152,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/getEdit', 'getEdit')->name('getEdit');
             Route::post('/edit', 'edit')->name('edit');
         });
-    Route::controller(VendorController::class)
-        ->prefix('vendor')
-        ->name('vendor.')
-        ->group(function () {
-            Route::get('/', 'index')->name('index');
-            Route::post('/store', 'store')->name('store');
-            Route::get('/getEdit', 'getEdit')->name('getEdit');
-            Route::post('/edit', 'edit')->name('edit');
-        });
+
     Route::controller(PerbaikanAssetController::class)
         ->prefix('perbaikan')
         ->name('perbaikan.')
