@@ -3,7 +3,9 @@
 /public/build
 /public/hot
 /public/storage
-/public/product_image
+
+/public/karyawan_image/
+/public/product_image/
 /storage/*.key
 /storage/pail
 /vendor
