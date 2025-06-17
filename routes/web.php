@@ -139,6 +139,8 @@ Route::middleware('auth')->group(function () {
         ->group(function () {
             Route::get('/', 'index')->name('index');
             Route::get('/formulir', 'formulir')->name('formulir');
+            Route::get('/detail', 'detail_peminjaman')->name('detail');
+            Route::get('/getQr', 'getQr')->name('getQr');
             Route::get('/getDataPeminjaman', 'getDataPeminjaman')->name('getDataPeminjaman');
             Route::post('/store', 'store')->name('store');
             Route::post('/accepted', 'accepted')->name('accepted');

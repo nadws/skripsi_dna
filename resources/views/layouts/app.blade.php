@@ -253,6 +253,31 @@
         });
     </script>
 
+    <script>
+        $(document).ready(function() {
+            $(document).on('click', '.getQr', function(e) {
+                var id = $(this).attr('data-id');
+
+                $.ajax({
+                    url: "{{ route('peminjaman.getQr') }}",
+                    type: "GET",
+                    data: {
+                        id: id
+                    },
+                    success: function(data) {
+
+                        $("#load-qr").html(data);
+
+                    }
+                });
+            });
+        });
+    </script>
+
+
+
+
+
 
 </body>
 

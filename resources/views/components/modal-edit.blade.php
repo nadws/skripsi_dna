@@ -8,6 +8,7 @@
             </div>
 
             <div class="modal-body">
+                {{ $url }}
                 <div class="load-data"></div>
             </div>
             <div class="modal-footer">
@@ -30,6 +31,7 @@
             $(document).ready(function() {
                 $(document).on('click', '.getData', function(e) {
                     var id = $(this).attr('data-id');
+                    alert("{{ $url }}");
                     $.ajax({
                         url: "{{ route($url) }}",
                         type: "GET",

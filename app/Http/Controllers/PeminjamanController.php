@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Notifikasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
@@ -48,16 +49,19 @@ class PeminjamanController extends Controller
         try {
             $imageName = null;
 
+            // Buat invoice kode
             $invoice = PeminjamanAsset::latest('urutan')->first();
             $invoice = empty($invoice) ? 1001 : $invoice->urutan + 1001;
             $invoice_kode = 'KPA' . $invoice;
 
+            // Simpan file upload jika ada
             if ($request->hasFile('file')) {
                 $image = $request->file('file');
-                $imageName = $invoice_kode;
+                $imageName = $invoice_kode . '.' . $image->getClientOriginalExtension(); // tambah ekstensi file
                 $image->move(public_path('peminjaman_image'), $imageName);
             }
 
+            // Simpan ke database
             $data = [
                 'karyawan_id' => $request->karyawan_id,
                 'barang_id' => $request->barang_id,
@@ -73,35 +77,51 @@ class PeminjamanController extends Controller
             ];
             $peminjaman = PeminjamanAsset::create($data);
 
-            // Generate QR Code
-            $url = url('peminjaman/detail/' . $invoice_kode);
-            $qrCodePath = public_path('qrcodes/' . $invoice_kode . '.png');
-            QrCode::format('png')->size(300)->generate($url, $qrCodePath);
 
-            // Optional: simpan path QR di database kalau mau
-            $peminjaman->update(['qr_code' => $invoice_kode . '.png']);
 
-            $user = User::where('role', 'manager')->get();
-            foreach ($user as $u) {
-                $data3 = [
+            // Kirim notifikasi ke manager
+            $managers = User::where('role', 'manager')->get();
+            foreach ($managers as $manager) {
+                Notifikasi::create([
                     'judul' => 'Peminjaman ' . $invoice_kode,
                     'deskripsi' => 'Peminjaman asset baru',
                     'link' => 'peminjaman.index',
-                    'user_id' => $u->id,
+                    'user_id' => $manager->id,
                     'read' => 'unread',
                     'icon' => 'bi bi-journal-bookmark',
                     'status' => 'berhasil'
-                ];
-                Notifikasi::create($data3);
+                ]);
             }
 
             return redirect()->route('peminjaman.index')->with('success', 'Data Berhasil Disimpan');
         } catch (\Throwable $th) {
-            return redirect()->route('peminjaman.index')->with('error', 'Data Gagal Disimpan');
+            // Debug jika gagal
+            return redirect()->route('peminjaman.index')->with('error', 'Data Gagal Disimpan: ' . $th->getMessage());
         }
     }
 
+    public function getQr(Request $r)
+    {
+        $data = [
+            'title' => 'Detail Peminjaman',
+            'id' => $r->id,
+            'role' => Auth::user()->role,
+        ];
 
+        return view('peminjaman.getQr', $data);
+    }
+
+
+    public function detail_peminjaman(Request $r)
+    {
+        $data = [
+            'title' => 'Detail Peminjaman',
+            'peminjaman' => PeminjamanAsset::find($r->id),
+            'role' => Auth::user()->role,
+        ];
+
+        return view('peminjaman.detail', $data);
+    }
     public function getDataPeminjaman(Request $r)
     {
         $data = [

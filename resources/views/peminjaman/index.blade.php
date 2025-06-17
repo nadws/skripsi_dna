@@ -22,6 +22,7 @@
                         <th>Qty</th>
                         <th>Ket</th>
                         <th>status</th>
+                        <th>Qr Code</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -39,6 +40,14 @@
                                     class="badge {{ $p->status == 'pending' ? 'bg-warning' : ($p->status == 'approved' ? 'bg-success' : 'bg-danger') }}  ">{{ $p->status }}</span>
                             </td>
                             <td>
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#detail" class="getQr"
+                                    data-id="{{ $p->id }}">
+                                    {!! QrCode::size(80)->generate(url("/peminjaman/getDataPeminjaman?id=$p->id")) !!}
+                                </a>
+                            </td>
+
+                            <td>
+
                                 @if ($role == 'manager')
                                     @if ($p->status == 'approved')
                                         <span class="badge bg-success"><i class="bi bi-check2-all"></i></span>
@@ -119,6 +128,38 @@
     <x-modal-edit size="modal-lg" id="view" url="peminjaman.getDataPeminjaman" tipe='acc'
         judul='Peminjaman Assets'>
     </x-modal-edit>
+    <x-modal-edit size="modal-lg" id="view" url="peminjaman.getDataPeminjaman" tipe='acc'
+        judul='Peminjaman Assets'>
+    </x-modal-edit>
+
+    <div class="modal fade" id="detail" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tambahModalLabel">Qr</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div id="load-qr"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
 
 
 
