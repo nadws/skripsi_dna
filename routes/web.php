@@ -141,9 +141,13 @@ Route::middleware('auth')->group(function () {
             Route::get('/formulir', 'formulir')->name('formulir');
             Route::get('/detail', 'detail_peminjaman')->name('detail');
             Route::get('/getQr', 'getQr')->name('getQr');
+            Route::get('/printQr', 'printQr')->name('printQr');
             Route::get('/getDataPeminjaman', 'getDataPeminjaman')->name('getDataPeminjaman');
+            Route::get('/getDataEditPeminjaman', 'getDataEditPeminjaman')->name('getDataEditPeminjaman');
             Route::post('/store', 'store')->name('store');
+            Route::post('/update', 'update')->name('update');
             Route::post('/accepted', 'accepted')->name('accepted');
+            Route::get('/delete/{id}', 'delete')->name('delete');
         });
 
     Route::controller(PermintaanBarangController::class)

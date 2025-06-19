@@ -99,16 +99,107 @@ class PeminjamanController extends Controller
             return redirect()->route('peminjaman.index')->with('error', 'Data Gagal Disimpan: ' . $th->getMessage());
         }
     }
+    public function update(Request $request)
+    {
+        try {
+            $imageName = null;
 
+            // Buat invoice kode
+
+
+
+            // Simpan file upload jika ada
+            // if ($request->hasFile('file')) {
+            //     $image = $request->file('file');
+            //     $imageName = $invoice_kode . '.' . $image->getClientOriginalExtension(); // tambah ekstensi file
+            //     $image->move(public_path('peminjaman_image'), $imageName);
+            // }
+            $peminjaman = PeminjamanAsset::findOrFail($request->id);
+            if ($request->hasFile('image')) {
+                // Hapus gambar lama jika ada
+                if ($peminjaman->file && file_exists(public_path('peminjaman_image/' . $peminjaman->file))) {
+                    unlink(public_path('peminjaman_image/' . $peminjaman->file));
+                }
+
+                $image = $request->file('image');
+                $ext = $image->getClientOriginalExtension();
+                $imageName = $peminjaman->invoice .  '.' . $ext;
+                $image->move(public_path('karyawan_image'), $imageName);
+            } else {
+                // Jika tidak ada gambar baru, tetap pakai yang lama
+                $imageName = $peminjaman->file;
+            }
+
+            // Simpan ke database
+            $data = [
+                'karyawan_id' => $request->karyawan_id,
+                'barang_id' => $request->barang_id,
+                'invoice' => $peminjaman->invoice,
+                'tgl_pinjam' => date('Y-m-d'),
+                'qty' => $request->qty,
+                'qty_disposal' => 0,
+                'urutan' => $peminjaman->urutan,
+                'ket' => $request->ket,
+                'cabang_id' => Auth::user()->cabang_id,
+                'status' => 'pending',
+                'file' => $imageName
+            ];
+            PeminjamanAsset::where('id', $request->id)->update($data);
+
+
+
+            // Kirim notifikasi ke manager
+            $managers = User::where('role', 'manager')->get();
+            Notifikasi::where('judul', 'Peminjaman' . $peminjaman->invoice)->delete();
+            foreach ($managers as $manager) {
+
+                Notifikasi::create([
+                    'judul' => 'Peminjaman ' . $peminjaman->invoice,
+                    'deskripsi' => 'Peminjaman asset baru',
+                    'link' => 'peminjaman.index',
+                    'user_id' => $manager->id,
+                    'read' => 'unread',
+                    'icon' => 'bi bi-journal-bookmark',
+                    'status' => 'berhasil'
+                ]);
+            }
+
+            return redirect()->route('peminjaman.index')->with('success', 'Data Berhasil Disimpan');
+        } catch (\Throwable $th) {
+            // Debug jika gagal
+            return redirect()->route('peminjaman.index')->with('error', 'Data Gagal Disimpan: ' . $th->getMessage());
+        }
+    }
+
+    public function delete($id)
+    {
+        $peminjaman = PeminjamanAsset::findOrFail($id); // cari dulu sebelum dihapus
+        Notifikasi::where('judul', 'Peminjaman ' . $peminjaman->invoice)->delete();
+
+        $peminjaman->delete(); // baru hapus
+        return redirect()->route('peminjaman.index')->with('success', 'Data Berhasil Dihapus');
+    }
     public function getQr(Request $r)
     {
         $data = [
             'title' => 'Detail Peminjaman',
             'id' => $r->id,
             'role' => Auth::user()->role,
+            'peminjaman' => PeminjamanAsset::find($r->id),
         ];
 
         return view('peminjaman.getQr', $data);
+    }
+    public function printQr(Request $r)
+    {
+        $data = [
+            'title' => 'Detail Peminjaman',
+            'id' => $r->id,
+            'role' => Auth::user()->role,
+            'peminjaman' => PeminjamanAsset::find($r->id),
+        ];
+
+        return view('peminjaman.getQr2', $data);
     }
 
 
@@ -130,6 +221,17 @@ class PeminjamanController extends Controller
         ];
 
         return view('peminjaman.getData', $data);
+    }
+    public function getDataEditPeminjaman(Request $r)
+    {
+        $data = [
+            'peminjaman' => PeminjamanAsset::find($r->id),
+            'role' => Auth::user()->role,
+            'barang' => Barang::getBarangPilih(Auth::user()->cabang_id),
+            'karyawan' => Karyawan::where('cabang_id', Auth::user()->cabang_id)->get()
+        ];
+
+        return view('peminjaman.getEdit', $data);
     }
 
     public function accepted(Request $r)
