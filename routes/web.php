@@ -143,6 +143,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/getQr', 'getQr')->name('getQr');
             Route::get('/printQr', 'printQr')->name('printQr');
             Route::get('/getDataPeminjaman', 'getDataPeminjaman')->name('getDataPeminjaman');
+            Route::get('/getDataPeminjaman2', 'getDataPeminjaman2')->name('getDataPeminjaman2');
             Route::get('/getDataEditPeminjaman', 'getDataEditPeminjaman')->name('getDataEditPeminjaman');
             Route::post('/store', 'store')->name('store');
             Route::post('/update', 'update')->name('update');

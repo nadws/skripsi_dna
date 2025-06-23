@@ -222,6 +222,15 @@ class PeminjamanController extends Controller
 
         return view('peminjaman.getData', $data);
     }
+    public function getDataPeminjaman2(Request $r)
+    {
+        $data = [
+            'peminjaman' => PeminjamanAsset::find($r->id),
+            'role' => Auth::user()->role,
+        ];
+
+        return view('peminjaman.getData2', $data);
+    }
     public function getDataEditPeminjaman(Request $r)
     {
         $data = [
