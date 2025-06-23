@@ -4,8 +4,9 @@
 /public/hot
 /public/storage
 
-/public/karyawan_image/
-/public/product_image/
+/public/karyawan_image/*
+/public/product_image/*
+/public/peminjaman_image/*
 /storage/*.key
 /storage/pail
 /vendor
