@@ -26,7 +26,7 @@ class PermintaanBarangController extends Controller
             'barang' => Barang::all(),
             'invoice' => $invoice,
             'cabang' => Cabang::where('id', '!=', Auth::user()->cabang_id)->get(),
-            'suplier' => Suplier::all(),
+            'suplier' => Suplier::where('cabang_id', Auth::user()->cabang_id)->get(),
         ];
         return view('permintaanbarang.index', $data);
     }
@@ -48,6 +48,20 @@ class PermintaanBarangController extends Controller
             'stok' => $barang->stok,
             'harga' => $barang->harga_terbaru,
         ]);
+    }
+
+    public function getDataEdit(Request $r)
+    {
+        $data = [
+            'peminjaman' => PermintaanBarang::find($r->id),
+            'role' => Auth::user()->role,
+            'barang' => Barang::all(),
+            'suplier' => Suplier::where('cabang_id', Auth::user()->cabang_id)->get(),
+            'cabang' => Cabang::where('id', '!=', Auth::user()->cabang_id)->get(),
+
+        ];
+
+        return view('permintaanbarang.getEdit', $data);
     }
 
     public function store(Request $r)

@@ -32,6 +32,7 @@
                 $(document).on('click', '.getData', function(e) {
                     var id = $(this).attr('data-id');
 
+
                     $.ajax({
                         url: "{{ $url }}",
                         type: "GET",

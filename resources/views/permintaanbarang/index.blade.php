@@ -142,7 +142,33 @@
         </x-modal>
     </form>
 
-    @section('scripts')
+    <form action="{{ route('peminjaman.update') }}" method="post" enctype="multipart/form-data">
+        @csrf
+        <div class="modal fade" id="edituser" tabindex="-1" aria-labelledby="tambahModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="tambahModalLabel">Edit Peminjaman</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div id="load-edit_data"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary submit">Simpan</button>
+                        <button type="button" disabled class="btn btn-primary submit_proses" hidden>Proses
+                            ..</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    @section('scripts2')
         <script>
             $(document).ready(function() {
                 $(document).on('change', '.kategori', function(e) {
@@ -190,6 +216,23 @@
 
 
 
+                });
+
+                $(document).on('click', '.geteditData', function(e) {
+                    var id = $(this).attr('data-id');
+
+                    $.ajax({
+                        url: "/permintaan/getDataEdit",
+                        type: "GET",
+                        data: {
+                            id: id
+                        },
+                        success: function(data) {
+
+                            $("#load-edit_data").html(data);
+
+                        }
+                    });
                 });
             });
         </script>
