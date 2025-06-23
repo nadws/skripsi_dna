@@ -159,6 +159,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/get_asset', 'get_asset')->name('get_asset');
             Route::get('/get_stock', 'get_stock')->name('get_stock');
             Route::post('/store', 'store')->name('store');
+            Route::get('/delete/{id}', 'delete')->name('delete');
         });
     Route::controller(AccPengajuanPermintaanassetController::class)
         ->prefix('accpermintaan')

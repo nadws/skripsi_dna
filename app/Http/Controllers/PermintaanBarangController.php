@@ -134,4 +134,22 @@ class PermintaanBarangController extends Controller
             return redirect()->route('permintaan.index')->with('error', 'Data Gagal Disimpan: ' . $th->getMessage());
         }
     }
+
+    public function delete($id)
+    {
+        $peminjaman = PermintaanBarang::findOrFail($id); // cari dulu sebelum dihapus
+
+        if ($peminjaman->kategori == 'pembelian') {
+            Notifikasi::where('judul', 'Permintaan Asset ' . $peminjaman->invoice)->delete();
+            PembelianBarang::where('invoice', $peminjaman->invoice)->delete();
+        } else {
+            OverBarang::where('invoice', $peminjaman->invoice)->delete();
+            Notifikasi::where('judul', 'Permintaan Over Stock Asset ' . $peminjaman->invoice)->delete();
+        }
+
+
+
+        $peminjaman->delete(); // baru hapus
+        return redirect()->route('permintaan.index')->with('success', 'Data Berhasil Dihapus');
+    }
 }

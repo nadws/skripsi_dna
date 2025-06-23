@@ -201,8 +201,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
         $(document).ready(function() {
-            $(document).on('click', '.submit', function(e) {
-                $(this).attr("hidden", true); // Sembunyikan tombol submit
+            $(document).on('submit', '.submit', function(e) {
+                $(".submit_btn").attr('hidden', true) // Sembunyikan tombol submit
                 $(".submit_proses").removeAttr("hidden"); // Tampilkan tombol submit_proses
 
             });
@@ -254,7 +254,7 @@
         });
     </script>
 
-    
+
 
 
 

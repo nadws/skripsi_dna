@@ -15,6 +15,7 @@
                         <th>Kategori</th>
                         <th>Keterangan</th>
                         <th>Status</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -32,6 +33,18 @@
                             <td><span
                                     class="badge {{ $p->status == 'pending' ? 'bg-warning' : ($p->status == 'approved' ? 'bg-success' : 'bg-danger') }}  ">{{ $p->status }}</span>
                             </td>
+                            <td>
+                                @if ($p->status == 'pending')
+                                    <button data-bs-toggle="modal" data-bs-target="#edituser"
+                                        data-id="{{ $p->id }}" class="btn btn-warning btn-sm geteditData"><i
+                                            class="bi bi-pencil-square"></i></button>
+                                    <a href="{{ route('permintaan.delete', $p->id) }}"
+                                        onclick="return confirm('Apakah anda yakin?')" class="btn btn-danger btn-sm"><i
+                                            class="bi bi-trash"></i></a>
+                                @else
+                                @endif
+
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -40,7 +53,7 @@
         </div>
     </div>
 
-    <form action="{{ route('permintaan.store') }}" method="POST">
+    <form action="{{ route('permintaan.store') }}" method="POST" class="submit">
         @csrf
         <x-modal size="modal-lg" id="tambah">
             <div class="row">
