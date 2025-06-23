@@ -146,7 +146,7 @@
                     var cabang_id = $(this).val();
                     $.ajax({
                         type: "get",
-                        url: "{{ route('permintaan.get_asset') }}",
+                        url: "/permintaan/get_asset",
                         data: {
                             cabang_id: cabang_id
                         },
@@ -162,7 +162,7 @@
 
                     $.ajax({
                         type: "get",
-                        url: "{{ route('permintaan.get_stock') }}",
+                        url: "/permintaan/get_stock",
                         data: {
                             barang_id: barang_id,
                             cabang_id: cabang_id

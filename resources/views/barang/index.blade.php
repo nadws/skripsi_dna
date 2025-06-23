@@ -123,7 +123,7 @@
 
     <form action="{{ route('barang.update') }}" method="post" enctype="multipart/form-data">
         @csrf
-        <x-modal-edit id="edit" size="modal-lg" judul="Edit Barang" url="barang.getEdit"></x-modal-edit>
+        <x-modal-edit id="edit" size="modal-lg" judul="Edit Barang" url="/barang/getEdit"></x-modal-edit>
     </form>
 
 </x-app-layout>

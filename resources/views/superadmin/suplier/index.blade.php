@@ -87,6 +87,6 @@
 
     <form action="{{ route('suplier.update') }}" method="post">
         @csrf
-        <x-modal-edit id="edit" size="modal-lg" judul="Edit Suplier" url="suplier.getEdit"></x-modal-edit>
+        <x-modal-edit id="edit" size="modal-lg" judul="Edit Suplier" url="/suplier/getEdit"></x-modal-edit>
     </form>
 </x-app-layout>

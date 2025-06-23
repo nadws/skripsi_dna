@@ -27,7 +27,7 @@
                 $(document).on('change', '#getBarang', function(e) {
                     var cabang = $(this).val();
                     $.ajax({
-                        url: "{{ route('stok_inventaris.getStok') }}",
+                        url: "/stok_inventaris/getStok",
                         type: "GET",
                         data: {
                             cabang: cabang

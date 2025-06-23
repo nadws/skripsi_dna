@@ -27,7 +27,7 @@
                 $(document).on('change', '#getDepartemen', function(e) {
                     var cabang = $(this).val();
                     $.ajax({
-                        url: "{{ route('laporan_departemen.getdepartemen') }}",
+                        url: "/laporan_departemen/getdepartemen",
                         type: "GET",
                         data: {
                             cabang: cabang

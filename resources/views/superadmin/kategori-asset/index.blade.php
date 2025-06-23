@@ -45,7 +45,7 @@
     </form>
     <form action="{{ route('kategori.update') }}" method="post">
         @csrf
-        <x-modal-edit id="edit" size="modal-lg" judul="Edit Kategori" url="kategori.getEdit"></x-modal-edit>
+        <x-modal-edit id="edit" size="modal-lg" judul="Edit Kategori" url="/kategori/getEdit"></x-modal-edit>
     </form>
     @section('js')
     @endsection

@@ -62,6 +62,6 @@
 
     <form action="{{ route('departemen.update') }}" method="post">
         @csrf
-        <x-modal-edit id="edit" size="modal-lg" judul="Edit Departemen" url="departemen.getEdit"></x-modal-edit>
+        <x-modal-edit id="edit" size="modal-lg" judul="Edit Departemen" url="/departemen/getEdit"></x-modal-edit>
     </form>
 </x-app-layout>

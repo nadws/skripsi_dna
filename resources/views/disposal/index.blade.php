@@ -128,7 +128,7 @@
                     var karyawan_id = $(this).val();
                     $.ajax({
                         type: "get",
-                        url: "{{ route('perbaikan.getAssetKaryawan') }}",
+                        url: "/perbaikan/getAssetKaryawan",
                         data: {
                             karyawan_id: karyawan_id
                         },
@@ -143,7 +143,7 @@
                     var barang_id = $(this).val();
                     $.ajax({
                         type: "get",
-                        url: "{{ route('perbaikan.getStockCabang') }}",
+                        url: "/perbaikan/getStockCabang",
                         data: {
                             barang_id: barang_id
                         },
@@ -160,7 +160,7 @@
 
                     $.ajax({
                         type: "get",
-                        url: "{{ route('perbaikan.getQtyAssetKaryawan') }}",
+                        url: "/perbaikan/getQtyAssetKaryawan",
                         data: {
                             invoice: invoice
                         },

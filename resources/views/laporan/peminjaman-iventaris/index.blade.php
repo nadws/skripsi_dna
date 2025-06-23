@@ -28,7 +28,7 @@
                     var cabang = $(this).val();
 
                     $.ajax({
-                        url: "{{ route('laporan_peminjaman_inventaris.getdata') }}",
+                        url: "/laporan_peminjaman_inventaris/getdata",
                         type: "GET",
                         data: {
                             cabang: cabang

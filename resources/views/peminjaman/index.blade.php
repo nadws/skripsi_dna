@@ -121,16 +121,16 @@
     </form>
     <form action="{{ route('peminjaman.accepted') }}" method="POST">
         @csrf
-        <x-modal-edit size="modal-lg" id="edit" url="peminjaman.getDataPeminjaman" tipe='edit'
+        <x-modal-edit size="modal-lg" id="edit" url="/peminjaman/getDataPeminjaman" tipe='edit'
             judul='Peminjaman Assets'>
         </x-modal-edit>
     </form>
 
 
-    <x-modal-edit size="modal-lg" id="view" url="peminjaman.getDataPeminjaman" tipe='acc'
+    <x-modal-edit size="modal-lg" id="view" url="/peminjaman/getDataPeminjaman" tipe='acc'
         judul='Peminjaman Assets'>
     </x-modal-edit>
-    <x-modal-edit size="modal-lg" id="view" url="peminjaman.getDataPeminjaman" tipe='acc'
+    <x-modal-edit size="modal-lg" id="view" url="/peminjaman/getDataPeminjaman" tipe='acc'
         judul='Peminjaman Assets'>
     </x-modal-edit>
 
@@ -185,7 +185,7 @@
                     var id = $(this).attr('data-id');
 
                     $.ajax({
-                        url: "{{ route('peminjaman.getQr') }}",
+                        url: "/peminjaman/getQr",
                         type: "GET",
                         data: {
                             id: id
@@ -201,7 +201,7 @@
                     var id = $(this).attr('data-id');
 
                     $.ajax({
-                        url: "{{ route('peminjaman.getDataEditPeminjaman') }}",
+                        url: "/peminjaman/getDataEditPeminjaman",
                         type: "GET",
                         data: {
                             id: id

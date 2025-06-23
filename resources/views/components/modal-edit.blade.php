@@ -33,7 +33,7 @@
                     var id = $(this).attr('data-id');
 
                     $.ajax({
-                        url: "{{ route($url) }}",
+                        url: "{{ $url }}",
                         type: "GET",
                         data: {
                             id: id
