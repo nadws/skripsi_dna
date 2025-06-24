@@ -31,7 +31,7 @@
             </table>
         </div>
     </div>
-    <form action="{{ route('kategori.store') }}" method="post">
+    <form action="{{ route('kategori.store') }}" method="post" class="submit">
         @csrf
         <x-modal id="tambah">
             <div class="row">
@@ -43,7 +43,7 @@
             </div>
         </x-modal>
     </form>
-    <form action="{{ route('kategori.update') }}" method="post">
+    <form action="{{ route('kategori.update') }}" method="post" class="submit">
         @csrf
         <x-modal-edit id="edit" size="modal-lg" judul="Edit Kategori" url="/kategori/getEdit"></x-modal-edit>
     </form>

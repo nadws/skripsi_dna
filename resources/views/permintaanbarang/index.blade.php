@@ -53,7 +53,7 @@
         </div>
     </div>
 
-    <form action="{{ route('permintaan.store') }}" method="POST" class="submit">
+    <form action="{{ route('permintaan.store') }}" method="POST" class="submit" class="submit">
         @csrf
         <x-modal size="modal-lg" id="tambah">
             <div class="row">
@@ -142,7 +142,7 @@
         </x-modal>
     </form>
 
-    <form action="{{ route('peminjaman.update') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('peminjaman.update') }}" method="post" enctype="multipart/form-data" class="submit">
         @csrf
         <div class="modal fade" id="edituser" tabindex="-1" aria-labelledby="tambahModalLabel"
             aria-hidden="true">
@@ -159,7 +159,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary submit">Simpan</button>
+                        <button type="submit" class="btn btn-primary submit_btn">Simpan</button>
                         <button type="button" disabled class="btn btn-primary submit_proses" hidden>Proses
                             ..</button>
                     </div>

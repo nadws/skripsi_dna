@@ -40,7 +40,7 @@
             </table>
         </div>
     </div>
-    <form action="{{ route('vendor.store') }}" method="post">
+    <form action="{{ route('vendor.store') }}" method="post" class="submit">
         @csrf
         <x-modal id="tambah" title="Tambah Data">
             <div class="row">
@@ -79,8 +79,8 @@
         </x-modal>
     </form>
 
-    <form action="{{ route('vendor.update') }}" method="post">
+    <form action="{{ route('vendor.update') }}" method="post" class="submit">
         @csrf
-        <x-modal-edit id="edit" size="modal-lg" judul="Edit Vendor" url="vendor.getEdit"></x-modal-edit>
+        <x-modal-edit id="edit" size="modal-lg" judul="Edit Vendor" url="/vendor/getEdit"></x-modal-edit>
     </form>
 </x-app-layout>

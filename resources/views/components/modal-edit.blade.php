@@ -14,7 +14,7 @@
             <div class="modal-footer">
                 @if ($tipe == 'edit' || $tipe == 'selesai' || $tipe == 'acc')
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary submit">Simpan</button>
+                    <button type="submit" class="btn btn-primary submit_btn">Simpan</button>
                     <button type="button" disabled class="btn btn-primary submit_proses" hidden>Proses ..</button>
                 @else
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

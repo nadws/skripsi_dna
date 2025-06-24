@@ -7,13 +7,13 @@
         <label for="">Kategori Permintaan</label>
         <select name="katgeori" id="" class="form-control kategori">
             <option value="">-Pilih Kategori-</option>
-            <option value="pembelian">Pembelian</option>
-            <option value="overstock">Overstock</option>
+            <option value="pembelian" @selected($peminjaman->kategori == 'pembelian')>Pembelian</option>
+            <option value="overstock" @selected($peminjaman->kategori == 'overstock')>Overstock</option>
         </select>
     </div>
     <div class="col-lg-4">
         <label for="">Keterangan</label>
-        <input type="text" class="form-control" name="keterangan" required>
+        <input type="text" class="form-control" value="{{ $peminjaman->keterangan }}" name="keterangan" required>
     </div>
     <div class="col-lg-12">
         <hr>

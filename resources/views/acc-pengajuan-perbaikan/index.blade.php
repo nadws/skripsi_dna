@@ -50,7 +50,7 @@
             </table>
         </div>
     </div>
-    <form action="{{ route('accperbaikan.edit') }}" method="POST">
+    <form action="{{ route('accperbaikan.edit') }}" method="POST" class="submit">
         @csrf
         <x-modal-edit size="modal-lg" id="edit" url="/accperbaikan/getPerbaikan" tipe='edit'
             judul='Perbaikan Assets'>

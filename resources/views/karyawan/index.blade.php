@@ -51,7 +51,7 @@
         </div>
     </div>
 
-    <form action="{{ route('karyawan.store') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('karyawan.store') }}" method="post" enctype="multipart/form-data" class="submit">
         @csrf
         <x-modal size="modal-lg" id="tambah">
             <div class="row">
@@ -110,7 +110,7 @@
 
         </x-modal>
     </form>
-    <form action="{{ route('karyawan.update') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('karyawan.update') }}" method="post" enctype="multipart/form-data" class="submit">
         @csrf
         <x-modal-edit id="edit" size="modal-lg" judul="Edit Karyawan" url="/karyawan/getEdit"></x-modal-edit>
     </form>

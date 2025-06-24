@@ -35,7 +35,7 @@
             </table>
         </div>
     </div>
-    <form action="{{ route('disposal.store') }}" method="post">
+    <form action="{{ route('disposal.store') }}" method="post" class="submit">
         @csrf
         <x-modal id="tambah" size="modal-lg">
             <div class="row">

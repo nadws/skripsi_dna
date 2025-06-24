@@ -38,7 +38,7 @@
         </div>
     </div>
 
-    <form action="{{ route('user.store') }}" method="post">
+    <form action="{{ route('user.store') }}" method="post" class="submit">
         @csrf
         <x-modal id="tambah" size="modal-lg">
             <div class="row">
@@ -77,7 +77,7 @@
         </x-modal>
     </form>
 
-    <form action="{{ route('user.update') }}" method="post">
+    <form action="{{ route('user.update') }}" method="post" class="submit">
         @csrf
         <x-modal-edit id="edit" size="modal-lg" url="/user/getEdit"></x-modal-edit>
     </form>

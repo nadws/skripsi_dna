@@ -42,7 +42,7 @@
         </div>
     </div>
 
-    <form action="{{ route('suplier.store') }}" method="post">
+    <form action="{{ route('suplier.store') }}" method="post" class="submit">
         @csrf
         <x-modal size="modal-lg" id="tambah">
             <div class="row">
@@ -85,7 +85,7 @@
         </x-modal>
     </form>
 
-    <form action="{{ route('suplier.update') }}" method="post">
+    <form action="{{ route('suplier.update') }}" method="post" class="submit">
         @csrf
         <x-modal-edit id="edit" size="modal-lg" judul="Edit Suplier" url="/suplier/getEdit"></x-modal-edit>
     </form>

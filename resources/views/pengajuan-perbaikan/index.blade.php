@@ -52,7 +52,7 @@
         </div>
     </div>
 
-    <form action="{{ route('perbaikan.store') }}" method="post">
+    <form action="{{ route('perbaikan.store') }}" method="post" class="submit">
         @csrf
         <x-modal id="tambah" size="modal-lg">
             <div class="row">
@@ -153,7 +153,7 @@
             </div>
         </x-modal>
     </form>
-    <form action="{{ route('perbaikan.selesai') }}" method="POST">
+    <form action="{{ route('perbaikan.selesai') }}" method="POST" class="submit">
         @csrf
         <x-modal-edit size="modal-md" id="edit" url="perbaikan.getPerbaikan" tipe='selesai'
             judul='Perbaikan Assets'>
