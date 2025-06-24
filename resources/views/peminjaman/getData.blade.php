@@ -2,7 +2,7 @@
     <input type="hidden" name="id" value="{{ $peminjaman->id }}">
     <table class="table">
         <tr>
-            <th>Invoice</th>
+            <th>Kode Peminjaman</th>
             <th width="2%"> : </th>
             <th>{{ $peminjaman->invoice }}</th>
         </tr>

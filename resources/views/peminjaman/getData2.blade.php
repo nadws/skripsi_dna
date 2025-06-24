@@ -33,7 +33,7 @@
     <div class="justify-content-center">
         <table class="table">
             <tr>
-                <th>Invoice</th>
+                <th>Kode Peminjaman</th>
                 <th> : </th>
                 <th>{{ $peminjaman->invoice }}</th>
             </tr>
