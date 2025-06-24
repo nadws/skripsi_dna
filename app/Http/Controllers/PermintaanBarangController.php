@@ -54,7 +54,13 @@ class PermintaanBarangController extends Controller
     {
         $permintaan = PermintaanBarang::find($r->id);
         $overBarang = OverBarang::where('invoice', $permintaan->invoice)->first();
-        $stok = Barang::getBarangOne($overBarang->barang_id,  $overBarang->dari_cabang_id);
+        if ($permintaan->kategori == 'pembelian') {
+            $stok = 0;
+        } else {
+            $stok = Barang::getBarangOne($overBarang->barang_id,  $overBarang->dari_cabang_id);
+        }
+
+
 
 
         $data = [
@@ -66,8 +72,8 @@ class PermintaanBarangController extends Controller
             'cabang' => Cabang::where('id', '!=', Auth::user()->cabang_id)->get(),
             'pembelian' => PembelianBarang::where('invoice', $permintaan->invoice)->first(),
             'overstock' => $overBarang,
-            'stok' => $stok->stok,
-            'harga' => $stok->harga_terbaru,
+            'stok' =>  $stok->stok ?? 0,
+            'harga' => $stok->harga_terbaru ?? 0,
         ];
 
         return view('permintaanbarang.getEdit', $data);

@@ -192,4 +192,77 @@ class PerbaikanAssetController extends Controller
 
         return redirect()->route('perbaikan.index')->with('success', 'Data Berhasil Disimpan');
     }
+
+    public function delete($id)
+    {
+        $peminjaman = PerbaikanAsset::findOrFail($id); // cari dulu sebelum dihapus
+        Notifikasi::where('judul', 'Perbaikan ' . $peminjaman->invoice)->delete();
+
+        $peminjaman->delete(); // baru hapus
+        return redirect()->route('perbaikan.index')->with('success', 'Data Berhasil Dihapus');
+    }
+
+    public function getEdit(Request $r)
+    {
+        $perbaikan = PerbaikanAsset::where('id', $r->id)->first();
+        $karya = Karyawan::where('id', $perbaikan->karyawan_id)->first();
+        $peminjaman = PeminjamanAsset::where('karyawan_id', $karya->id)
+            ->whereRaw('qty - qty_disposal > 0')
+            ->orderBy('id', 'desc')
+            ->get();
+
+
+
+        $stok =  PeminjamanAsset::where('karyawan_id', $karya->id)
+            ->where('barang_id', $perbaikan->barang_id)
+            ->first();
+        $data = [
+            'perbaikan' => $perbaikan,
+            'karyawan' => Karyawan::where('cabang_id', Auth::user()->cabang_id)->get(),
+            'vendor' => Vendor::all(),
+            'barang' => Barang::getBarang(Auth::user()->cabang_id),
+            'peminjaman' => $peminjaman,
+            'stok' => $stok,
+        ];
+        return view('pengajuan-perbaikan.getEdit', $data);
+    }
+
+    public function update(Request $r)
+    {
+        // if ($r->from == 'user') {
+        $barang =  PeminjamanAsset::where('invoice', $r->barang_id)->first();
+        PerbaikanAsset::where('id', $r->id)->delete();
+        Notifikasi::where('judul', 'Perbaikan Asset ' . $r->barang_id)->delete();
+
+        $data = [
+            'barang_id' => $barang->barang_id,
+            'cabang_id' => Auth::user()->cabang_id,
+            'vendor_id' => $r->vendor_id,
+            'karyawan_id' => $r->karyawan_id,
+            'jumlah' => $r->jumlah,
+            'biaya' => $r->biaya,
+            'keterangan' => $r->keterangan,
+            'from' => 'user',
+            'status' => 'pending',
+            'tgl_perbaikan' => date('Y-m-d'),
+            'tgl_estimasi' => $r->tgl_estimasi,
+        ];
+        PerbaikanAsset::create($data);
+        $user = User::where('role', 'manager')->get();
+        foreach ($user as $u) {
+            $data3 = [
+                'judul' => 'Perbaikan Asset ' . $r->barang_id,
+                'deskripsi' => 'Perbaikan asset karywan',
+                'link' => 'accperbaikan.index',
+                'user_id' => $u->id,
+                'read' => 'unread',
+                'icon' => 'bi bi-grid-fill',
+                'status' => 'berhasil'
+            ];
+            Notifikasi::create($data3);
+        }
+
+
+        return redirect()->route('perbaikan.index')->with('success', 'Data Berhasil Disimpan');
+    }
 }

@@ -190,8 +190,10 @@ Route::middleware('auth')->group(function () {
             Route::get('/getStockCabang', 'getStockCabang')->name('getStockCabang');
             Route::get('/getPerbaikan', 'getPerbaikan')->name('getPerbaikan');
             Route::post('/store', 'store')->name('store');
+            Route::post('/update', 'update')->name('update');
             Route::get('/getEdit', 'getEdit')->name('getEdit');
             Route::post('/selesai', 'selesai')->name('selesai');
+            Route::get('/delete/{id}', 'delete')->name('delete');
         });
     Route::controller(AccPerbaikanAssetController::class)
         ->prefix('accperbaikan')

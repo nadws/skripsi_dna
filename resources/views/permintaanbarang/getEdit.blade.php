@@ -58,7 +58,7 @@
         <select name="cabang_id_overstock" id="" class="form-control get_aseet_cabang">
             <option value="">-Pilih Cabang-</option>
             @foreach ($cabang as $b)
-                <option value="{{ $b->id }}" @selected($b->id == $overstock->dari_cabang_id)>{{ $b->nama }}</option>
+                <option value="{{ $b->id }}" @selected($b->id == ($overstock->dari_cabang_id ?? 0))>{{ $b->nama }}</option>
             @endforeach
         </select>
     </div>
@@ -66,7 +66,7 @@
         <label for="">Asset</label>
         <select name="barang_id_overstock" id="" class="form-control load_asset">
             @foreach ($assets as $item)
-                <option value="{{ $item->id }}" @selected($item->id == $overstock->barang_id)>{{ $item->nama_barang }}
+                <option value="{{ $item->id }}" @selected($item->id == ($overstock->barang_id ?? 0))>{{ $item->nama_barang }}
                     ({{ $item->merek }})
                 </option>
             @endforeach

@@ -43,6 +43,12 @@
                                             class="badge {{ $p->status_perbaikan == 'finish' ? 'bg-success' : 'bg-danger' }}  ">{{ $p->status_perbaikan }}</span>
                                     @endif
                                 @else
+                                    <button data-bs-toggle="modal" data-bs-target="#edituser"
+                                        data-id="{{ $p->id }}" class="btn btn-warning btn-sm geteditData"><i
+                                            class="bi bi-pencil-square"></i></button>
+                                    <a href="{{ route('perbaikan.delete', $p->id) }}"
+                                        onclick="return confirm('Apakah anda yakin?')" class="btn btn-danger btn-sm"><i
+                                            class="bi bi-trash"></i></a>
                                 @endif
                             </td>
                         </tr>
@@ -159,6 +165,30 @@
             judul='Perbaikan Assets'>
         </x-modal-edit>
     </form>
+
+    <form action="{{ route('perbaikan.update') }}" method="post" enctype="multipart/form-data" class="submit">
+        @csrf
+        <div class="modal fade" id="edituser" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="tambahModalLabel">Edit Permintaan</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div id="load-edit_data"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary submit_btn">Simpan</button>
+                        <button type="button" disabled class="btn btn-primary submit_proses" hidden>Proses
+                            ..</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
     @section('scripts')
         <script>
             $(document).ready(function() {
@@ -249,6 +279,23 @@
                         },
                         success: function(data) {
                             $(".load-data").html(data);
+
+                        }
+                    });
+                });
+
+                $(document).on('click', '.geteditData', function(e) {
+                    var id = $(this).attr('data-id');
+
+                    $.ajax({
+                        url: "/perbaikan/getEdit",
+                        type: "GET",
+                        data: {
+                            id: id
+                        },
+                        success: function(data) {
+
+                            $("#load-edit_data").html(data);
 
                         }
                     });
