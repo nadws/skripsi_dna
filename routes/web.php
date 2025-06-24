@@ -168,6 +168,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/get_stock', 'get_stock')->name('get_stock');
             Route::get('/getDataEdit', 'getDataEdit')->name('getDataEdit');
             Route::post('/store', 'store')->name('store');
+            Route::post('/update', 'update')->name('update');
             Route::get('/delete/{id}', 'delete')->name('delete');
         });
     Route::controller(AccPengajuanPermintaanassetController::class)
