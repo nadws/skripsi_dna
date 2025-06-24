@@ -14,6 +14,7 @@
                         <th>Jumlah</th>
                         <th>Keterangan</th>
                         <th>Status</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -26,6 +27,17 @@
                             <td>{{ $d->keterangan }}</td>
                             <td><span
                                     class="badge {{ $d->status == 'pending' ? 'bg-warning' : ($d->status == 'approved' ? 'bg-success' : 'bg-danger') }}  ">{{ $d->status }}</span>
+                            </td>
+                            <td>
+                                @if ($d->status == 'pending')
+                                    <button data-bs-toggle="modal" data-bs-target="#edituser"
+                                        data-id="{{ $d->id }}" class="btn btn-warning btn-sm geteditData"><i
+                                            class="bi bi-pencil-square"></i></button>
+                                    <a href="{{ route('disposal.delete', $d->id) }}"
+                                        onclick="return confirm('Apakah anda yakin?')" class="btn btn-danger btn-sm"><i
+                                            class="bi bi-trash"></i></a>
+                                @else
+                                @endif
                             </td>
                         </tr>
                     @endforeach
@@ -77,32 +89,32 @@
                     <label for="">Keterangan</label>
                     <input type="text" class="form-control " name="keterangan">
                 </div>
-                {{-- user --}}
-                {{-- cabang --}}
-                {{-- <div class="col-lg-6 cabang mt-2" hidden>
-                    <label for="">Asset</label>
-                    <select name="barang_id" id="asset_id" class="form-control cabang" disabled>
-                        <option value="">-Pilih Asset-</option>
-                        @foreach ($barang as $b)
-                            <option value="{{ $b->id }}">{{ $b->nama_barang }} Merk : {{ $b->merek }}
-                            </option>
-                        @endforeach
-                    </select>
-                </div>
-                <div class="col-lg-6 cabang mt-2" hidden>
-                    <label for="">Stok</label>
-                    <input type="text" class="form-control qty" disabled>
-                </div>
-                <div class="col-lg-6 cabang mt-2" hidden>
-                    <label for="">Jumlah Yang Disposal</label>
-                    <input type="number" class="form-control qty2 cabang" max="" disabled name="jumlah">
-                </div>
-                <div class="col-lg-6 cabang mt-2" hidden>
-                    <label for="">Keterangan</label>
-                    <input type="text" class="form-control cabang" disabled name="keterangan">
-                </div> --}}
+
             </div>
         </x-modal>
+    </form>
+    <form action="{{ route('disposal.update') }}" method="post" enctype="multipart/form-data" class="submit">
+        @csrf
+        <div class="modal fade" id="edituser" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="tambahModalLabel">Edit Permintaan</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body">
+                        <div id="load-edit_data"></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary submit_btn">Simpan</button>
+                        <button type="button" disabled class="btn btn-primary submit_proses" hidden>Proses
+                            ..</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </form>
     @section('scripts')
         <script>
@@ -170,6 +182,23 @@
                         }
                     });
 
+                });
+
+                $(document).on('click', '.geteditData', function(e) {
+                    var id = $(this).attr('data-id');
+
+                    $.ajax({
+                        url: "/disposal/getEdit",
+                        type: "GET",
+                        data: {
+                            id: id
+                        },
+                        success: function(data) {
+
+                            $("#load-edit_data").html(data);
+
+                        }
+                    });
                 });
 
             });

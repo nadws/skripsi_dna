@@ -72,4 +72,75 @@ class DisposalController extends Controller
 
         return redirect()->route('disposal.index')->with('success', 'Data Berhasil Disimpan');
     }
+
+    public function delete($id)
+    {
+        $peminjaman = Disposal::findOrFail($id); // cari dulu sebelum dihapus
+        Notifikasi::where('judul', 'Pengajuan disposal asset ' . $peminjaman->barang->nama_barang)->delete();
+
+        $peminjaman->delete(); // baru hapus
+        return redirect()->route('disposal.index')->with('success', 'Data Berhasil Dihapus');
+    }
+
+    public function getEdit(Request $request)
+    {
+        $disposal = Disposal::findOrFail($request->id);
+        $karya = Karyawan::where('id', $disposal->karyawan_id)->first();
+
+        $peminjaman = PeminjamanAsset::where('karyawan_id', $karya->id)
+            ->whereRaw('qty - qty_disposal > 0')
+            ->orderBy('id', 'desc')
+            ->get();
+        $stok =  PeminjamanAsset::where('karyawan_id', $karya->id)
+            ->where('barang_id', $disposal->barang_id)
+            ->first();
+
+        $data = [
+            'title' => 'Disposal Asset',
+            'disposal' => Disposal::findOrFail($request->id),
+            'karyawan' => Karyawan::where('cabang_id', Auth::user()->cabang_id)->get(),
+
+            'barang' => Barang::getBarang(Auth::user()->cabang_id),
+            'peminjaman' => $peminjaman,
+            'stok' => $stok,
+
+        ];
+        return view('disposal.getEdit', $data);
+    }
+
+    public function update(Request $r)
+    {
+        // if ($r->from == 'user') {
+        $barang =  PeminjamanAsset::where('invoice', $r->barang_id)->first();
+        Disposal::where('invoice_peminjaman', $barang->invoice)->delete();
+        Notifikasi::where('judul', 'Pengajuan disposal asset ' . $barang->nama_barang)->delete();
+        $data = [
+            'barang_id' => $barang->barang_id,
+            'cabang_id' => Auth::user()->cabang_id,
+            'karyawan_id' => $r->karyawan_id,
+            'invoice_peminjaman' => $r->barang_id,
+            'jumlah' => $r->jumlah,
+            'keterangan' => $r->keterangan,
+            'from' => 'user',
+            'status' => 'pending',
+            'tgl_disposal' => date('Y-m-d'),
+        ];
+        Disposal::create($data);
+        $user = User::where('role', 'manager')->get();
+        foreach ($user as $u) {
+            $data3 = [
+                'judul' => 'Pengajuan disposal asset' . $barang->nama_barang,
+                'deskripsi' => 'Pengajuan disposal asset karyawan',
+                'link' => 'accdisposal.index',
+                'user_id' => $u->id,
+                'read' => 'unread',
+                'icon' => 'bi bi-grid-fill',
+                'status' => 'berhasil'
+            ];
+            Notifikasi::create($data3);
+        }
+
+
+        return redirect()->route('disposal.index')->with('success', 'Data Berhasil Disimpan');
+    }
 }

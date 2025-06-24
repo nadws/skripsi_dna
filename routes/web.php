@@ -209,6 +209,9 @@ Route::middleware('auth')->group(function () {
         ->group(function () {
             Route::get('/', 'index')->name('index');
             Route::post('/store', 'store')->name('store');
+            Route::post('/update', 'update')->name('update');
+            Route::get('/delete/{id}', 'delete')->name('delete');
+            Route::get('/getEdit', 'getEdit')->name('getEdit');
         });
     Route::controller(AccDisposalController::class)
         ->prefix('accdisposal')
