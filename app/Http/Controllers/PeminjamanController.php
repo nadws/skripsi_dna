@@ -155,7 +155,7 @@ class PeminjamanController extends Controller
 
                 Notifikasi::create([
                     'judul' => 'Peminjaman ' . $peminjaman->invoice,
-                    'deskripsi' => 'Peminjaman asset baru',
+                    'deskripsi' => 'Edit Peminjaman asset baru',
                     'link' => 'peminjaman.index',
                     'user_id' => $manager->id,
                     'read' => 'unread',
@@ -247,6 +247,8 @@ class PeminjamanController extends Controller
     {
 
         $peminjaman = PeminjamanAsset::find($r->id);
+        Stok::where('ket', 'Peminjaman ' . $peminjaman->invoice)->delete();
+        Notifikasi::where('judul', 'Peminjaman ' . $peminjaman->invoice)->delete();
         if ($r->status == 'approved') {
             $data = [
                 'status' => 'approved',

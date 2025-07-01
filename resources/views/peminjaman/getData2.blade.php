@@ -57,6 +57,13 @@
                 </th>
             </tr>
             <tr>
+                <th>Tanggal Peminjaman</th>
+                <th> : </th>
+                <th>
+                    {{ $peminjaman->tgl_pinjam }}
+                </th>
+            </tr>
+            <tr>
                 <th>Qty</th>
                 <th> : </th>
                 <th>

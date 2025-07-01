@@ -18,6 +18,7 @@
                         <th>Kode Peminjaman</th>
                         <th>Nama Karyawan</th>
                         <th>Cabang</th>
+                        <th>Tanggal pinjam</th>
                         <th>Barang</th>
                         <th>Qty</th>
                         <th>Ket</th>
@@ -33,6 +34,7 @@
                             <td>{{ $p->invoice }}</td>
                             <td>{{ $p->karyawan->nama }}</td>
                             <td>{{ $p->cabang->nama }}</td>
+                            <td>{{ date('d/m/Y', strtotime($p->tgl_pinjam)) }}</td>
                             <td>{{ $p->barang->nama_barang }}</td>
                             <td>{{ $p->qty }}</td>
                             <td>{{ $p->ket }}</td>
@@ -58,6 +60,12 @@
                                     @endif
                                 @else
                                     @if ($p->status == 'approved')
+                                        <button data-bs-toggle="modal" data-bs-target="#view"
+                                            data-id="{{ $p->id }}" class="btn btn-primary btn-sm getData"><i
+                                                class="bi bi-eye-fill"></i></button>
+                                        <button data-bs-toggle="modal" data-bs-target="#edituser"
+                                            data-id="{{ $p->id }}" class="btn btn-warning btn-sm geteditData"><i
+                                                class="bi bi-pencil-square"></i></button>
                                     @else
                                         <button data-bs-toggle="modal" data-bs-target="#view"
                                             data-id="{{ $p->id }}" class="btn btn-primary btn-sm getData"><i
