@@ -110,6 +110,10 @@
                     </select>
                 </div>
                 <div class="col-lg-6 mt-2">
+                    <label for="">Tanggal Peminjaman</label>
+                    <input type="date" class="form-control" name="tgl_pinjam">
+                </div>
+                <div class="col-lg-6 mt-2">
                     <label for="">Qty</label>
                     <input type="number" class="form-control" name="qty">
                 </div>

@@ -25,6 +25,10 @@
         <input type="number" class="form-control" name="qty" value="{{ $peminjaman->qty }}">
     </div>
     <div class="col-lg-6 mt-2">
+        <label for="">Tanggal Peminjaman</label>
+        <input type="date" class="form-control" name="tgl_pinjam" value="{{ $peminjaman->tgl_pinjam }}">
+    </div>
+    <div class="col-lg-6 mt-2">
         <label for="">Ket</label>
         <input type="text" class="form-control" name="ket" value="{{ $peminjaman->ket }}">
     </div>
