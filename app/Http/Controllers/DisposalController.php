@@ -39,7 +39,7 @@ class DisposalController extends Controller
             'keterangan' => $r->keterangan,
             'from' => 'user',
             'status' => 'pending',
-            'tgl_disposal' => date('Y-m-d'),
+            'tgl_disposal' => $r->tgl_disposal,
         ];
         Disposal::create($data);
         $user = User::where('role', 'manager')->get();
@@ -123,7 +123,7 @@ class DisposalController extends Controller
             'keterangan' => $r->keterangan,
             'from' => 'user',
             'status' => 'pending',
-            'tgl_disposal' => date('Y-m-d'),
+            'tgl_disposal' => $r->tgl_disposal,
         ];
         Disposal::create($data);
         $user = User::where('role', 'manager')->get();

@@ -10,6 +10,7 @@
                     <tr>
                         <th>No</th>
                         <th>Asset</th>
+                        <th>Tanggal Disposal</th>
                         <th>Pemilik</th>
                         <th>Jumlah</th>
                         <th>Keterangan</th>
@@ -22,6 +23,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $d->barang->nama_barang }}</td>
+                            <td>{{ date('d/m/Y', strtotime($d->tgl_disposal)) }}</td>
                             <td>{{ $d->from == 'user' ? $d->karyawan->nama : 'Cabang :' . $d->cabang->nama }}</td>
                             <td>{{ $d->jumlah }}</td>
                             <td>{{ $d->keterangan }}</td>
@@ -74,6 +76,10 @@
                     <select name="barang_id" id="barang_id" class="form-control ">
 
                     </select>
+                </div>
+                <div class="col-lg-6  mt-2">
+                    <label for="">Tanggal Disposal</label>
+                    <input type="date" name="tgl_disposal" class="form-control">
                 </div>
                 <div class="col-lg-6  mt-2">
                     <label for="">Jumlah Peminjaman</label>

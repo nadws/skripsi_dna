@@ -36,6 +36,10 @@
         </select>
     </div>
     <div class="col-lg-6  mt-2">
+        <label for="">Tanggal Disposal</label>
+        <input type="date" name="tgl_disposal" class="form-control" value="{{ $disposal->tgl_disopsal }}">
+    </div>
+    <div class="col-lg-6  mt-2">
         <label for="">Jumlah Peminjaman</label>
         <input type="text" class="form-control qty" value="{{ $stok->qty - $stok->qty_disposal }}" disabled>
     </div>
