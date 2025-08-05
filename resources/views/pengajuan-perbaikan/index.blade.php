@@ -10,6 +10,7 @@
                     <tr>
                         <th>No</th>
                         <th>Asset</th>
+                        <th>Tanggal Perbaikan</th>
                         <th>Pemilik</th>
                         <th>Jumlah</th>
                         <th>Vendor</th>
@@ -24,6 +25,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $p->barang->nama_barang }}</td>
+                            <td>{{ date('d/m/Y', strtotime($p->tgl_perbaikan)) }}</td>
                             <td>{{ $p->from == 'user' ? $p->karyawan->nama : 'Cabang :' . $p->cabang->nama }}</td>
                             <td>{{ $p->jumlah }}</td>
                             <td>{{ $p->vendor->nama }}</td>
@@ -85,6 +87,10 @@
                     <select name="barang_id" id="barang_id" class="form-control user">
 
                     </select>
+                </div>
+                <div class="col-lg-6 user mt-2">
+                    <label for="">Tanggal Perbaikan</label>
+                    <input type="date" name="tgl_perbaikan" class="form-control qty">
                 </div>
                 <div class="col-lg-6 user mt-2">
                     <label for="">Jumlah Peminjaman</label>
@@ -173,7 +179,8 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="tambahModalLabel">Edit Permintaan</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
 
                     <div class="modal-body">

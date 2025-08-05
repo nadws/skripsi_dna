@@ -156,7 +156,7 @@ class PerbaikanAssetController extends Controller
             'keterangan' => $r->keterangan,
             'from' => 'user',
             'status' => 'pending',
-            'tgl_perbaikan' => date('Y-m-d'),
+            'tgl_perbaikan' => $r->tgl_perbaikan,
             'tgl_estimasi' => $r->tgl_estimasi,
         ];
         PerbaikanAsset::create($data);
@@ -244,7 +244,7 @@ class PerbaikanAssetController extends Controller
             'keterangan' => $r->keterangan,
             'from' => 'user',
             'status' => 'pending',
-            'tgl_perbaikan' => date('Y-m-d'),
+            'tgl_perbaikan' => $r->tgl_perbaikan,
             'tgl_estimasi' => $r->tgl_estimasi,
         ];
         PerbaikanAsset::create($data);

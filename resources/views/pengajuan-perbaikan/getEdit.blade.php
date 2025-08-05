@@ -28,6 +28,11 @@
         </select>
     </div>
     <div class="col-lg-6 user mt-2">
+        <label for="">Tanggal Perbaikan</label>
+        <input type="date" class="form-control " name="tgl_perbaikan" value="{{ $perbaikan->tgl_perbaikan }}">
+
+    </div>
+    <div class="col-lg-6 user mt-2">
         <label for="">Jumlah Peminjaman</label>
         <input type="text" class="form-control qty" value="{{ $stok->qty - $stok->qty_disposal }}" disabled>
         <input type="hidden" name="id" class="form-control" value="{{ $perbaikan->id }}">
