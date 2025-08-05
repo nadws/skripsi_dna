@@ -1,10 +1,10 @@
 <div class="row">
-    <div class="col-lg-4">
+    <div class="col-lg-3">
         <label for="">Invoice</label>
         <input type="text" class="form-control" value="{{ $peminjaman->invoice }}" disabled>
         <input type="hidden" class="form-control" name="invoice" value="{{ $peminjaman->invoice }}">
     </div>
-    <div class="col-lg-4">
+    <div class="col-lg-3">
         <label for="">Kategori Permintaan</label>
         <select name="katgeori" id="" class="form-control kategori">
             <option value="">-Pilih Kategori-</option>
@@ -12,7 +12,12 @@
             <option value="overstock" @selected($peminjaman->kategori == 'overstock')>Overstock</option>
         </select>
     </div>
-    <div class="col-lg-4">
+    <div class="col-lg-3">
+        <label for="">Tangaal Permintaan</label>
+        <input type="text" class="form-control" value="{{ $peminjaman->tgl_permintaan }}" name="tgl_permintaan"
+            required>
+    </div>
+    <div class="col-lg-3">
         <label for="">Keterangan</label>
         <input type="text" class="form-control" value="{{ $peminjaman->keterangan }}" name="keterangan" required>
     </div>

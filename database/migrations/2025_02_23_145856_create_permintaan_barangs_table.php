@@ -19,6 +19,7 @@ return new class extends Migration
             $table->double('jumlah');
             $table->enum('kategori', ['pembelian', 'overstock']);
             $table->string('keterangan');
+            $table->date('tgl_permintaan');
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->string('ket_presiden')->nullable();
             $table->timestamps();

@@ -9,6 +9,7 @@
                     <tr>
                         <th>No</th>
                         <th>Kode Permintaan</th>
+                        <th>Tanggal Permintaan</th>
                         <th>Asset</th>
                         <th>Suplier / Cabang</th>
                         <th>Jumlah</th>
@@ -23,6 +24,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>PER-{{ $p->invoice }}</td>
+                            <td>{{ date('d/m/Y', strtotime($p->tgl_permintaan)) }}</td>
                             <td>{{ $p->barang->nama_barang }} ({{ $p->barang->merek }})</td>
                             <td>{{ empty($p->pembelian->suplier->nama) ? '' : 'Suplier ' . $p->pembelian->suplier->nama }}
                                 {{ empty($p->overstock->cabang->nama) ? '' : 'Cabang ' . $p->overstock->cabang->nama }}
@@ -57,11 +59,11 @@
         @csrf
         <x-modal size="modal-lg" id="tambah">
             <div class="row">
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <label for="">Invoice</label>
                     <input type="text" class="form-control" value="{{ $invoice }}" disabled>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <label for="">Kategori Permintaan</label>
                     <select name="katgeori" id="" class="form-control kategori">
                         <option value="">-Pilih Kategori-</option>
@@ -69,7 +71,11 @@
                         <option value="overstock">Overstock</option>
                     </select>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-3">
+                    <label for="">Tanggal Permintaan</label>
+                    <input type="date" class="form-control" name="tgl_permintaan" required>
+                </div>
+                <div class="col-lg-3">
                     <label for="">Keterangan</label>
                     <input type="text" class="form-control" name="keterangan" required>
                 </div>

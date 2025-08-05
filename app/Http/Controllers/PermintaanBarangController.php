@@ -95,6 +95,7 @@ class PermintaanBarangController extends Controller
                     'jumlah' => $r->jumlah_pembelian,
                     'kategori' => $r->katgeori,
                     'keterangan' => $r->keterangan,
+                    'tgl_permintaan' => $r->tgl_permintaan
                 ];
                 PermintaanBarang::create($data);
 
@@ -128,6 +129,7 @@ class PermintaanBarangController extends Controller
                     'jumlah' => $r->jumlah_overstock,
                     'kategori' => $r->katgeori,
                     'keterangan' => $r->keterangan,
+                    'tgl_permintaan' => $r->tgl_permintaan
                 ];
                 PermintaanBarang::create($data);
 
@@ -184,6 +186,7 @@ class PermintaanBarangController extends Controller
                     'jumlah' => $r->jumlah_pembelian,
                     'kategori' => $r->katgeori,
                     'keterangan' => $r->keterangan,
+                    'tgl_permintaan' => $r->tgl_permintaan
                 ];
                 PermintaanBarang::create($data);
 
@@ -220,6 +223,7 @@ class PermintaanBarangController extends Controller
                     'jumlah' => $r->jumlah_overstock,
                     'kategori' => $r->katgeori,
                     'keterangan' => $r->keterangan,
+                    'tgl_permintaan' => $r->tgl_permintaan
                 ];
                 PermintaanBarang::create($data);
 

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class PermintaanBarang extends Model
 {
 
-    protected $fillable = ['invoice', 'barang_id', 'cabang_id', 'jumlah', 'kategori', 'keterangan', 'status', 'ket_presiden'];
+    protected $fillable = ['invoice', 'barang_id', 'cabang_id', 'jumlah', 'kategori', 'keterangan', 'status', 'ket_presiden', 'tgl_permintaan'];
 
     public function barang()
     {
