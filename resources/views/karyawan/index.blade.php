@@ -10,6 +10,7 @@
                     <tr>
                         <th>No</th>
                         <th>Nama Karyawan</th>
+                        <th>Jabatan</th>
                         <th>Cabang</th>
                         <th>Departemen</th>
                         <th>Tempat/tanggal lahir</th>
@@ -25,6 +26,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $c->nama }}</td>
+                            <td>{{ $c->jabatan }}</td>
                             <td>{{ $c->cabang->nama }}</td>
                             <td>{{ $c->departemen->nama }}</td>
                             <td>{{ $c->tempat_lahir }}, {{ date('d-m-Y', strtotime($c->tgl_lahir)) }}</td>
@@ -68,6 +70,14 @@
                             <label for="">Nama Karyawan</label>
                             <input type="text" class="form-control" name="nama">
                             <input type="hidden" name="cabang_id" value="{{ $cabang_id }}">
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="">Jabatan</label>
+                            <select name="jabatan" id="" class="form-control">
+                                <option value="">Pilihan Jabatan</option>
+                                <option value="Supervisor">Supervisor</option>
+                                <option value="Staff">Staff</option>
+                            </select>
                         </div>
 
                         <div class="col-lg-6 mt-2">

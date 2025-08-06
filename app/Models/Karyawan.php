@@ -14,6 +14,7 @@ class Karyawan extends Model
         'tgl_lahir',
         'tempat_lahir',
         'tgl_gabung',
+        'jabatan',
         'alamat',
         'jenis_kelamin',
         'foto'

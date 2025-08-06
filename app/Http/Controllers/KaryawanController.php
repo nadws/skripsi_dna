@@ -42,6 +42,7 @@ class KaryawanController extends Controller
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'tgl_gabung' => $request->tgl_gabung,
                 'alamat' => $request->alamat,
+                'jabatan' => $request->jabatan,
                 'foto' => $imageName
             ];
             Karyawan::create($data);
@@ -104,6 +105,7 @@ class KaryawanController extends Controller
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'tgl_gabung' => $request->tgl_gabung,
                 'alamat' => $request->alamat,
+                'jabatan' => $request->jabatan,
                 'foto' => $imageName
             ];
 

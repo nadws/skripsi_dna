@@ -3,7 +3,7 @@
         <img id="imagePreview" src="{{ asset('karyawan_image/' . $karyawan->foto) }}" alt="Preview Gambar"
             style="max-width: 150px;">
         <br>
-        <input type="file" class="form-control" name="image" id="imageInput" >
+        <input type="file" class="form-control" name="image" id="imageInput">
     </div>
     <div class="col-lg-8">
         <div class="row">
@@ -13,6 +13,14 @@
                 <input type="text" class="form-control" name="nama" value="{{ $karyawan->nama }}">
                 <input type="hidden" name="cabang_id" value="{{ $karyawan->cabang_id }}">
                 <input type="hidden" name="id" value="{{ $karyawan->id }}">
+            </div>
+            <div class="col-lg-6">
+                <label for="">Jabatan</label>
+                <select name="jabatan" id="" class="form-control">
+                    <option value="">Pilihan Jabatan</option>
+                    <option value="Supervisor" @selected($karyawan->jabatan == 'Supervisor')>Supervisor</option>
+                    <option value="Staff" @selected($karyawan->jabatan == 'Staff')>Staff</option>
+                </select>
             </div>
 
             <div class="col-lg-6 mt-2">

@@ -3,6 +3,7 @@
         <tr>
             <th>No</th>
             <th>Nama Karyawan</th>
+            <th>Jabatan</th>
             <th>Cabang</th>
             <th>Departemen</th>
             <th>Tempat/tanggal lahir</th>
@@ -18,6 +19,7 @@
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $c->nama }}</td>
+                <td>{{ $c->jabatan }}</td>
                 <td>{{ $c->cabang->nama }}</td>
                 <td>{{ $c->departemen->nama }}</td>
                 <td>{{ $c->tempat_lahir }}, {{ date('d-m-Y', strtotime($c->tgl_lahir)) }}</td>
