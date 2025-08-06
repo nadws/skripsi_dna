@@ -199,6 +199,7 @@
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         $(document).ready(function() {
             $(document).on('submit', '.submit', function(e) {
@@ -236,6 +237,7 @@
     <script src="assets/static/js/pages/dashboard.js"></script>
     <script src="assets/extensions/simple-datatables/umd/simple-datatables.js"></script>
     <script src="assets/static/js/pages/simple-datatables.js"></script>
+
 
 
     <script>

@@ -7,6 +7,7 @@ use App\Http\Controllers\BarangController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DepartemenCOntroller;
 use App\Http\Controllers\CabangController;
+use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\DisposalController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\PeminjamanController;
@@ -34,9 +35,9 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [Dashboard::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+
+
 
 Route::controller(PeminjamanController::class)
     ->prefix('peminjaman')
