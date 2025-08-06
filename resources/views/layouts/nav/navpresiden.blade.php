@@ -85,6 +85,16 @@
                         Disposal Inventaris
                     </a>
                 </li>
+                <li class="submenu-item {{ request()->routeIs('laporan_vendor.index') ? 'active' : '' }}">
+                    <a href="{{ route('laporan_vendor.index') }}" class='submenu-link'>
+                        Vendor
+                    </a>
+                </li>
+                <li class="submenu-item {{ request()->routeIs('laporan_suplier.index') ? 'active' : '' }}">
+                    <a href="{{ route('laporan_suplier.index') }}" class='submenu-link'>
+                        Suplier
+                    </a>
+                </li>
 
 
             </ul>

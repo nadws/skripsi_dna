@@ -19,6 +19,8 @@ use App\Http\Controllers\LaporanDisposal;
 use App\Http\Controllers\LaporanPeminjamanIventaris;
 use App\Http\Controllers\LaporanPerbaikanIventaris;
 use App\Http\Controllers\LaporanPermintaanInventaris;
+use App\Http\Controllers\LaporanSupllier;
+use App\Http\Controllers\LaporanVendor;
 use App\Http\Controllers\NotifikasiController;
 use App\Http\Controllers\PerbaikanAssetController;
 use App\Http\Controllers\PermintaanBarangController;
@@ -283,6 +285,20 @@ Route::middleware('auth')->group(function () {
         ->group(function () {
             Route::get('/', 'index')->name('index');
             Route::get('/getdata', 'getdata')->name('getdata');
+            Route::get('/print', 'print')->name('print');
+        });
+    Route::controller(LaporanVendor::class)
+        ->prefix('laporan_vendor')
+        ->name('laporan_vendor.')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/print', 'print')->name('print');
+        });
+    Route::controller(LaporanSupllier::class)
+        ->prefix('laporan_suplier')
+        ->name('laporan_suplier.')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
             Route::get('/print', 'print')->name('print');
         });
 });
