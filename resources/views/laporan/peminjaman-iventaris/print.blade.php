@@ -41,9 +41,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($peminjaman as $p)
+                        @foreach ($peminjaman as $no => $p)
+                            @php
+                                $disposal = DB::table('disposals')->where('invoice_peminjaman', $p->invoice)->first();
+
+                                if (!empty($disposal->barang_id)) {
+                                    continue;
+                                }
+                            @endphp
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $no++ }}</td>
                                 <td>{{ $p->invoice }}</td>
                                 <td>{{ $p->karyawan->nama }}</td>
                                 <td>{{ $p->cabang->nama }}</td>
