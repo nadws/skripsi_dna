@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('tempat_lahir');
             $table->date('tgl_gabung');
             $table->string('alamat');
+            $table->enum('jabatan', ['Supervisor', 'Staff']);
             $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan']);
             $table->string('foto');
             $table->timestamps();
