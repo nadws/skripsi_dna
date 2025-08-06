@@ -43,9 +43,8 @@
                     <tbody>
                         @foreach ($peminjaman as $no => $p)
                             @php
-                                $disposal = DB::table('disposals')->where('invoice_peminjaman', $p->invoice)->first();
 
-                                if (!empty($disposal->barang_id)) {
+                                if ($p->qty - $p->qty_disposal <= 0) {
                                     continue;
                                 }
                             @endphp
@@ -55,7 +54,7 @@
                                 <td>{{ $p->karyawan->nama }}</td>
                                 <td>{{ $p->cabang->nama }}</td>
                                 <td>{{ $p->barang->nama_barang }}</td>
-                                <td>{{ $p->qty }}</td>
+                                <td>{{ $p->qty - $p->qty_disposal }}</td>
                                 <td>{{ $p->ket }}</td>
                                 <td><span
                                         class="badge {{ $p->status == 'pending' ? 'bg-warning' : ($p->status == 'approved' ? 'bg-success' : 'bg-danger') }}  "></span>

@@ -49,7 +49,7 @@
                         <th>Qty</th>
                         <th width="2%"> : </th>
                         <th>
-                            {{ $peminjaman->qty }}
+                            {{ $peminjaman->qty - $peminjaman->qty_disposal }}
                         </th>
                     </tr>
                     <tr>
