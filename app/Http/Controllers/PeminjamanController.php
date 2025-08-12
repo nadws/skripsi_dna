@@ -9,6 +9,7 @@ use App\Models\PeminjamanAsset;
 use App\Models\Stok;
 use App\Models\User;
 use App\Models\Notifikasi;
+use App\Models\Pengembalian_asset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -304,9 +305,18 @@ class PeminjamanController extends Controller
 
     public function pengembalian(Request $r)
     {
+
+        $data = [
+            'peminjaman_id' => $r->id,
+            'barang_id' => $r->barang_id,
+            'cabang_id' => $r->cabang_id,
+            'tgl_pengembalian' => $r->tgl_pengembalian,
+            'qty' => $r->qty_pengembalian,
+        ];
+        Pengembalian_asset::create($data);
         $data2 = [
             'barang_id' => $r->barang_id,
-            'debit' => $r->qty,
+            'debit' => $r->qty_pengembalian,
             'kredit' => 0,
             'ket' => 'Pengembalian ' . $r->invoice,
             'cabang_id' => $r->cabang_id,
@@ -314,6 +324,10 @@ class PeminjamanController extends Controller
             'tanggal' => date('Y-m-d')
         ];
         Stok::create($data2);
+        $data3 = [
+            'qty_pengembalian' => $r->qty_pengembalian,
+        ];
+        PeminjamanAsset::where('id', $r->id)->update($data3);
         return redirect()->route('peminjaman.index')->with('success', 'Data Berhasil Disimpan');
     }
 }

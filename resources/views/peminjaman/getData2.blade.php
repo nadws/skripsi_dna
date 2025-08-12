@@ -103,6 +103,7 @@
 
             <input type="hidden" name="id" value="{{ $peminjaman->id }}">
             <input type="hidden" name="invoice" value="{{ $peminjaman->invoice }}">
+            <input type="hidden" name="barang_id" value="{{ $peminjaman->barang_id }}">
             <input type="hidden" name="cabang_id" value="{{ $peminjaman->cabang_id }}">
 
 

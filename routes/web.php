@@ -160,6 +160,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/update', 'update')->name('update');
             Route::post('/accepted', 'accepted')->name('accepted');
             Route::get('/delete/{id}', 'delete')->name('delete');
+            Route::post('/pengembalian', 'pengembalian')->name('pengembalian');
         });
 
     Route::controller(PermintaanBarangController::class)

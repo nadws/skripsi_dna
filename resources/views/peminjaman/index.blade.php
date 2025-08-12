@@ -20,7 +20,8 @@
                         <th>Cabang</th>
                         <th>Tanggal pinjam</th>
                         <th>Barang</th>
-                        <th>Qty</th>
+                        <th>Qty Pinjam</th>
+                        <th>Stok</th>
                         <th>Ket</th>
                         <th>status</th>
                         <th>Qr Code</th>
@@ -32,11 +33,11 @@
                         $no = 1;
                     @endphp
                     @foreach ($peminjaman as $p)
-                        @php
+                        {{-- @php
                             if ($p->qty - $p->qty_disposal - $p->qty_pengembalian <= 0) {
                                 continue;
                             }
-                        @endphp
+                        @endphp --}}
                         <tr>
                             <td>{{ $no++ }}</td>
                             <td>{{ $p->invoice }}</td>
@@ -44,7 +45,8 @@
                             <td>{{ $p->cabang->nama }}</td>
                             <td>{{ date('d/m/Y', strtotime($p->tgl_pinjam)) }}</td>
                             <td>{{ $p->barang->nama_barang }}</td>
-                            <td>{{ $p->qty - $p->qty_disposal }}</td>
+                            <td>{{ $p->qty }}</td>
+                            <td>{{ $p->qty - $p->qty_disposal - $p->qty_pengembalian }}</td>
                             <td>{{ $p->ket }}</td>
                             <td><span
                                     class="badge {{ $p->status == 'pending' ? 'bg-warning' : ($p->status == 'approved' ? 'bg-success' : 'bg-danger') }}  ">{{ $p->status }}</span>
@@ -159,39 +161,44 @@
         judul='Peminjaman Assets'>
     </x-modal-edit>
 
-    <div class="modal fade" id="pengembalian" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="tambahModalLabel">Pengembalian</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
+    <form action="{{ route('peminjaman.pengembalian') }}" method="post">
+        @csrf
+        <div class="modal fade" id="pengembalian" tabindex="-1" aria-labelledby="tambahModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="tambahModalLabel">Pengembalian</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
 
-                <div class="modal-body">
+                    <div class="modal-body">
 
-                    <div id="load-pengembalian"></div>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <label for="">Tgl Pengembalian</label>
-                            <input type="date" name="tgl_pengembalian" class="form-control"
-                                name="tgl_pengembalian">
-                        </div>
-                        <div class="col-lg-6">
-                            <label for="">Qty Pengembalian</label>
-                            <input type="number" name="qty_pengembalian" class="form-control qty_pegembalian"
-                                max="" name="qty_pengembalian">
+                        <div id="load-pengembalian"></div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label for="">Tgl Pengembalian</label>
+                                <input type="date" name="tgl_pengembalian" class="form-control"
+                                    name="tgl_pengembalian">
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="">Qty Pengembalian</label>
+                                <input type="number" name="qty_pengembalian" class="form-control qty_pegembalian"
+                                    max="" name="qty_pengembalian">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary submit_btn">Simpan</button>
-                    <button type="button" disabled class="btn btn-primary submit_proses" hidden>Proses
-                        ..</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary submit_btn">Simpan</button>
+                        <button type="button" disabled class="btn btn-primary submit_proses" hidden>Proses
+                            ..</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </form>
 
 
     <div class="modal fade" id="detail" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
