@@ -28,9 +28,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($peminjaman as $no => $p)
+                    @php
+                        $no = 1;
+                    @endphp
+                    @foreach ($peminjaman as $p)
                         @php
-                            if ($p->qty - $p->qty_disposal <= 0) {
+                            if ($p->qty - $p->qty_disposal - $p->qty_pengembalian <= 0) {
                                 continue;
                             }
                         @endphp
@@ -53,7 +56,7 @@
                                 </a>
                             </td>
 
-                            <td>
+                            <td class="text-nowrap">
 
                                 @if ($role == 'manager')
                                     @if ($p->status == 'approved')
@@ -71,6 +74,11 @@
                                         <button data-bs-toggle="modal" data-bs-target="#edituser"
                                             data-id="{{ $p->id }}" class="btn btn-warning btn-sm geteditData"><i
                                                 class="bi bi-pencil-square"></i></button>
+
+                                        <button data-bs-toggle="modal" data-bs-target="#pengembalian"
+                                            data-id="{{ $p->id }}"
+                                            stok="{{ $p->qty - $p->qty_disposal - $p->qty_pengembalian }}"
+                                            class="btn btn-warning btn-sm klik_pengembalian">pengembalian</button>
                                     @else
                                         <button data-bs-toggle="modal" data-bs-target="#view"
                                             data-id="{{ $p->id }}" class="btn btn-primary btn-sm getData"><i
@@ -151,6 +159,41 @@
         judul='Peminjaman Assets'>
     </x-modal-edit>
 
+    <div class="modal fade" id="pengembalian" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tambahModalLabel">Pengembalian</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+
+                    <div id="load-pengembalian"></div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <label for="">Tgl Pengembalian</label>
+                            <input type="date" name="tgl_pengembalian" class="form-control"
+                                name="tgl_pengembalian">
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="">Qty Pengembalian</label>
+                            <input type="number" name="qty_pengembalian" class="form-control qty_pegembalian"
+                                max="" name="qty_pengembalian">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary submit_btn">Simpan</button>
+                    <button type="button" disabled class="btn btn-primary submit_proses" hidden>Proses
+                        ..</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div class="modal fade" id="detail" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-md">
             <div class="modal-content">
@@ -183,6 +226,7 @@
 
                     <div class="modal-body">
                         <div id="load-edit_data"></div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -227,6 +271,22 @@
 
                             $("#load-edit_data").html(data);
 
+                        }
+                    });
+                });
+                $(document).on('click', '.klik_pengembalian', function(e) {
+                    var id = $(this).attr('data-id');
+                    var stok = $(this).attr('stok');
+                    $.ajax({
+                        type: "get",
+                        url: "/peminjaman/getDataPeminjaman2",
+                        data: {
+                            id: id
+                        },
+
+                        success: function(response) {
+                            $("#load-pengembalian").html(response);
+                            $('.qty_pegembalian').attr('max', stok);
                         }
                     });
                 });

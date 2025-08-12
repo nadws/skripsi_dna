@@ -67,7 +67,7 @@
                 <th>Qty</th>
                 <th> : </th>
                 <th>
-                    {{ $peminjaman->qty - $peminjaman->qty_disposal }}
+                    {{ $peminjaman->qty - $peminjaman->qty_disposal - $peminjaman->qty_pengembalian }}
                 </th>
             </tr>
             <tr>
@@ -100,6 +100,10 @@
                         alt="">
                 </th>
             </tr>
+
+            <input type="hidden" name="id" value="{{ $peminjaman->id }}">
+            <input type="hidden" name="invoice" value="{{ $peminjaman->invoice }}">
+            <input type="hidden" name="cabang_id" value="{{ $peminjaman->cabang_id }}">
 
 
         </table>

@@ -301,4 +301,19 @@ class PeminjamanController extends Controller
         }
         return redirect()->route('peminjaman.index')->with('success', 'Data Berhasil Disimpan');
     }
+
+    public function pengembalian(Request $r)
+    {
+        $data2 = [
+            'barang_id' => $r->barang_id,
+            'debit' => $r->qty,
+            'kredit' => 0,
+            'ket' => 'Pengembalian ' . $r->invoice,
+            'cabang_id' => $r->cabang_id,
+            'harga' => 0,
+            'tanggal' => date('Y-m-d')
+        ];
+        Stok::create($data2);
+        return redirect()->route('peminjaman.index')->with('success', 'Data Berhasil Disimpan');
+    }
 }

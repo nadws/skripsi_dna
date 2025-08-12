@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('tgl_pinjam');
             $table->double('qty');
             $table->double('qty_disposal');
+            $table->double('qty_pengembalian');
             $table->double('urutan');
             $table->string('ket');
             $table->integer('cabang_id');

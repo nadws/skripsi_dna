@@ -170,13 +170,13 @@
 
             </header>
 
-            <div class="content-wrapper container">
+            <div class="content-wrapper container-fluid">
 
                 <div class="page-heading">
                     <h3>{{ $title }}</h3>
                 </div>
                 <div class="page-content">
-                    <section class="row">
+                    <section class=" row">
                         <x-alert />
                         {{ $slot }}
                     </section>
