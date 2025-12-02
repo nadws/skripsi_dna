@@ -31,6 +31,14 @@
                 <label for="">Merek</label>
                 <input type="text" class="form-control" name="merek" value="{{ $barang->merek }}">
             </div>
+            <div class="col-lg-6">
+                <label for="">Serial Number</label>
+                <input type="text" class="form-control" name="serial_number" value="{{ $barang->serial_number }}">
+            </div>
+            <div class="col-lg-6">
+                <label for="">Spesifikasi</label>
+                <input type="text" class="form-control" name="spesifikasi" value="{{ $barang->spesifikasi }}">
+            </div>
             <input type="hidden" class="form-control" name="cabang_id" value="{{ $cabang_id }}">
             <input type="hidden" class="form-control" name="id" value="{{ $barang->id }}">
 

@@ -58,7 +58,9 @@ class BarangController extends Controller
                 'nama_barang' => $r->nama_barang,
                 'merek' => $r->merek,
                 'image' => $imageName,
-                'kategori_id' => $r->kategori_id
+                'kategori_id' => $r->kategori_id,
+                'serial_number' => $r->serial_number,
+                'spesifikasi' => $r->spesifikasi
             ]);
 
             $data2 = [

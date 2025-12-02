@@ -216,6 +216,7 @@ Route::middleware('auth')->group(function () {
             Route::post('/update', 'update')->name('update');
             Route::get('/delete/{id}', 'delete')->name('delete');
             Route::get('/getEdit', 'getEdit')->name('getEdit');
+            Route::get('/print/{id}', 'print')->name('print');
         });
     Route::controller(AccDisposalController::class)
         ->prefix('accdisposal')

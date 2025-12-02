@@ -143,4 +143,13 @@ class DisposalController extends Controller
 
         return redirect()->route('disposal.index')->with('success', 'Data Berhasil Disimpan');
     }
+
+    public function print($id)
+    {
+        $data = [
+            'title' => 'Berita Acara Disposal Asset',
+            'p' => Disposal::find($id),
+        ];
+        return view('disposal.print', $data);
+    }
 }

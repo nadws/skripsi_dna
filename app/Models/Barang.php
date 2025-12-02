@@ -14,7 +14,9 @@ class Barang extends Model
         'merek',
         'image',
         'kategori_id',
-        'cabang_id'
+        'cabang_id',
+        'serial_number',
+        'spesifikasi'
     ];
     public static function getBarang($cabang_id)
     {

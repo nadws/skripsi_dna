@@ -13,6 +13,8 @@
                         <th class="text-center">Nama Barang</th>
                         <th class="text-center">Kategori</th>
                         <th class="text-center">Merek</th>
+                        <th class="text-center">Serial Number</th>
+                        <th class="text-center">Spesifikasi</th>
                         <th class="text-center">Stok</th>
                         <th class="text-center">Harga Satuan</th>
                         <th class="text-center">Foto</th>
@@ -27,6 +29,8 @@
                             <td>{{ $c->nama_barang }}</td>
                             <td>{{ $c->kategori }}</td>
                             <td>{{ $c->merek }}</td>
+                            <td>{{ $c->serial_number }}</td>
+                            <td>{{ $c->spesifikasi }}</td>
                             <td class="text-end">{{ $c->stok }}</td>
                             <td class="text-end">{{ number_format($c->harga_terbaru, 0) }}</td>
                             <td class="text-center">
@@ -88,6 +92,14 @@
                         <div class="col-lg-6">
                             <label for="">Merek</label>
                             <input type="text" class="form-control" name="merek">
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="">Serial Number</label>
+                            <input type="text" class="form-control" name="serial_number">
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="">Spesifikasi</label>
+                            <input type="text" class="form-control" name="spesifikasi">
                         </div>
                         @if ($role == 'admin')
                             <input type="hidden" class="form-control" name="cabang_id" value="{{ $cabang_id }}">

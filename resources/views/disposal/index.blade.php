@@ -40,6 +40,8 @@
                                             class="bi bi-trash"></i></a>
                                 @else
                                 @endif
+                                <a href="{{ route('disposal.print', $d->id) }}" class="btn btn-sm btn-warning"><i
+                                        class="bi bi-printer"></i></a>
                             </td>
                         </tr>
                     @endforeach
