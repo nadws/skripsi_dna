@@ -20,7 +20,8 @@ class DisposalController extends Controller
             'disposal' => Disposal::where('cabang_id', Auth::user()->cabang_id)->orderBy('id', 'desc')->get(),
             'karyawan' => Karyawan::where('cabang_id', Auth::user()->cabang_id)->get(),
 
-            'barang' => Barang::getBarang(Auth::user()->cabang_id)
+            'barang' => Barang::getBarang(Auth::user()->cabang_id),
+            'cabang_id' => Auth::user()->cabang_id
 
         ];
         return view('disposal.index', $data);

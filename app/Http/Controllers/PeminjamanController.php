@@ -70,6 +70,7 @@ class PeminjamanController extends Controller
                 'tgl_pinjam' => $request->tgl_pinjam,
                 'qty' => $request->qty,
                 'qty_disposal' => 0,
+                'qty_pengembalian' => 0,
                 'urutan' => $invoice,
                 'ket' => $request->ket,
                 'cabang_id' => Auth::user()->cabang_id,

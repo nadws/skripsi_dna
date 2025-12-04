@@ -14,6 +14,7 @@ class PeminjamanAsset extends Model
         'tgl_pinjam',
         'qty',
         'qty_disposal',
+        'qty_pengembalian',
         'urutan',
         'ket',
         'cabang_id',

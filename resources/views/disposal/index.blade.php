@@ -1,8 +1,11 @@
 <x-app-layout title="{{ $title }}">
     <div class="card">
         <div class="card-header">
+            <a target="_blank" href="{{ route('laporan_disposal.print', ['cabang' => $cabang_id]) }}"
+                class="btn btn-warning float-end ms-2">Print</a>
             <button data-bs-toggle="modal" data-bs-target="#tambah" class="btn btn-primary float-end">Tambah
                 Data</button>
+
         </div>
         <div class="card-body">
             <table class="table table-bordered" id="table1">
