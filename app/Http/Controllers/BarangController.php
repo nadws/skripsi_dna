@@ -36,6 +36,7 @@ class BarangController extends Controller
             'cabang' => Cabang::all(),
             'kategori' => KategoriAsset::all(),
 
+
         ];
         return view('barang.index', $data);
     }
@@ -60,7 +61,8 @@ class BarangController extends Controller
                 'image' => $imageName,
                 'kategori_id' => $r->kategori_id,
                 'serial_number' => $r->serial_number,
-                'spesifikasi' => $r->spesifikasi
+                'spesifikasi' => $r->spesifikasi,
+                'tempat_barang' => $r->tempat_barang,
             ]);
 
             $data2 = [
@@ -138,7 +140,8 @@ class BarangController extends Controller
                 'image' => $imageName,
                 'kategori_id' => $r->kategori_id,
                 'serial_number' => $r->serial_number,
-                'spesifikasi' => $r->spesifikasi
+                'spesifikasi' => $r->spesifikasi,
+                'tempat_barang' => $r->tempat_barang,
             ]);
 
             return redirect()->route('barang.index')->with('success', 'Data Berhasil Diupdate');

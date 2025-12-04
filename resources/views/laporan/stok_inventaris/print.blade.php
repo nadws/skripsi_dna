@@ -34,7 +34,9 @@
                             <th class="text-center">Nama Barang</th>
                             <th class="text-center">Kategori</th>
                             <th class="text-center">Merek</th>
-                            <th class="text-center">Stok</th>
+                            <th class="text-center">Serial Number</th>
+                            <th class="text-center">Spesifikasi</th>
+                            <th class="text-center">Tempat / Posisi</th>
                             <th class="text-center">Harga Satuan</th>
                             <th class="text-center">Foto</th>
                         </tr>
@@ -47,6 +49,9 @@
                                 <td>{{ $c->nama_barang }}</td>
                                 <td>{{ $c->kategori }}</td>
                                 <td>{{ $c->merek }}</td>
+                                <td>{{ $c->serial_number }}</td>
+                                <td>{{ $c->spesifikasi }}</td>
+                                <td>{{ $c->tempat_barang }}</td>
                                 <td class="text-end">{{ $c->stok }}</td>
                                 <td class="text-end">{{ number_format($c->harga_terbaru, 0) }}</td>
                                 <td class="text-center">

@@ -16,7 +16,8 @@ class Barang extends Model
         'kategori_id',
         'cabang_id',
         'serial_number',
-        'spesifikasi'
+        'spesifikasi',
+        'tempat_barang'
     ];
     public static function getBarang($cabang_id)
     {

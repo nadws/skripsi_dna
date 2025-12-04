@@ -1,6 +1,8 @@
 <x-app-layout title="{{ $title }}">
     <div class="card">
         <div class="card-header">
+            <a href="{{ route('stok_inventaris.print', ['cabang' => Auth::user()->cabang_id]) }}" target="_blank"
+                class="btn btn-warning float-end ms-2">Print</a>
             <button class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#tambah">Tambah
                 Data</button>
         </div>
@@ -17,7 +19,8 @@
                         <th class="text-center">Spesifikasi</th>
                         <th class="text-center">Stok</th>
                         <th class="text-center">Harga Satuan</th>
-                        <th class="text-center">Foto</th>
+                        <th class="text-center">Tempat / Posisi</th>
+                        {{-- <th class="text-center">Foto</th> --}}
                         <th class="text-center">Aksi</th>
                     </tr>
                 </thead>
@@ -33,10 +36,11 @@
                             <td>{{ $c->spesifikasi }}</td>
                             <td class="text-end">{{ $c->stok }}</td>
                             <td class="text-end">{{ number_format($c->harga_terbaru, 0) }}</td>
-                            <td class="text-center">
+                            <td class="text-end">{{ $c->tempat_barang }}</td>
+                            {{-- <td class="text-center">
                                 <img src="{{ asset('product_image/' . $c->image) }}" alt="" width="80px"
                                     height="80px">
-                            </td>
+                            </td> --}}
                             <td class="text-center">
                                 @if ($role == 'presiden')
                                     <a href="#" class="btn btn-info btn-sm"><i class="bi bi-eye"></i></a>
@@ -100,6 +104,10 @@
                         <div class="col-lg-6">
                             <label for="">Spesifikasi</label>
                             <input type="text" class="form-control" name="spesifikasi">
+                        </div>
+                        <div class="col-lg-12">
+                            <label for="">Tempat/Posisi</label>
+                            <input type="text" class="form-control" name="tempat_barang">
                         </div>
                         @if ($role == 'admin')
                             <input type="hidden" class="form-control" name="cabang_id" value="{{ $cabang_id }}">

@@ -39,6 +39,10 @@
                 <label for="">Spesifikasi</label>
                 <input type="text" class="form-control" name="spesifikasi" value="{{ $barang->spesifikasi }}">
             </div>
+            <div class="col-lg-12">
+                <label for="">Tempat/Posisi</label>
+                <input type="text" class="form-control" name="tempat_barang" value="{{ $barang->tempat_barang }}">
+            </div>
             <input type="hidden" class="form-control" name="cabang_id" value="{{ $cabang_id }}">
             <input type="hidden" class="form-control" name="id" value="{{ $barang->id }}">
 
