@@ -56,8 +56,13 @@
             <div class="col-4">
                 <p class="text-center">Banjarmasin, {{ date('d-m-Y') }}</p>
                 <p class="text-center">Mengetahui</p>
-                <br><br>
-                <p class="text-center">..................</p>
+                <p class="text-center">{{ QrCode::size('80')->generate(route('verify-ttd', '1')) }}</p>
+                <p class="text-center">
+                    @php
+                        $nama = DB::selectOne('select * from users where id = 1');
+                    @endphp
+                    {{ $nama->name }}
+                </p>
 
 
             </div>

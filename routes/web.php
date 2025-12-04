@@ -29,7 +29,7 @@ use App\Http\Controllers\PermintaanBarangController;
 use App\Http\Controllers\SuplierController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VendorController;
-
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -38,6 +38,15 @@ Route::get('/', function () {
 
 Route::get('/dashboard', [Dashboard::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/beranda', [BerandaController::class, 'index'])->middleware(['auth', 'verified'])->name('beranda');
+
+Route::get('/verify-ttd/{id}', function ($id) {
+    $pegawai = User::where('id', $id)->first();
+
+    $data = [
+        'pegawai' => $pegawai
+    ];
+    return view('verify_ttd', $data);
+})->name('verify-ttd');
 
 
 
