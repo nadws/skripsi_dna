@@ -6,6 +6,11 @@
                     <span><i class="bi bi-grid-fill"></i> Dashboard</span>
                 </a>
             </li>
+            <li class="menu-item  {{ request()->routeIs('beranda') ? 'active' : '' }}">
+                <a href="{{ route('beranda') }}" class='menu-link'>
+                    <span><i class="bi bi-grid-fill"></i> Beranda</span>
+                </a>
+            </li>
             @if (Auth::user()->role == 'manager')
                 @include('layouts.nav.navpresiden')
             @elseif(Auth::user()->role == 'admin')

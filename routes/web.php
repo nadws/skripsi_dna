@@ -4,6 +4,7 @@ use App\Http\Controllers\AccDisposalController;
 use App\Http\Controllers\AccPengajuanPermintaanassetController;
 use App\Http\Controllers\AccPerbaikanAssetController;
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DepartemenCOntroller;
 use App\Http\Controllers\CabangController;
@@ -36,6 +37,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', [Dashboard::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/beranda', [BerandaController::class, 'index'])->middleware(['auth', 'verified'])->name('beranda');
 
 
 
