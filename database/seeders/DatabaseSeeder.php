@@ -17,10 +17,11 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create(
             [
-                'name' => 'Manager',
+                'name' => 'Dr.Hadi Skom,Mkom',
                 'email' => 'manager@gmail.com',
                 'password' => bcrypt('manager'),
-                'role' => 'manager'
+                'role' => 'manager',
+                'nip' => '20251217-001'
             ]
 
         );
