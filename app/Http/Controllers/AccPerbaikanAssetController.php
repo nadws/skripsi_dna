@@ -48,7 +48,7 @@ class AccPerbaikanAssetController extends Controller
         $barang =  PerbaikanAsset::where('id', $r->id)->first();
         $cabang = Karyawan::where('id', $barang->karyawan_id)->first();
         if ($r->status == 'approved') {
-            $user = User::where('cabang_id', $cabang->cabang_id)->get();
+            $user = User::where('cabang_id', $barang->cabang_id)->get();
             foreach ($user as $u) {
                 $data3 = [
                     'judul' => 'Perbaikan asset ' . $barang->barang_id,
