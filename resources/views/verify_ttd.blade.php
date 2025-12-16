@@ -29,7 +29,7 @@
         <h3 class="mb-3">Verifikasi Tanda Tangan Digital</h3>
 
         <p class="mb-1 text-start">Nama : <strong>{{ $pegawai->name }}</strong></p>
-        <p class="mb-1 text-start">Posisi : {{ $pegawai->role }}</p>
+        <p class="mb-1 text-start">Posisi : {{ ucfirst($pegawai->role) }}</p>
         {{-- <p class="mb-3 text-muted text-start">Posisi : {{ $pegawai->divisi->divisi }}</p> --}}
 
         <span class="badge bg-success fs-6 py-2 px-3">✅ Valid</span>
