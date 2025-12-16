@@ -64,66 +64,66 @@
         @csrf
         <x-modal id="tambah" size="modal-lg">
             <div class="row">
-                {{-- <div class="col-lg-12">
+                <div class="col-lg-12">
                     <label for="">Barang dari</label>
                     <select name="from" id="pemilik" class="form-control">
                         <option value="">Pilih Barang dari</option>
                         <option value="cabang">Cabang</option>
                         <option value="user">Karyawan</option>
                     </select>
-                </div> --}}
+                </div>
                 {{-- user --}}
-                <div class="col-lg-6 user mt-2">
+                <div class="col-lg-6 user mt-2" hidden>
                     <label for="">Karyawan</label>
-                    <select name="karyawan_id" id="karyawan_id" class="form-control user">
+                    <select name="karyawan_id" id="karyawan_id" class="form-control user" disabled>
                         <option value="">-Pilih Karyawan-</option>
                         @foreach ($karyawan as $k)
                             <option value="{{ $k->id }}">{{ $k->nama }}</option>
                         @endforeach
                     </select>
                 </div>
-                <div class="col-lg-6 user mt-2">
+                <div class="col-lg-6 user mt-2" hidden>
                     <label for="">Asset</label>
-                    <select name="barang_id" id="barang_id" class="form-control user">
+                    <select name="barang_id" id="barang_id" class="form-control user" disabled>
 
                     </select>
                 </div>
-                <div class="col-lg-6 user mt-2">
+                <div class="col-lg-6 user mt-2" hidden>
                     <label for="">Tanggal Perbaikan</label>
-                    <input type="date" name="tgl_perbaikan" class="form-control qty">
+                    <input type="date" name="tgl_perbaikan" class="form-control qty" disabled>
                 </div>
-                <div class="col-lg-6 user mt-2">
+                <div class="col-lg-6 user mt-2" hidden>
                     <label for="">Jumlah Peminjaman</label>
-                    <input type="text" class="form-control qty">
+                    <input type="text" class="form-control qty" disabled>
                 </div>
-                <div class="col-lg-6 user mt-2">
+                <div class="col-lg-6 user mt-2" hidden>
                     <label for="">Jumlah Yang Diperbaiki</label>
-                    <input type="number" class="form-control qty2 user" max="" name="jumlah">
+                    <input type="number" class="form-control qty2 user" max="" name="jumlah" disabled>
                 </div>
-                <div class="col-lg-6 user mt-2">
+                <div class="col-lg-6 user mt-2" hidden>
                     <label for="">Vendor</label>
-                    <select name="vendor_id" id="" class="form-control user">
+                    <select name="vendor_id" id="" class="form-control user" disabled>
                         <option value="">-Pilih Vendor-</option>
                         @foreach ($vendor as $v)
                             <option value="{{ $v->id }}">{{ $v->nama }}</option>
                         @endforeach
                     </select>
                 </div>
-                <div class="col-lg-6 user mt-2">
+                <div class="col-lg-6 user mt-2" hidden>
                     <label for="">Harga Estimasi Perbaikan</label>
-                    <input type="number" class="form-control user" name="biaya">
+                    <input type="number" class="form-control user" name="biaya" disabled>
                 </div>
-                <div class="col-lg-6 user mt-2">
+                <div class="col-lg-6 user mt-2" hidden>
                     <label for="">Tanggal Estimasi Selesai</label>
-                    <input type="date" class="form-control user" name="tgl_estimasi">
+                    <input type="date" class="form-control user" name="tgl_estimasi" disabled>
                 </div>
-                <div class="col-lg-6 user mt-2">
+                <div class="col-lg-6 user mt-2" hidden>
                     <label for="">Keterangan</label>
-                    <input type="text" class="form-control user" name="keterangan">
+                    <input type="text" class="form-control user" name="keterangan" disabled>
                 </div>
                 {{-- user --}}
                 {{-- cabang --}}
-                {{-- <div class="col-lg-6 cabang mt-2" hidden>
+                <div class="col-lg-6 cabang mt-2" hidden>
                     <label for="">Asset</label>
                     <select name="barang_id" id="asset_id" class="form-control cabang" disabled>
                         <option value="">-Pilih Asset-</option>
@@ -161,7 +161,7 @@
                 <div class="col-lg-6 cabang mt-2" hidden>
                     <label for="">Keterangan</label>
                     <input type="text" class="form-control cabang" disabled name="keterangan">
-                </div> --}}
+                </div>
             </div>
         </x-modal>
     </form>
@@ -174,7 +174,8 @@
 
     <form action="{{ route('perbaikan.update') }}" method="post" enctype="multipart/form-data" class="submit">
         @csrf
-        <div class="modal fade" id="edituser" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
+        <div class="modal fade" id="edituser" tabindex="-1" aria-labelledby="tambahModalLabel"
+            aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
