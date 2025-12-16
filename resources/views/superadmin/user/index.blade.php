@@ -10,6 +10,7 @@
                     <tr>
                         <th>No</th>
                         <th>Nama</th>
+                        <th>Nip</th>
                         <th>Email</th>
                         <th>Role</th>
                         <th>Cabang</th>
@@ -21,6 +22,7 @@
                         <tr>
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $u->name }}</td>
+                            <td>{{ $u->nip ?? '-' }}</td>
                             <td>{{ $u->email }}</td>
                             <td>{{ $u->role }}</td>
                             <td>{{ $u->cabang->nama ?? '-' }}</td>
@@ -53,6 +55,10 @@
                 <div class="col-lg-6">
                     <label for="">Password</label>
                     <input type="password" class="form-control" name="password">
+                </div>
+                <div class="col-lg-6">
+                    <label for="">Nip</label>
+                    <input type="text" class="form-control" name="nip">
                 </div>
                 <div class="col-lg-6">
                     <label for="">Role</label>

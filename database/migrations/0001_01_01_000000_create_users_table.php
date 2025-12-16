@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('password');
             $table->enum('role', ['manager', 'superadmin', 'admin'])->default('admin');
             $table->integer('cabang_id')->nullable();
+            $table->string('nip')->nullable();
+
             $table->rememberToken();
             $table->timestamps();
         });

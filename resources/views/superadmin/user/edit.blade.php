@@ -13,6 +13,10 @@
         <input type="password" class="form-control" name="password">
     </div>
     <div class="col-lg-6">
+        <label for="">Nip</label>
+        <input type="text" class="form-control" name="nip" value="{{ $user->nip }}">
+    </div>
+    <div class="col-lg-6">
         <label for="">Role</label>
         <select name="role" class="form-control" id="">
             <option value="">Pilih Role</option>

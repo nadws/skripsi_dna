@@ -58,6 +58,9 @@
                     @endphp
                     {{ $nama->name }}
                 </p>
+                <p class="text-center">
+                    {{ $nama->nip }}
+                </p>
 
 
             </div>
