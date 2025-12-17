@@ -40,7 +40,7 @@
         <script>
             $(document).ready(function() {
                 $(document).on('click', '#getData', function(e) {
-                    var cabang = $(this).val();
+                    var cabang = $('select[name=cabang]').val();
                     var tgl_awal = $('input[name=tgl_awal]').val();
                     var tgl_akhir = $('input[name=tgl_akhir]').val();
 
