@@ -20,6 +20,11 @@
                         <label for="">Sampai Tanggal</label>
                         <input type="date" class="form-control" name="tgl_akhir">
                     </div>
+                    <div class="col-lg-2">
+                        <label for="">Aksi</label>
+                        <br>
+                        <button class="btn btn-primary"><i class="bi bi-printer-fill"></i> Search</button>
+                    </div>
                     <div class="col-lg-6">
                         <button type="submit" class="btn btn-primary float-end">Print</button>
                     </div>
