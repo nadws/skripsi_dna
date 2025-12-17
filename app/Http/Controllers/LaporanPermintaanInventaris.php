@@ -20,7 +20,9 @@ class LaporanPermintaanInventaris extends Controller
     {
         $data = [
             'title' => 'Laporan Data Permintaan Iventaris',
-            'permintaan' => PermintaanBarang::where('cabang_id', $r->cabang)->orderBy('id', 'desc')->get(),
+            'permintaan' => PermintaanBarang::where('cabang_id', $r->cabang)
+                ->whereBetween('tgl_permintaan', [$r->tgl_awal, $r->tgl_akhir])
+                ->orderBy('id', 'desc')->get(),
         ];
         return view('laporan.permintaan-iventaris.getData', $data);
     }
@@ -28,7 +30,9 @@ class LaporanPermintaanInventaris extends Controller
     {
         $data = [
             'title' => 'Laporan Data Permintaan Iventaris',
-            'permintaan' => PermintaanBarang::where('cabang_id', $r->cabang)->orderBy('id', 'desc')->get(),
+            'permintaan' => PermintaanBarang::where('cabang_id', $r->cabang)
+                ->whereBetween('tgl_permintaan', [$r->tgl_awal, $r->tgl_akhir])
+                ->orderBy('id', 'desc')->get(),
             'cabang' => Cabang::where('id', $r->cabang)->first(),
         ];
         return view('laporan.permintaan-iventaris.print', $data);

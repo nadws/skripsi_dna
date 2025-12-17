@@ -3,15 +3,30 @@
         <div class="card-header">
             <form action="{{ route('laporan_permintaan_inventaris.print') }}" method="get" target="_blank">
                 <div class="row">
-                    <div class="col-lg-4">
-                        <select name="cabang" id="getData" class="form-control">
+                    <div class="col-lg-2">
+                        <label for="">Cabang</label>
+                        <select name="cabang" class="form-control">
                             <option value="">Pilih Cabang</option>
                             @foreach ($cabang as $c)
                                 <option value="{{ $c->id }}">{{ $c->nama }}</option>
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-lg-8">
+                    <div class="col-lg-2">
+                        <label for="">Dari Tanggal</label>
+                        <input type="date" class="form-control" name="tgl_awal">
+                    </div>
+                    <div class="col-lg-2">
+                        <label for="">Sampai Tanggal</label>
+                        <input type="date" class="form-control" name="tgl_akhir">
+                    </div>
+                    <div class="col-lg-2">
+                        <label for="">Aksi</label>
+                        <br>
+                        <button type="button" class="btn btn-primary" id="getData"><i class="bi bi-search"></i>
+                            Search</button>
+                    </div>
+                    <div class="col-lg-4">
                         <button type="submit" class="btn btn-primary float-end">Print</button>
                     </div>
                 </div>
@@ -24,14 +39,18 @@
     @section('scripts')
         <script>
             $(document).ready(function() {
-                $(document).on('change', '#getData', function(e) {
-                    var cabang = $(this).val();
+                $(document).on('click', '#getData', function(e) {
+                    var cabang = $('select[name=cabang]').val();
+                    var tgl_awal = $('input[name=tgl_awal]').val();
+                    var tgl_akhir = $('input[name=tgl_akhir]').val();
 
                     $.ajax({
                         url: "/laporan_permintaan_inventaris/getdata",
                         type: "GET",
                         data: {
-                            cabang: cabang
+                            cabang: cabang,
+                            tgl_awal: tgl_awal,
+                            tgl_akhir: tgl_akhir
                         },
                         success: function(data) {
                             $("#load_data").html(data);
