@@ -18,6 +18,7 @@ class LaporanPerbaikanIventaris extends Controller
     }
     public function getdata(Request $r)
     {
+        dd($r);
         $data = [
             'title' => 'Laporan Data Perbaikan Iventaris',
             'perbaikan' => PerbaikanAsset::where('cabang_id', $r->cabang)
