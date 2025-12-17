@@ -36,14 +36,8 @@
                             </td>
                             <td>
                                 @if ($p->status == 'approved')
-                                    @if ($p->status_perbaikan == 'repair')
-                                        <button data-bs-toggle="modal" data-bs-target="#edit"
-                                            data-id="{{ $p->id }}"
-                                            class="btn btn-warning btn-sm getData">Selesaikan</button>
-                                    @else
-                                        <span
-                                            class="badge {{ $p->status_perbaikan == 'finish' ? 'bg-success' : 'bg-danger' }}  ">{{ $p->status_perbaikan }}</span>
-                                    @endif
+                                    <span
+                                        class="badge {{ $p->status_perbaikan == 'finish' ? 'bg-success' : 'bg-danger' }}  ">{{ $p->status_perbaikan }}</span>
                                 @else
                                     <button data-bs-toggle="modal" data-bs-target="#edituser"
                                         data-id="{{ $p->id }}" class="btn btn-warning btn-sm geteditData"><i
