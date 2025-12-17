@@ -11,7 +11,15 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-lg-8">
+                    <div class="col-lg-3">
+                        <label for="">Dari Tanggal</label>
+                        <input type="date" class="form-control" name="tgl_awal">
+                    </div>
+                    <div class="col-lg-3">
+                        <label for="">Sampai Tanggal</label>
+                        <input type="date" class="form-control" name="tgl_akhir">
+                    </div>
+                    <div class="col-lg-2">
                         <button type="submit" class="btn btn-primary float-end">Print</button>
                     </div>
                 </div>
