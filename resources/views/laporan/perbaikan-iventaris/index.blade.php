@@ -23,7 +23,7 @@
                     <div class="col-lg-2">
                         <label for="">Aksi</label>
                         <br>
-                        <button type="button" class="btn btn-primary" id="getData"><i class="bi bi-printer-fill"></i>
+                        <button type="button" class="btn btn-primary" id="getData"><i class="bi bi-search"></i>
                             Search</button>
                     </div>
                     <div class="col-lg-4">
