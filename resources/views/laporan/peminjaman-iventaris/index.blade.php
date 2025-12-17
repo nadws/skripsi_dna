@@ -43,6 +43,7 @@
                     var cabang = $('select[name=cabang]').val();
                     var tgl_awal = $('input[name=tgl_awal]').val();
                     var tgl_akhir = $('input[name=tgl_akhir]').val();
+                    alert(cabang);
 
                     $.ajax({
                         url: "/laporan_peminjaman_inventaris/getdata",
