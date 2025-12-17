@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-lg-2">
                         <label for="">Cabang</label>
-                        <select name="cabang" id="getData" class="form-control">
+                        <select name="cabang" class="form-control">
                             <option value="">Pilih Cabang</option>
                             @foreach ($cabang as $c)
                                 <option value="{{ $c->id }}">{{ $c->nama }}</option>
@@ -23,7 +23,8 @@
                     <div class="col-lg-2">
                         <label for="">Aksi</label>
                         <br>
-                        <button class="btn btn-primary"><i class="bi bi-printer-fill"></i> Search</button>
+                        <button class="btn btn-primary" id="getData"><i class="bi bi-printer-fill"></i>
+                            Search</button>
                     </div>
                     <div class="col-lg-4">
                         <button type="submit" class="btn btn-primary float-end">Print</button>
@@ -38,14 +39,18 @@
     @section('scripts')
         <script>
             $(document).ready(function() {
-                $(document).on('change', '#getData', function(e) {
+                $(document).on('click', '#getData', function(e) {
                     var cabang = $(this).val();
+                    var tgl_awal = $('input[name=tgl_awal]').val();
+                    var tgl_akhir = $('input[name=tgl_akhir]').val();
 
                     $.ajax({
                         url: "/laporan_perbaikan_inventaris/getdata",
                         type: "GET",
                         data: {
-                            cabang: cabang
+                            cabang: cabang,
+                            tgl_awal: tgl_awal,
+                            tgl_akhir: tgl_akhir
                         },
                         success: function(data) {
                             $("#load_data").html(data);
