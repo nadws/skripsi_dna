@@ -20,7 +20,9 @@ class LaporanPeminjamanIventaris extends Controller
     {
         $data = [
             'title' => 'Laporan Data Peminjaman Iventaris',
-            'peminjaman' => PeminjamanAsset::where('cabang_id', $r->cabang)->orderBy('id', 'desc')->get()
+            'peminjaman' => PeminjamanAsset::where('cabang_id', $r->cabang)
+                ->whereBetween('tgl_pinjam', [$r->tgl_awal, $r->tgl_akhir])
+                ->orderBy('id', 'desc')->get()
         ];
         return view('laporan.peminjaman-iventaris.getData', $data);
     }
@@ -28,7 +30,9 @@ class LaporanPeminjamanIventaris extends Controller
     {
         $data = [
             'title' => 'Laporan Data Peminjaman Iventaris',
-            'peminjaman' => PeminjamanAsset::where('cabang_id', $r->cabang)->orderBy('id', 'desc')->get(),
+            'peminjaman' => PeminjamanAsset::where('cabang_id', $r->cabang)
+                ->whereBetween('tgl_pinjam', [$r->tgl_awal, $r->tgl_akhir])
+                ->orderBy('id', 'desc')->get(),
             'cabang' => Cabang::where('id', $r->cabang)->first(),
         ];
         return view('laporan.peminjaman-iventaris.print', $data);
