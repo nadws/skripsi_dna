@@ -18,7 +18,7 @@ class LaporanPerbaikanIventaris extends Controller
     }
     public function getdata(Request $r)
     {
-        dd($r);
+        dd($r->tgl_awal, $r->tgl_akhir);
         $data = [
             'title' => 'Laporan Data Perbaikan Iventaris',
             'perbaikan' => PerbaikanAsset::where('cabang_id', $r->cabang)
