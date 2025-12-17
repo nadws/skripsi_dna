@@ -4,6 +4,7 @@
             <form action="{{ route('laporan_perbaikan_inventaris.print') }}" method="get" target="_blank">
                 <div class="row">
                     <div class="col-lg-4">
+                        <label for="">Cabang</label>
                         <select name="cabang" id="getData" class="form-control">
                             <option value="">Pilih Cabang</option>
                             @foreach ($cabang as $c)
