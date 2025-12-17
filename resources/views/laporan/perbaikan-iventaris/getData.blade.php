@@ -9,6 +9,7 @@
             <th>Biaya</th>
             <th>Keterangan</th>
             <th>Status</th>
+            <th>Progress</th>
 
         </tr>
     </thead>
@@ -24,6 +25,10 @@
                 <td>{{ $p->keterangan }}</td>
                 <td><span
                         class="badge {{ $p->status == 'pending' ? 'bg-warning' : ($p->status == 'approved' ? 'bg-success' : 'bg-danger') }}  ">{{ $p->status }}</span>
+                </td>
+                <td>
+                    <span
+                        class="badge {{ $p->status_perbaikan == 'finish' ? 'bg-success' : 'bg-danger' }}  ">{{ ucfirst($p->status_perbaikan) }}</span>
                 </td>
 
             </tr>
