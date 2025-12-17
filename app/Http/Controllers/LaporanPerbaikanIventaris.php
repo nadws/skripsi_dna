@@ -31,7 +31,7 @@ class LaporanPerbaikanIventaris extends Controller
     {
         $data = [
             'title' => 'Laporan Data Perbaikan Iventaris',
-            'perbaikan' => PerbaikanAsset::where('cabang_id', $r->cabang)->orderBy('id', 'desc')->get(),
+            'perbaikan' => PerbaikanAsset::where('cabang_id', $r->cabang)->whereBetween('tgl_perbaikan', [$r->tgl_awal, $r->tgl_akhir])->orderBy('id', 'desc')->get(),
             'cabang' => Cabang::where('id', $r->cabang)->first(),
         ];
         return view('laporan.perbaikan-iventaris.print', $data);
