@@ -16,6 +16,7 @@
                         <th>Vendor</th>
                         <th>Biaya</th>
                         <th>Keterangan</th>
+                        <th>Progress</th>
                         <th>Status</th>
                         <th>Aksi</th>
                     </tr>
@@ -39,11 +40,13 @@
                                     <span
                                         class="badge {{ $p->status_perbaikan == 'finish' ? 'bg-success' : 'bg-danger' }}  ">{{ ucfirst($p->status_perbaikan) }}</span>
                                 @else
-                                    @if ($p->status == 'approved')
-                                        <button data-bs-toggle="modal" data-bs-target="#edit"
-                                            data-id="{{ $p->id }}"
-                                            class="btn btn-warning btn-sm getData">Selesaikan</button>
-                                    @endif
+                                @endif
+                            </td>
+                            <td>
+                                @if ($p->status == 'approved')
+                                    <button data-bs-toggle="modal" data-bs-target="#edit" data-id="{{ $p->id }}"
+                                        class="btn btn-warning btn-sm getData">Selesaikan</button>
+                                @else
                                     <button data-bs-toggle="modal" data-bs-target="#edituser"
                                         data-id="{{ $p->id }}" class="btn btn-warning btn-sm geteditData"><i
                                             class="bi bi-pencil-square"></i></button>
