@@ -18,7 +18,7 @@ class LaporanPeminjamanIventaris extends Controller
     }
     public function getData(Request $r)
     {
-        dd($r->all());
+
         $data = [
             'title' => 'Laporan Data Peminjaman Iventaris',
             'peminjaman' => PeminjamanAsset::where('cabang_id', $r->cabang)
