@@ -25,7 +25,7 @@
                         <br>
                         <button class="btn btn-primary"><i class="bi bi-printer-fill"></i> Search</button>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-4">
                         <button type="submit" class="btn btn-primary float-end">Print</button>
                     </div>
                 </div>
