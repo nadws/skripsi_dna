@@ -37,8 +37,13 @@
                             <td>
                                 @if ($p->status == 'approved')
                                     <span
-                                        class="badge {{ $p->status_perbaikan == 'finish' ? 'bg-success' : 'bg-danger' }}  ">{{ $p->status_perbaikan }}</span>
+                                        class="badge {{ $p->status_perbaikan == 'finish' ? 'bg-success' : 'bg-danger' }}  ">{{ ucfirst($p->status_perbaikan) }}</span>
                                 @else
+                                    @if ($p->status == 'approved')
+                                        <button data-bs-toggle="modal" data-bs-target="#edit"
+                                            data-id="{{ $p->id }}"
+                                            class="btn btn-warning btn-sm getData">Selesaikan</button>
+                                    @endif
                                     <button data-bs-toggle="modal" data-bs-target="#edituser"
                                         data-id="{{ $p->id }}" class="btn btn-warning btn-sm geteditData"><i
                                             class="bi bi-pencil-square"></i></button>
